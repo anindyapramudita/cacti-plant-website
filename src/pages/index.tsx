@@ -1,13 +1,10 @@
-import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "next/font/google";
 import { TransitionImage } from "@/components/image";
-import big from "../../public/big.jpeg";
-import { useEffect, useState } from "react";
 import config from "@/shared/config";
-import { plantDataType, plantImagesType } from "@/shared/types";
-import { Layout } from "@/components/layout";
+import { plantDataType } from "@/shared/types";
+import { CardLayout } from "@/components/card-layout";
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { HomeLayout } from "@/components/home-layout";
+import { Header } from "@/components/header";
 
 type plantData = {
   plants: plantDataType[]
@@ -18,8 +15,10 @@ plants
 }: plantData) {
 
   return (
+    // <HomeLayout>
     <>
-      <Layout>
+      <Header/>
+      <CardLayout>
         {
           plants.map((plant) => (
             <TransitionImage
@@ -29,8 +28,9 @@ plants
             />
           ))
           }
-      </Layout>
+      </CardLayout>
     </>
+    // </HomeLayout>
   );
 }
 
