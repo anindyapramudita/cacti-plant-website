@@ -2,5 +2,5 @@ import { ReactNode } from "react";
 
 
 export interface IHeaderProps{
-    children?: ReactNode;
+    role?: 'user' | 'admin';
   }

@@ -1,6 +1,8 @@
 import { BurgerIcon } from "@/assets/burger-icon";
 import { CloseIcon } from "@/assets/close-icon";
 import { Logo } from "@/assets/logo";
+import config from "@/shared/config";
+import { navigation } from "@/shared/navigation";
 import { FC, useState } from "react";
 import { Button } from "../button";
 import { IHeaderProps } from "./header.interface";
@@ -12,8 +14,7 @@ import {
   MenuWrapper,
 } from "./header.styles";
 
-export const Header: FC<IHeaderProps> = ({ children }) => {
-
+export const Header: FC<IHeaderProps> = ({ role = "all" }) => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
 
   return (
@@ -33,18 +34,15 @@ export const Header: FC<IHeaderProps> = ({ children }) => {
         )}
       </MenuWrapper>
       <NavigationWrapper drawerOpen={drawerOpen}>
-        <li>
-          <a>Discovery</a>
-        </li>
-        <li>
-          <a>Search</a>
-        </li>
-        <li>
-          <a>Login</a>
-        </li>
-        <li>
-          <a>Register</a>
-        </li>
+        {navigation
+          .filter((item) => item.roles.includes(role))
+          .map((path: any, index) => (
+            <li>
+              <a href={`${config.websiteUrl}/${path.path}`} key={index}>
+                {path.name}
+              </a>
+            </li>
+          ))}
       </NavigationWrapper>
       <ButtonWrapper>
         <Button variant="outlined" size="small">

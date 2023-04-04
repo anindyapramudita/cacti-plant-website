@@ -1,5 +1,5 @@
 import { gridBreakpoint } from "@/shared/breakpoints";
-import { ralewayBold, ralewayMedium, ralewayThin } from "@/styles/fonts";
+import { ralewayMedium, ralewayThin } from "@/styles/fonts";
 import styled from "styled-components";
 
 export const StylesWrapper = styled.nav<{}>`
@@ -7,7 +7,9 @@ export const StylesWrapper = styled.nav<{}>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.325rem 0.625rem;
+  padding: 5.2px 10px;
+  height: 3rem;
+  // grid-area: navbar;
 
   @media (min-width: ${gridBreakpoint.sm}) {
   }
@@ -29,7 +31,7 @@ export const LogoWrapper = styled.div<{}>`
   ${ralewayMedium}
   display: flex;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 24px;
 
   @media (min-width: ${gridBreakpoint.sm}) {
   }
@@ -48,7 +50,7 @@ export const LogoWrapper = styled.div<{}>`
 `;
 
 export const NavigationWrapper = styled.ul<{
-  drawerOpen: boolean 
+  drawerOpen: boolean;
 }>`
   position: fixed;
   inset: 0 0 0 30%;
@@ -56,21 +58,22 @@ export const NavigationWrapper = styled.ul<{
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 3rem;
-  padding: min(20vh, 10rem) 2rem;
-  color: var(--white);
+  gap: 48px;
+  padding: min(20vh, 160px) 32px;
   background: rgba(18, 49, 50, 0.8);
   z-index: 1000;
+  a {
+    color: var(--white);
+    text-decoration: none;
+  }
 
   transform: ${(props) =>
     props.drawerOpen ? "translateX(0)" : "translateX(100%)"};
   transition: transform 0.3s ease-out;
 
-  
-
-  @supports (backdrop-filter: blur(1rem)) {
+  @supports (backdrop-filter: blur(16px)) {
     background: rgba(18, 49, 50, 0.5);
-    backdrop-filter: blur(1rem);
+    backdrop-filter: blur(16px);
   }
 
   @media (min-width: ${gridBreakpoint.sm}) {
@@ -83,9 +86,11 @@ export const NavigationWrapper = styled.ul<{
     ${ralewayThin}
     align-items: center;
     background-color: transparent;
-    color: var(--black);
-    gap: 2rem;
+    gap: 32px;
     transform: translateX(0);
+    a {
+      color: var(--black);
+    }
 
     li {
       cursor: pointer;
@@ -93,7 +98,7 @@ export const NavigationWrapper = styled.ul<{
     }
 
     li:hover {
-      transform: translateY(-0.1rem);
+      transform: translateY(-1.6px);
       text-decoration: underline;
     }
 
@@ -120,10 +125,10 @@ export const ButtonWrapper = styled.div<{}>`
 
   @media (min-width: ${gridBreakpoint.md}) {
     ${ralewayThin}
-    height: 2.25rem;
+    height: 36px;
     display: flex;
     align-items: center;
-    gap: 0.625rem;
+    gap: 10px;
   }
 
   @media (min-width: ${gridBreakpoint.lg}) {
@@ -137,7 +142,7 @@ export const ButtonWrapper = styled.div<{}>`
 `;
 
 export const MenuWrapper = styled.button<{
-  drawerOpen: boolean
+  drawerOpen: boolean;
 }>`
   cursor: pointer;
   z-index: 9999;
@@ -145,8 +150,8 @@ export const MenuWrapper = styled.button<{
   display: flex;
   background-color: transparent;
   border: 0;
-  top: 0.5rem;
-  right: ${props => props.drawerOpen ? '60%': '2rem'};
+  top: 8px;
+  right: ${(props) => (props.drawerOpen ? "60%" : "32px")};
   transition: right 0.3s ease-out;
 
   @media (min-width: ${gridBreakpoint.sm}) {
