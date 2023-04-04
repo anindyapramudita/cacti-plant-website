@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
 
-export interface ILayoutProps{
+export interface ICardLayoutProps{
     children: ReactNode;
   }

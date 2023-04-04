@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { ILayoutProps } from "./layout.interface";
+import { ICardLayoutProps } from "./layout.interface";
 import { StylesWrapper } from "./layout.styles";
 
-export const Layout: FC<ILayoutProps> = ({ children }) => {
+export const CardLayout: FC<ICardLayoutProps> = ({ children }) => {
   if (!children) {
     return null;
   }
