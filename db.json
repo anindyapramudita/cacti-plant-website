@@ -10,10 +10,10 @@
       },
       "description": "Monstera is a genus of 59 species of flowering plants in the arum family, Araceae, native to tropical regions of the Americas. They are herbs or evergreen vines, growing to heights of 20 metres (66 ft) in trees, climbing by means of aerial roots which act as hooks over branches; these roots will also grow into the soil to help support the plant. Since the plant roots both into the soil and over trees, it is considered a hemiepiphyte.",
       "water": 3,
-      "difficulty": "medium",
-      "season": "all season",
-      "size": "big",
-      "color": ["green", "red", "purple"]
+      "difficulty": 3,
+      "season": ["spring", "summer", "fall"],
+      "size": 3,
+      "color": ["green", "red", "purple", "yellow"]
     },
     {
       "id": 2,
@@ -25,10 +25,10 @@
       },
       "description": "It is an evergreen perennial plant forming dense stands, spreading by way of its creeping rhizome, which is sometimes above ground, sometimes underground. Its stiff leaves grow vertically from a basal rosette. Mature leaves are dark green with light gray-green cross-banding and usually range from 70–90 centimetres (2.3–3.0 ft) long and 5–6 centimetres (2.0–2.4 in) wide, though it can reach heights above 2 m (6 ft) in optimal conditions.",
       "water": 3,
-      "difficulty": "medium",
-      "season": "all season",
-      "size": "big",
-      "color": ["green", "red"]
+      "difficulty": 2,
+      "season": ["spring", "summer", "fall", "winter"],
+      "size": 2,
+      "color": ["green", "red", "yellow"]
     },
     {
       "id": 2,
@@ -40,10 +40,10 @@
       },
       "description": "Chlorophytum comosum grows to about 60 cm (24 in) tall, although as a hanging plant it can descend many feet. It has fleshy, tuberous roots, each about 5–10 cm (2–4 in) long. The long narrow leaves reach a length of 20–45 cm (8–18 in) and are around 6–25 millimetres (0.2–1.0 in) wide.[6]",
       "water": 3,
-      "difficulty": "medium",
-      "season": "all season",
-      "size": "medium",
-      "color": ["green"]
+      "difficulty": 4,
+      "season": ["spring", "summer", "fall"],
+      "size": 1,
+      "color": ["green", "yellow"]
     }
   ],
   "comments": [
