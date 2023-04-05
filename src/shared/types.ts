@@ -10,8 +10,8 @@ export type plantDataType = {
   images: plantImagesType,
   description: string,
   water: number,
-  difficulty: string,
-  season: string,
-  size: string,
+  difficulty: number,
+  season: string[],
+  size: number,
   color: string[]
 }
