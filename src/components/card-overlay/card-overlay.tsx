@@ -1,4 +1,4 @@
-import { CircleIcon } from "@/assets/circle-icon";
+// import { CircleIcon } from "@/assets/circle-icon";
 import { LeafIcon } from "@/assets/leaf-icon";
 import { PlantIcon } from "@/assets/plant-icon";
 import { SnowIcon } from "@/assets/snow-icon";
@@ -24,9 +24,9 @@ export const CardOverlay: FC<ICardOverlayProps> = ({ data }) => {
             .fill("")
             .map((_, index) =>
               index < data.water ? (
-                <WaterIcon color="white" />
+                <WaterIcon key={index} color="white" />
               ) : (
-                <WaterIcon color="#0e1d1d" />
+                <WaterIcon key={index} color="#0e1d1d" />
               )
             )}
         </LevelWrapper>
@@ -38,9 +38,9 @@ export const CardOverlay: FC<ICardOverlayProps> = ({ data }) => {
             .fill("")
             .map((_, index) =>
               index < data.difficulty ? (
-                <LeafIcon color="white" />
+                <LeafIcon key={index} color="white" />
               ) : (
-                <LeafIcon color="#0e1d1d" />
+                <LeafIcon key={index} color="#0e1d1d" />
               )
             )}
         </LevelWrapper>
@@ -52,9 +52,17 @@ export const CardOverlay: FC<ICardOverlayProps> = ({ data }) => {
             .fill("")
             .map((_, index) =>
               index + 1 == data.size ? (
-                <PlantIcon width={(index + 1) * 3 + 15} color="white" />
+                <PlantIcon
+                  key={index}
+                  width={(index + 1) * 3 + 15}
+                  color="white"
+                />
               ) : (
-                <PlantIcon width={(index + 1) * 3 + 15} color="#0e1d1d" />
+                <PlantIcon
+                  key={index}
+                  width={(index + 1) * 3 + 15}
+                  color="#0e1d1d"
+                />
               )
             )}
         </LevelWrapper>

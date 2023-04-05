@@ -8,31 +8,31 @@ export const StylesWrapper = styled.div<{}>`
   width: 75%;
   justify-content: space-around;
   text-align: center;
-  
+
   div {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-  
+
   div p {
     flex: 2;
     text-align: start;
   }
   @media (min-width: ${gridBreakpoint.sm}) {
   }
-  
+
   @media (min-width: ${gridBreakpoint.md}) {
     width: 70%;
   }
-  
+
   @media (min-width: ${gridBreakpoint.lg}) {
     width: 65%;
   }
-  
+
   @media (min-width: ${gridBreakpoint.xl}) {
   }
-  
+
   @media (min-width: ${gridBreakpoint.xxl}) {
     width: 50%;
   }

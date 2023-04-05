@@ -37,7 +37,7 @@ export const Header: FC<IHeaderProps> = ({ role = "all" }) => {
         {navigation
           .filter((item) => item.roles.includes(role))
           .map((path: any, index) => (
-            <li>
+            <li key={index}>
               <a href={`${config.websiteUrl}/${path.path}`} key={index}>
                 {path.name}
               </a>

@@ -1,6 +1,3 @@
-import { ReactNode } from "react";
-
-
-export interface IHeaderProps{
-    role?: 'user' | 'admin';
-  }
+export interface IHeaderProps {
+  role?: "user" | "admin";
+}

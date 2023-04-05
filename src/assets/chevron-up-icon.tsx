@@ -24,9 +24,9 @@ export const ChevronUpIcon: FC<SVGAttributes<IIconProps>> = ({
           id="Vector"
           d="M5 16L12 9L19 16"
           stroke={color}
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
     </svg>

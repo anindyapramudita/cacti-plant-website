@@ -1,10 +1,9 @@
 import { ChevronDownIcon } from "@/assets/chevron-down-icon";
 import { ChevronUpIcon } from "@/assets/chevron-up-icon";
-import { CloseIcon } from "@/assets/close-icon";
 import { HeartIcon } from "@/assets/heart-outline-icon";
 import config from "@/shared/config";
 import Link from "next/link";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import { FC, useState } from "react";
 import { CardOverlay } from "../card-overlay";
 import { TransitionImage } from "../image";
@@ -16,22 +15,23 @@ import {
   FavoriteWrapper,
 } from "./card.styles";
 
-export const Card: FC<ICardProps> = ({ data, session }) => {
-  if (!data) {
-    return null;
-  }
-  const router = useRouter();
+export const Card: FC<ICardProps> = ({ data }) => {
+  // const router = useRouter();
 
   const [showSummary, setShowSummary] = useState<boolean>(false);
   const [isLiked, setIsLiked] = useState<boolean>(false);
 
-  const handleFavorite = () => {
-    if (session) {
-      setIsLiked(!isLiked);
-    } else {
-      router.push("/login");
-    }
-  };
+  if (!data) {
+    return null;
+  }
+
+  // const handleFavorite = () => {
+  //   if (session) {
+  //     setIsLiked(!isLiked);
+  //   } else {
+  //     router.push("/login");
+  //   }
+  // };
 
   return (
     <StylesWrapper showSummary={showSummary}>

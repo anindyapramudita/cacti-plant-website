@@ -9,7 +9,7 @@ interface IIconProps {
 export const SummerIcon: FC<SVGAttributes<IIconProps>> = ({
   color = "#000000",
   width = 20,
-  height = 20,
+  // height = 20,
 }) => {
   return (
     <svg

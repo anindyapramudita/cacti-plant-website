@@ -12,7 +12,7 @@ export const Button: FC<IButtonProps> = ({
   size = "medium",
   fullWidth = false,
   loaderDot = 3,
-  loaderSize = 'small'
+  loaderSize = "small",
 }) => {
   if (!children) {
     return null;
@@ -29,7 +29,7 @@ export const Button: FC<IButtonProps> = ({
       fullWidth={fullWidth}
     >
       <StylesText isLoading={isLoading}>{children}</StylesText>
-      {isLoading && <Loader size={loaderSize} number={loaderDot}/>}
+      {isLoading && <Loader size={loaderSize} number={loaderDot} />}
     </StylesWrapper>
   );
 };

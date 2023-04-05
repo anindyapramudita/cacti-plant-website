@@ -1,5 +1,3 @@
 import styled from "styled-components";
 
-export const StylesWrapper = styled.img<{}>`
-
-`
+export const StylesWrapper = styled.img<{}>``;
