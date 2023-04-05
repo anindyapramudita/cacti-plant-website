@@ -5,7 +5,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { HomeLayout } from "@/components/home-layout";
 import { Header } from "@/components/header";
 import { Card } from "@/components/card";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import useDeviceSize from "@/hooks/use-device-size";
 
 type plantData = {
@@ -27,7 +27,21 @@ export default function Home({ plants }: plantData) {
       return newData;
     }
   }, [plants, width]);
-  
+
+  useEffect(() => {
+    function handleKeyDown(e: any) {
+      if (e.keyCode == 32) {
+        console.log("hai");
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return function cleanup() {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   return (
     <HomeLayout>
       <Header />
@@ -36,7 +50,7 @@ export default function Home({ plants }: plantData) {
           <Card data={plant} />
         ))}
       </CardLayout>
-    </HomeLayout>
+    </HomeLayout> 
   );
 }
 
