@@ -23,7 +23,7 @@ export const CardOverlay: FC<ICardOverlayProps> = ({ data }) => {
           {Array(5)
             .fill("")
             .map((_, index) =>
-              index < data.water ? (
+              index < data.water.level ? (
                 <WaterIcon key={index} color="white" />
               ) : (
                 <WaterIcon key={index} color="#0e1d1d" />
@@ -37,7 +37,7 @@ export const CardOverlay: FC<ICardOverlayProps> = ({ data }) => {
           {Array(5)
             .fill("")
             .map((_, index) =>
-              index < data.difficulty ? (
+              index < data.difficulty.level ? (
                 <LeafIcon key={index} color="white" />
               ) : (
                 <LeafIcon key={index} color="#0e1d1d" />
@@ -51,7 +51,7 @@ export const CardOverlay: FC<ICardOverlayProps> = ({ data }) => {
           {Array(3)
             .fill("")
             .map((_, index) =>
-              index + 1 == data.size ? (
+              index + 1 == data.size.level ? (
                 <PlantIcon
                   key={index}
                   width={(index + 1) * 3 + 15}
