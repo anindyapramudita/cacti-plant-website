@@ -9,7 +9,6 @@ export const StylesWrapper = styled.nav<{}>`
   justify-content: space-between;
   padding: 5.2px 10px;
   height: 3rem;
-  // grid-area: navbar;
 
   @media (min-width: ${gridBreakpoint.sm}) {
   }
