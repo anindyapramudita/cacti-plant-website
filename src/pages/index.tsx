@@ -1,7 +1,7 @@
 import config from "@/shared/config";
 import { plantDataType } from "@/shared/types";
 import { CardLayout } from "@/components/card-layout";
-import { HomeLayout } from "@/components/home-layout";
+import { HomeLayout } from "@/components/layouts/home";
 import { Header } from "@/components/header";
 import { Card } from "@/components/card";
 import { useEffect, useMemo } from "react";
