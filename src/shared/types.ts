@@ -1,3 +1,8 @@
+export type levelInfoType = {
+  level: number;
+  info: string;
+};
+
 export type plantImagesType = {
   mainImage: string;
   placeholder: string;
@@ -9,9 +14,9 @@ export type plantDataType = {
   name: string;
   images: plantImagesType;
   description: string;
-  water: number;
-  difficulty: number;
+  water: levelInfoType;
+  difficulty: levelInfoType;
   season: string[];
-  size: number;
+  size: levelInfoType;
   color: string[];
 };
