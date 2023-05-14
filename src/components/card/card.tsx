@@ -1,37 +1,20 @@
 import { ChevronDownIcon } from "@/assets/chevron-down-icon";
 import { ChevronUpIcon } from "@/assets/chevron-up-icon";
-import { HeartIcon } from "@/assets/heart-outline-icon";
 import config from "@/shared/config";
 import Link from "next/link";
-// import { useRouter } from "next/router";
 import { FC, useState } from "react";
 import { CardOverlay } from "../card-overlay";
+import { FavoriteButton } from "../favorite-button";
 import { TransitionImage } from "../image";
 import { ICardProps } from "./card.interface";
-import {
-  StylesWrapper,
-  OverlayWrapper,
-  SwipeUpWrapper,
-  FavoriteWrapper,
-} from "./card.styles";
+import { StylesWrapper, OverlayWrapper, SwipeUpWrapper } from "./card.styles";
 
 export const Card: FC<ICardProps> = ({ data }) => {
-  // const router = useRouter();
-
   const [showSummary, setShowSummary] = useState<boolean>(false);
-  const [isLiked, setIsLiked] = useState<boolean>(false);
 
   if (!data) {
     return null;
   }
-
-  // const handleFavorite = () => {
-  //   if (session) {
-  //     setIsLiked(!isLiked);
-  //   } else {
-  //     router.push("/login");
-  //   }
-  // };
 
   return (
     <StylesWrapper showSummary={showSummary}>
@@ -55,10 +38,7 @@ export const Card: FC<ICardProps> = ({ data }) => {
       <OverlayWrapper>
         <CardOverlay data={data} />
       </OverlayWrapper>
-      {/* <FavoriteWrapper isLiked={isLiked} onClick={handleFavorite}> */}
-      <FavoriteWrapper isLiked={isLiked} onClick={() => setIsLiked(!isLiked)}>
-        <HeartIcon />
-      </FavoriteWrapper>
+      <FavoriteButton />
       <Link href={`${config.websiteUrl}/plant/${data.id}`}>
         <TransitionImage
           placeholder={data.images.placeholder}
