@@ -1,0 +1,26 @@
+import { ralewayThin } from "@/styles/fonts";
+import styled from "styled-components";
+
+export const StylesWrapper = styled.button<{
+  // color?: "primary" | "secondary";
+  // variant?: "filled" | "reversed" | "outlined";
+  // isLoading?: boolean;
+  // disabled?: boolean;
+  // size?: "small" | "medium" | "large";
+  // fullWidth?: boolean;
+}>`
+  ${ralewayThin}
+
+  --padding-small: .625rem 16px;
+  --padding-medium: 0.6875em 3em;
+  --padding-large: 0.7125em 3.0125em;
+
+  position: absolute;
+  border: none;
+  background-color: var(--primary);
+
+  top: calc(3rem + 0.75rem);
+  left: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 50%;
+`;
