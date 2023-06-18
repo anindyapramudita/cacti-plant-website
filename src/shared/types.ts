@@ -12,7 +12,7 @@ export type plantImagesType = {
 export type plantDataType = {
   id: number;
   name: string;
-  images: plantImagesType;
+  images: plantImagesType[];
   description: string;
   water: levelInfoType;
   difficulty: levelInfoType;
