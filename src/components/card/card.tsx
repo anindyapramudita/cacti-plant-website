@@ -7,7 +7,7 @@ import { CardOverlay } from "../card-overlay";
 import { FavoriteButton } from "../favorite-button";
 import { TransitionImage } from "../image";
 import { ICardProps } from "./card.interface";
-import { StylesWrapper, OverlayWrapper, SwipeUpWrapper } from "./card.styles";
+import { StylesWrapper } from "./card.styles";
 
 export const Card: FC<ICardProps> = ({ data }) => {
   const [showSummary, setShowSummary] = useState<boolean>(false);
@@ -19,31 +19,31 @@ export const Card: FC<ICardProps> = ({ data }) => {
   return (
     <StylesWrapper showSummary={showSummary}>
       {showSummary ? (
-        <SwipeUpWrapper
+        <div
+          className="swipe-up-icon"
           onClick={() => setShowSummary(!showSummary)}
-          showSummary={showSummary}
         >
           <ChevronDownIcon color="white" />
           <p>hide summary</p>
-        </SwipeUpWrapper>
+        </div>
       ) : (
-        <SwipeUpWrapper
+        <div
+          className="swipe-up-icon"
           onClick={() => setShowSummary(!showSummary)}
-          showSummary={showSummary}
         >
           <ChevronUpIcon color="white" />
           <p>see summary</p>
-        </SwipeUpWrapper>
+        </div>
       )}
-      <OverlayWrapper>
+      <div className="card-overlay">
         <CardOverlay data={data} />
-      </OverlayWrapper>
+      </div>
       <FavoriteButton />
       <Link href={`${config.websiteUrl}/plant/${data.id}`}>
         <TransitionImage
-          placeholder={data.images.placeholder}
-          image={data.images.mainImage}
-          alt={data.images.alt}
+          placeholder={data.images[0].placeholder}
+          image={data.images[0].mainImage}
+          alt={data.images[0].alt}
         />
       </Link>
     </StylesWrapper>
