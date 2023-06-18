@@ -59,11 +59,14 @@ export const StylesWrapper = styled.button<{
       props.isLoading ? "transparent" : "var(--disabled-dark)"};
     cursor: default;
   }
+
+  p {
+    visibility: ${(props) => (props.isLoading ? "hidden" : "")};
+  }
 `;
 
 export const StylesText = styled.p<{
   isLoading?: boolean;
 }>`
   visibility: ${(props) => (props.isLoading ? "hidden" : "")};
-  // display: ${(props) => (props.isLoading ? "none" : "")};
 `;
