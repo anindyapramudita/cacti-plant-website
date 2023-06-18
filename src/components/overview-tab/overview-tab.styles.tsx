@@ -24,12 +24,12 @@ export const StylesWrapper = styled.div<{}>`
 export const TabWrapper = styled.button<{ activeTab?: number; index: number }>`
   background: ${(props) =>
     props.activeTab === props.index ? "var(--white)" : "var(--primary)"};
-  border: solid 1px var(--primary);
+  border: solid 0.0625rem var(--primary);
   border-bottom: none;
   cursor: pointer;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  padding: 0.25rem 0.625rem;
+  border-top-left-radius: 0.625rem;
+  border-top-right-radius: 0.625rem;
+  padding: 4px 10px;
   display: flex;
   align-items: center;
 
@@ -39,8 +39,8 @@ export const TabWrapper = styled.button<{ activeTab?: number; index: number }>`
   @media (min-width: ${gridBreakpoint.md}) {
     padding: 0.5rem 1rem;
     svg {
-      width: 25px;
-      height: 25px;
+      width: 1.5625rem;
+      height: 1.5625rem;
     }
   }
 
@@ -54,14 +54,14 @@ export const TabWrapper = styled.button<{ activeTab?: number; index: number }>`
   }
 `;
 // export const StylesWrapper = styled.div<{}>`
-//   border-radius: 10px;
+//   border-radius: .625rem;
 //   background-color: var(--primary);
 //   width: max-content;
 
 //   display: flex;
 //   align-items: center;
-//   // gap: 20px;
-//   // padding: 10px;
+//   // gap: 1.25rem;
+//   // padding: .625rem;
 
 //   @media (min-width: ${gridBreakpoint.sm}) {
 //   }
@@ -83,8 +83,8 @@ export const TabWrapper = styled.button<{ activeTab?: number; index: number }>`
 //   background-color: ${(props) =>
 //     props.activeTab === props.index ? "var(--white)" : "transparent"};
 //   border: none;
-//   padding: 0.25rem 0.625rem;
-//   border-radius: 10px;
+//   padding: 4px 10px;
+//   border-radius: .625rem;
 //   cursor: pointer;
 //   display: flex;
 //   align-items: center;
