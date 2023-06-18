@@ -37,6 +37,10 @@ export const StylesWrapper = styled.div<{}>`
   -ms-overflow-style: none;
   scrollbar-width: none;
 
+  .overview-text {
+    line-height: 1.5 rem;
+  }
+
   @media (min-width: ${gridBreakpoint.sm}) {
   }
 
@@ -44,6 +48,10 @@ export const StylesWrapper = styled.div<{}>`
   }
 
   @media (min-width: ${gridBreakpoint.lg}) {
+    height: calc(
+      100vh - 3rem - 2rem - 2rem - 1.5rem - 1rem - 0.75rem - 0.75rem - 1.25rem
+    );
+    max-height: calc(100vh - 3rem - 2rem);
   }
 
   @media (min-width: ${gridBreakpoint.xl}) {

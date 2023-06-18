@@ -26,7 +26,7 @@ export const OverviewCard: FC<IOverviewCardProps> = ({ data }) => {
     <OverviewCardWrapper>
       <OverviewTab onClickTab={setActiveTab} activeTab={activeTab} />
       <StylesWrapper data-testid="overview-tab">
-        <p>{renderText}</p>
+        <p className="overview-text">{renderText}</p>
       </StylesWrapper>
     </OverviewCardWrapper>
   );
