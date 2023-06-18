@@ -3,6 +3,7 @@ import { CloseIcon } from "@/assets/close-icon";
 import { Logo } from "@/assets/logo";
 import config from "@/shared/config";
 import { navigation } from "@/shared/navigation";
+import Link from "next/link";
 import { FC, useState } from "react";
 import { Button } from "../button";
 import { IHeaderProps } from "./header.interface";
@@ -13,16 +14,20 @@ import {
   NavigationWrapper,
   MenuWrapper,
 } from "./header.styles";
+import { useRouter } from "next/navigation";
 
 export const Header: FC<IHeaderProps> = ({ role = "all" }) => {
+  const router = useRouter();
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
 
   return (
     <StylesWrapper data-testid="card-layout">
-      <LogoWrapper>
-        <Logo />
-        <p>Cacti</p>
-      </LogoWrapper>
+      <Link href={`${config.websiteUrl}`} className="logo-link">
+        <LogoWrapper>
+          <Logo />
+          <p>Cacti</p>
+        </LogoWrapper>
+      </Link>
       <MenuWrapper
         drawerOpen={drawerOpen}
         onClick={() => setDrawerOpen(!drawerOpen)}
@@ -45,7 +50,7 @@ export const Header: FC<IHeaderProps> = ({ role = "all" }) => {
           ))}
       </NavigationWrapper>
       <ButtonWrapper>
-        <Button variant="outlined" size="small">
+        <Button variant="outlined" size="small" onClick={() => null}>
           Log in
         </Button>
         <Button size="small">Sign up</Button>

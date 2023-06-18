@@ -10,6 +10,10 @@ export const StylesWrapper = styled.nav<{}>`
   padding: 5.2px 10px;
   height: 3rem;
 
+  .logo-link {
+    text-decoration: none;
+    color: black;
+  }
   @media (min-width: ${gridBreakpoint.sm}) {
   }
 
