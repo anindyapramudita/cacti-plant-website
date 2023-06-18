@@ -4,8 +4,8 @@ import styled from "styled-components";
 export const FavoriteWrapper = styled.button<{ isLiked: boolean }>`
   position: absolute;
   margin: 0.625rem;
-  top: 0;
-  right: 0;
+  top: 0.75rem;
+  right: 0.75rem;
   cursor: pointer;
 
   background-color: transparent;
@@ -37,7 +37,6 @@ export const FavoriteWrapper = styled.button<{ isLiked: boolean }>`
   }
 
   @media (min-width: ${gridBreakpoint.lg}) {
-    // display: none;
   }
 
   @media (min-width: ${gridBreakpoint.xl}) {
