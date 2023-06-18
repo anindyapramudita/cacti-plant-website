@@ -31,6 +31,21 @@ export const StylesWrapper = styled.div<{}>`
   }
 
   @media (min-width: ${gridBreakpoint.lg}) {
+    padding: 0 2rem;
+    flex-direction: row;
+
+    .plant-image {
+      position: relative;
+      margin: 2rem 0;
+      height: calc(100vh - 3rem - 4rem);
+      width: 35vw;
+    }
+
+    .plant-details {
+      padding: 2rem;
+      width: 65vw;
+      height: calc(100vh - 3rem);
+    }
   }
 
   @media (min-width: ${gridBreakpoint.xl}) {
