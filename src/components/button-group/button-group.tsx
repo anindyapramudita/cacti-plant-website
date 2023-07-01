@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { IButtonGroupProps } from "./button-group.interface";
-import { StylesWrapper, ButtonWrapper } from "./button-group.styles";
+import { StylesWrapper } from "./button-group.styles";
 
 export const ButtonGroup: FC<IButtonGroupProps> = ({
   buttons,

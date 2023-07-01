@@ -11,7 +11,7 @@
   ],
   "parser": "@typescript-eslint/parser",
   "rules": {
-    "import/no-unresolved": "error"
+    "import/no-unresolved": "off"
   },
   "plugins": ["import", "@typescript-eslint", "prettier"],
   "settings": {

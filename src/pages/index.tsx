@@ -3,9 +3,10 @@ import { plantDataType } from "@/shared/types";
 import { CardLayout } from "@/components/card-layout";
 import { HomeLayout } from "@/components/layouts/home";
 import { Header } from "@/components/header";
-import { Card } from "@/components/card";
+
 import { useEffect, useMemo } from "react";
 import useDeviceSize from "@/hooks/use-device-size";
+import { Card } from "@/components/card";
 
 type plantData = {
   plants: plantDataType[];
