@@ -11,23 +11,19 @@ export const CarouselImage: FC<ICarouselImage> = ({
   const [currentId, setCurrentId] = useState<number>(0);
   const imageLength = images.length;
 
-  const changeId = () => {
-    if (currentId === imageLength - 1) {
-      return setCurrentId(0);
-    }
-    return setCurrentId(currentId + 1);
-  };
-
   useEffect(() => {
-    const interval = setInterval(changeId, 5000);
+    const timer = setInterval(() => {
+      setCurrentId((prevCount) => (prevCount + 1) % images.length);
+    }, 4950);
+
     if (!restartImage) {
-      return () => clearInterval(interval);
+      return () => clearInterval(timer);
     } else {
-      clearInterval(interval);
+      clearInterval(timer);
       setCurrentId(0);
       setRestartImage(false);
     }
-  });
+  }, [images, restartImage, setRestartImage]);
 
   const handleLineClick = (index: number) => {
     setCurrentId(index);
@@ -45,6 +41,7 @@ export const CarouselImage: FC<ICarouselImage> = ({
                 totalLine={imageLength}
                 restartImage={restartImage}
                 onClick={() => handleLineClick(index)}
+                currentImage={images[currentId].mainImage}
               />
             ))
           : null}
