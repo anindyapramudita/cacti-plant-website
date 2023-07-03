@@ -7,21 +7,26 @@ const tabInfo = ["description", "water", "season", "size", "difficulty"];
 
 export const OverviewCard: FC<IOverviewCardProps> = ({ data }) => {
   const [activeTab, setActiveTab] = useState<number>(0);
-  // if (!children) {
-  //   return null;
-  // }
-  // console.log(data[`${tabInfo[activeTab]}`]);
+
   const renderText = useMemo(() => {
+    const seasonList = ["Spring", "Summer", "Fall", "Winter"];
+    const activeSeason: string[] = [];
+
+    seasonList.forEach((season) => {
+      if (data.season[season.toLowerCase()] === true) {
+        activeSeason.push(season);
+      }
+    });
+
     if (activeTab === 0) {
       return data[tabInfo[activeTab]];
     } else if (activeTab === 2) {
-      return `Plant can live in these seasons: ${data[tabInfo[activeTab]].join(
-        ", "
-      )}`;
+      return `Plant can live in these seasons: ${activeSeason.join(", ")}`;
     } else {
       return data[tabInfo[activeTab]].info;
     }
   }, [data, activeTab]);
+
   return (
     <OverviewCardWrapper>
       <OverviewTab onClickTab={setActiveTab} activeTab={activeTab} />
