@@ -6,27 +6,22 @@ import { AiFillSignal } from "react-icons/ai";
 export const tabInfo = [
   {
     name: "Information",
-    activeIcon: <FaInfo color="#123132" />,
-    nonActiveIcon: <FaInfo color="white" />,
+    icon: <FaInfo />,
   },
   {
     name: "Water Content",
-    activeIcon: <PiDrop color="#123132" />,
-    nonActiveIcon: <PiDrop color="white" />,
+    icon: <PiDrop />,
   },
   {
     name: "Season",
-    activeIcon: <FiSun color="#123132" />,
-    nonActiveIcon: <FiSun color="white" />,
+    icon: <FiSun />,
   },
   {
     name: "Plant Size",
-    activeIcon: <PiPottedPlant color="#123132" />,
-    nonActiveIcon: <PiPottedPlant color="white" />,
+    icon: <PiPottedPlant />,
   },
   {
     name: "Difficulty",
-    activeIcon: <AiFillSignal color="#123132" />,
-    nonActiveIcon: <AiFillSignal color="white" />,
+    icon: <AiFillSignal />,
   },
 ];
