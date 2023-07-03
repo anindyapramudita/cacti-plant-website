@@ -19,6 +19,7 @@ export const LineCounter = styled.div<{
   activeIndex: number;
   totalLine: number;
   restartImage: boolean;
+  currentImage: string;
 }>`
   width: ${(props) => props.totalLine && `calc(100vw / ${props.totalLine})`};
 
@@ -43,7 +44,7 @@ export const LineCounter = styled.div<{
     height: .1875rem;
     background-color: var(--primary);
     ${
-      !props.restartImage
+      !props.restartImage && props.currentImage
         ? `-webkit-animation: lineAnim 5s linear;
     -moz-animation: lineAnim 5s linear;
     animation: lineAnim 5s linear;
