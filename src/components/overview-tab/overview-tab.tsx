@@ -9,27 +9,16 @@ export const OverviewTab: FC<IOverviewTabProps> = ({
 }) => {
   return (
     <StylesWrapper data-testid="overview-tab">
-      {tabInfo.map((tab, index) =>
-        activeTab === index ? (
-          <TabWrapper
-            key={index}
-            activeTab={activeTab}
-            index={index}
-            onClick={() => onClickTab(index)}
-          >
-            {tab.activeIcon}
-          </TabWrapper>
-        ) : (
-          <TabWrapper
-            key={index}
-            activeTab={activeTab}
-            index={index}
-            onClick={() => onClickTab(index)}
-          >
-            {tab.nonActiveIcon}
-          </TabWrapper>
-        )
-      )}
+      {tabInfo.map((tab, index) => (
+        <TabWrapper
+          key={index}
+          activeTab={activeTab}
+          index={index}
+          onClick={() => onClickTab(index)}
+        >
+          {tab.icon}
+        </TabWrapper>
+      ))}
     </StylesWrapper>
   );
 };
