@@ -32,6 +32,8 @@ export const TabWrapper = styled.button<{ activeTab?: number; index: number }>`
   padding: 4px 10px;
   display: flex;
   align-items: center;
+  color: ${(props) =>
+    props.activeTab === props.index ? "var(--primary)" : "var(--white)"};
 
   @media (min-width: ${gridBreakpoint.sm}) {
   }
@@ -53,61 +55,3 @@ export const TabWrapper = styled.button<{ activeTab?: number; index: number }>`
   @media (min-width: ${gridBreakpoint.xxl}) {
   }
 `;
-// export const StylesWrapper = styled.div<{}>`
-//   border-radius: .625rem;
-//   background-color: var(--primary);
-//   width: max-content;
-
-//   display: flex;
-//   align-items: center;
-//   // gap: 1.25rem;
-//   // padding: .625rem;
-
-//   @media (min-width: ${gridBreakpoint.sm}) {
-//   }
-
-//   @media (min-width: ${gridBreakpoint.md}) {
-//   }
-
-//   @media (min-width: ${gridBreakpoint.lg}) {
-//   }
-
-//   @media (min-width: ${gridBreakpoint.xl}) {
-//   }
-
-//   @media (min-width: ${gridBreakpoint.xxl}) {
-//   }
-// `;
-
-// export const TabWrapper = styled.button<{ activeTab?: number; index: number }>`
-//   background-color: ${(props) =>
-//     props.activeTab === props.index ? "var(--white)" : "transparent"};
-//   border: none;
-//   padding: 4px 10px;
-//   border-radius: .625rem;
-//   cursor: pointer;
-//   display: flex;
-//   align-items: center;
-
-//   &:hover {
-//     background-color: ${(props) =>
-//       props.activeTab === props.index
-//         ? "var(--white)"
-//         : "var(--primary-light)"};
-//   }
-
-//   @media (min-width: ${gridBreakpoint.sm}) {
-//   }
-
-//   @media (min-width: ${gridBreakpoint.md}) {
-//   }
-
-//   @media (min-width: ${gridBreakpoint.lg}) {
-//   }
-
-//   @media (min-width: ${gridBreakpoint.xl}) {
-//   }
-
-//   @media (min-width: ${gridBreakpoint.xxl}) {
-//   }
-// `;
