@@ -25,11 +25,7 @@ export const StylesWrapper = styled.nav<{}>`
 
   .filter-button.clicked {
     background-color: var(--primary);
-
-    svg,
-    path {
-      stroke: white;
-    }
+    color: white;
   }
 
   @media (min-width: ${gridBreakpoint.sm}) {
