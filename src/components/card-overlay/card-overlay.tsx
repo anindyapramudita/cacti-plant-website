@@ -23,13 +23,12 @@ export const CardOverlay: FC<ICardOverlayProps> = ({ data }) => {
         <LevelWrapper>
           {Array(5)
             .fill("")
-            .map((_, index) =>
-              index < data.water.level ? (
-                <PiDrop key={index} color="white" />
-              ) : (
-                <PiDrop key={index} color="#0e1d1d" />
-              )
-            )}
+            .map((_, index) => (
+              <PiDrop
+                key={index}
+                color={index < data.water.level ? "white" : "#0e1d1d"}
+              />
+            ))}
         </LevelWrapper>
       </div>
       <div>
@@ -37,13 +36,12 @@ export const CardOverlay: FC<ICardOverlayProps> = ({ data }) => {
         <LevelWrapper>
           {Array(5)
             .fill("")
-            .map((_, index) =>
-              index < data.difficulty.level ? (
-                <RiLeafLine key={index} color="white" />
-              ) : (
-                <RiLeafLine key={index} color="#0e1d1d" />
-              )
-            )}
+            .map((_, index) => (
+              <RiLeafLine
+                key={index}
+                color={index < data.water.level ? "white" : "#0e1d1d"}
+              />
+            ))}
         </LevelWrapper>
       </div>
       <div>
@@ -51,46 +49,22 @@ export const CardOverlay: FC<ICardOverlayProps> = ({ data }) => {
         <LevelWrapper>
           {Array(3)
             .fill("")
-            .map((_, index) =>
-              index + 1 == data.size.level ? (
-                <PiPottedPlant
-                  key={index}
-                  size={(index + 1) * 3 + 15}
-                  color="white"
-                />
-              ) : (
-                <PiPottedPlant
-                  key={index}
-                  size={(index + 1) * 3 + 15}
-                  color="#0e1d1d"
-                />
-              )
-            )}
+            .map((_, index) => (
+              <PiPottedPlant
+                key={index}
+                size={(index + 1) * 3 + 15}
+                color={index + 1 == data.size.level ? "white" : "#0e1d1d"}
+              />
+            ))}
         </LevelWrapper>
       </div>
       <div>
         <p>Season: </p>
         <LevelWrapper>
-          {data.season.findIndex((season) => season === "spring") >= 0 ? (
-            <PiFlower color="white" />
-          ) : (
-            <PiFlower color="#0e1d1d" />
-          )}
-          {data.season.findIndex((season) => season === "summer") >= 0 ? (
-            <FiSun color="white" />
-          ) : (
-            <FiSun color="#0e1d1d" />
-          )}
-          {data.season.findIndex((season) => season === "fall") >= 0 ? (
-            <RiLeafLine color="white" />
-          ) : (
-            <RiLeafLine color="#0e1d1d" />
-          )}
-          {data.season.findIndex((season) => season === "winter") >= 0 ? (
-            <PiSnowflakeBold color="white" />
-          ) : (
-            <PiSnowflakeBold color="#0e1d1d" />
-          )}
+          <PiFlower color={data.season.spring ? "white" : "#0e1d1d"} />
+          <FiSun color={data.season.summer ? "white" : "#0e1d1d"} />
+          <RiLeafLine color={data.season.fall ? "white" : "#0e1d1d"} />
+          <PiSnowflakeBold color={data.season.winter ? "white" : "#0e1d1d"} />
         </LevelWrapper>
       </div>
     </StylesWrapper>
