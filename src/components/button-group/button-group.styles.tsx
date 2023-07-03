@@ -21,15 +21,7 @@ export const StylesWrapper = styled.div<{}>`
     border: 1px solid var(--primary);
     border-left: none;
     transition: background-color 0.3s ease-in;
-    path,
-    svg,
-    .g-stroke {
-      stroke: var(--primary);
-    }
-
-    .g-stroke {
-      fill: var(--primary);
-    }
+    color: var(--primary);
   }
 
   .button:first-child {
