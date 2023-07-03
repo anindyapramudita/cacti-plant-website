@@ -36,6 +36,7 @@ export const StylesWrapper = styled.div<{}>`
     display: flex;
     align-items: center;
     justify-content: center;
+    color: white;
   }
 
   @media (min-width: ${gridBreakpoint.lg}) {
