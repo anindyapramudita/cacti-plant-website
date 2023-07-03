@@ -1,13 +1,14 @@
-// import { CircleIcon } from "@/assets/circle-icon";
-import { LeafIcon } from "@/assets/leaf-icon";
-import { PlantIcon } from "@/assets/plant-icon";
-import { SnowIcon } from "@/assets/snow-icon";
-import { SpringIcon } from "@/assets/spring-icon";
-import { SummerIcon } from "@/assets/summer-icon";
-import { WaterIcon } from "@/assets/water-icon";
 import { FC } from "react";
 import { ICardOverlayProps } from "./card-overlay.interface";
 import { StylesWrapper, LevelWrapper } from "./card-overlay.styles";
+import { RiLeafLine } from "react-icons/ri";
+import { FiSun } from "react-icons/fi";
+import {
+  PiDrop,
+  PiPottedPlant,
+  PiFlower,
+  PiSnowflakeBold,
+} from "react-icons/pi";
 
 export const CardOverlay: FC<ICardOverlayProps> = ({ data }) => {
   if (!data) {
@@ -24,9 +25,9 @@ export const CardOverlay: FC<ICardOverlayProps> = ({ data }) => {
             .fill("")
             .map((_, index) =>
               index < data.water.level ? (
-                <WaterIcon key={index} color="white" />
+                <PiDrop key={index} color="white" />
               ) : (
-                <WaterIcon key={index} color="#0e1d1d" />
+                <PiDrop key={index} color="#0e1d1d" />
               )
             )}
         </LevelWrapper>
@@ -38,9 +39,9 @@ export const CardOverlay: FC<ICardOverlayProps> = ({ data }) => {
             .fill("")
             .map((_, index) =>
               index < data.difficulty.level ? (
-                <LeafIcon key={index} color="white" />
+                <RiLeafLine key={index} color="white" />
               ) : (
-                <LeafIcon key={index} color="#0e1d1d" />
+                <RiLeafLine key={index} color="#0e1d1d" />
               )
             )}
         </LevelWrapper>
@@ -52,15 +53,15 @@ export const CardOverlay: FC<ICardOverlayProps> = ({ data }) => {
             .fill("")
             .map((_, index) =>
               index + 1 == data.size.level ? (
-                <PlantIcon
+                <PiPottedPlant
                   key={index}
-                  width={(index + 1) * 3 + 15}
+                  size={(index + 1) * 3 + 15}
                   color="white"
                 />
               ) : (
-                <PlantIcon
+                <PiPottedPlant
                   key={index}
-                  width={(index + 1) * 3 + 15}
+                  size={(index + 1) * 3 + 15}
                   color="#0e1d1d"
                 />
               )
@@ -71,35 +72,27 @@ export const CardOverlay: FC<ICardOverlayProps> = ({ data }) => {
         <p>Season: </p>
         <LevelWrapper>
           {data.season.findIndex((season) => season === "spring") >= 0 ? (
-            <SpringIcon color="white" />
+            <PiFlower color="white" />
           ) : (
-            <SpringIcon color="#0e1d1d" />
+            <PiFlower color="#0e1d1d" />
           )}
           {data.season.findIndex((season) => season === "summer") >= 0 ? (
-            <SummerIcon color="white" />
+            <FiSun color="white" />
           ) : (
-            <SummerIcon color="#0e1d1d" />
+            <FiSun color="#0e1d1d" />
           )}
           {data.season.findIndex((season) => season === "fall") >= 0 ? (
-            <LeafIcon color="white" />
+            <RiLeafLine color="white" />
           ) : (
-            <LeafIcon color="#0e1d1d" />
+            <RiLeafLine color="#0e1d1d" />
           )}
           {data.season.findIndex((season) => season === "winter") >= 0 ? (
-            <SnowIcon color="white" />
+            <PiSnowflakeBold color="white" />
           ) : (
-            <SnowIcon color="#0e1d1d" />
+            <PiSnowflakeBold color="#0e1d1d" />
           )}
         </LevelWrapper>
       </div>
-      {/* <div>
-        <p>Color: </p>
-        <LevelWrapper>
-          {data.color.map((color, index) => (
-            <CircleIcon color={color} />
-          ))}
-        </LevelWrapper>
-      </div> */}
     </StylesWrapper>
   );
 };

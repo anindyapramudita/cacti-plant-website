@@ -1,5 +1,3 @@
-import { BurgerIcon } from "@/assets/burger-icon";
-import { CloseIcon } from "@/assets/close-icon";
 import { Logo } from "@/assets/logo";
 import config from "@/shared/config";
 import { navigation } from "@/shared/navigation";
@@ -14,10 +12,10 @@ import {
   NavigationWrapper,
   MenuWrapper,
 } from "./header.styles";
-import { useRouter } from "next/navigation";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { AiOutlineClose } from "react-icons/ai";
 
 export const Header: FC<IHeaderProps> = ({ role = "all" }) => {
-  const router = useRouter();
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
 
   return (
@@ -33,9 +31,9 @@ export const Header: FC<IHeaderProps> = ({ role = "all" }) => {
         onClick={() => setDrawerOpen(!drawerOpen)}
       >
         {drawerOpen ? (
-          <CloseIcon color="white" />
+          <AiOutlineClose size={30} color="white" />
         ) : (
-          <BurgerIcon color="#123132" />
+          <RxHamburgerMenu size={30} color="#123132" />
         )}
       </MenuWrapper>
       <NavigationWrapper drawerOpen={drawerOpen}>
