@@ -18,6 +18,7 @@ export const StylesWrapper = styled.button<{}>`
   padding: 0.75rem;
   border-radius: 50%;
   cursor: pointer;
+  color: white;
 
   @media (min-width: ${gridBreakpoint.lg}) {
     top: calc(3rem + 0.75rem + 2rem + 0.75rem);
