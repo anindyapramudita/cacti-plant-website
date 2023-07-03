@@ -39,7 +39,7 @@
         "level": 1,
         "info": "The Monstera Deliciosa is considered an easy-care plant, requiring very little attention to grow full and lush in your home over time. This low-maintenance beauty does well with a regular watering routine and bright indirect light"
       },
-      "season": ["spring", "summer", "fall"],
+      "season": {"spring": true, "summer": true, "fall": true, "winter": false},
       "size": {
         "level": 3,
         "info": "Given the right conditions and support, Monstera deliciosa are long-lived plants that can grow 10 to 15 feet tall indoors and stretch 8 feet wide, with leaves that measure 18 inches across or more. Variegated monstera grow much slower and rarely achieve that size indoors."
@@ -85,7 +85,7 @@
         "level": 2,
         "info": "In general, dracaena care is relatively simple. Light: Filtered indoor light (such as through a sheer curtain in front of a sunny window) or a semi-shade spot is an ideal location. Never place a dracaena plant in direct sun, as the rays will scorch its foliage"
       },
-      "season": ["spring", "summer", "fall", "winter"],
+      "season": {"spring": true, "summer": true, "fall": true, "winter": false},
       "size": {
         "level": 2,
         "info": "Dracaenas can grow 2 to 10 feet tall, depending on the cultivar. It is easy to maintain these plants at shorter heights if desired. Upright types will usually be no more than 2 feet wide"
@@ -126,7 +126,7 @@
         "level": 1,
         "info": "Caring for spider plants is easy. These tough plants tolerate lots of abuse, making them excellent candidates for newbie gardeners or those without a green thumb. Provide them with well-drained soil and bright, indirect light and they will flourish"
       },
-      "season": ["spring", "summer", "fall"],
+      "season": {"spring": true, "summer": true, "fall": true, "winter": true},
       "size": {
         "level": 1,
         "info": "Plants grows 12-15″ tall. The thick, fleshy roots and rhizomes evolved to store water, allowing it to survive inconsistent watering. Spider plant produces small white flowers."
