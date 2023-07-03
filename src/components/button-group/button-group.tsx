@@ -31,6 +31,7 @@ export const ButtonGroup: FC<IButtonGroupProps> = ({
       {buttons?.length > 0
         ? buttons.map((button, index) => (
             <button
+              key={index}
               className={
                 buttonSelected.includes(index) ? "button selected" : "button"
               }
