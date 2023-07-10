@@ -2,12 +2,12 @@
 const nextConfig = {
   reactStrictMode: true,
   compiler: {
-    styledComponents: true
+    styledComponents: true,
   },
   images: {
-    domains: ['images.unsplash.com']
+    domains: ["images.unsplash.com", "cdn.sanity.io"],
   },
-  domains: ['localhost:3000']
-}
+  domains: ["localhost:3000"],
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
