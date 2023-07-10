@@ -1,4 +1,3 @@
-import config from "@/shared/config";
 import { plantDataType } from "@/shared/types";
 import { HomeLayout } from "@/components/layouts/home";
 import { Header } from "@/components/header";
@@ -10,14 +9,15 @@ import { useState } from "react";
 import { CarouselImage } from "@/components/carousel-image";
 import randomId from "@/shared/utils/generateRandomId";
 import { useRouter } from "next/navigation";
+import { getPlantById } from "@/sanity/get-plants-by-id";
+import { getRandomPlantByIndex } from "@/sanity/get-random-plant-by-index";
 
 type plantData = {
   plants: plantDataType;
-  id: number;
 };
 
-export default function PlantDetails({ plants, id }: plantData) {
-  const [currentId, setCurrentId] = useState<number>(id);
+export default function PlantDetails({ plants }: plantData) {
+  const [currentId, setCurrentId] = useState<number>(-1);
   const [currentData, setCurrentData] = useState<plantDataType>(plants);
   const [restartImage, setRestartImage] = useState<boolean>(false);
 
@@ -25,15 +25,13 @@ export default function PlantDetails({ plants, id }: plantData) {
 
   const handleShuffleData = async () => {
     try {
-      const newId = randomId(currentId);
+      const newId = randomId(currentId, currentData?.total - 1);
       setCurrentId(newId);
       setRestartImage(true);
-
-      const fetchAPI = await fetch(`${config.databaseUrl}/plants/${newId}`);
-      const response = await fetchAPI.json();
-      if (response) {
-        router.push(`/plant/${newId}`);
-        setCurrentData(response);
+      const fetchAPI: plantDataType = await getRandomPlantByIndex(newId);
+      if (fetchAPI) {
+        router.push(`/plant/${fetchAPI._id}`);
+        setCurrentData(fetchAPI);
       } else {
         console.log("error");
       }
@@ -66,14 +64,10 @@ export default function PlantDetails({ plants, id }: plantData) {
 
 export async function getServerSideProps(context: any) {
   const { id } = context.query;
-  const fetchAPI = await fetch(`${config.databaseUrl}/plants/${id}`);
-  const data: plantDataType = await fetchAPI.json();
-  // const error = fetchAPI.ok ? false : fetchAPI.statusText;
-
+  const data = await getPlantById(id);
   return {
     props: {
-      plants: data,
-      id,
+      plants: data[0],
     },
   };
 }
