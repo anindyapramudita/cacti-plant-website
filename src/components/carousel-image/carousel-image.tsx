@@ -2,6 +2,7 @@ import { TransitionImage } from "@/components/image";
 import { FC, useEffect, useState } from "react";
 import { ICarouselImage } from "./carousel-image.interface";
 import { LineCounter, StylesWrapper } from "./carousel-image.styles";
+import { imagePlaceholder } from "@/shared/utils/image-placeholder";
 
 export const CarouselImage: FC<ICarouselImage> = ({
   images,
@@ -9,7 +10,8 @@ export const CarouselImage: FC<ICarouselImage> = ({
   setRestartImage,
 }) => {
   const [currentId, setCurrentId] = useState<number>(0);
-  const imageLength = images.length;
+  const imageLength = images?.length;
+  const [newId, setNewId] = useState<number>(-1);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -20,19 +22,20 @@ export const CarouselImage: FC<ICarouselImage> = ({
       return () => clearInterval(timer);
     } else {
       clearInterval(timer);
-      setCurrentId(0);
       setRestartImage(false);
+      if (newId < 0) {
+        setCurrentId(0);
+      } else {
+        setCurrentId(newId);
+        setNewId(-1);
+      }
     }
-  }, [images, restartImage, setRestartImage]);
-
-  const handleLineClick = (index: number) => {
-    setCurrentId(index);
-  };
+  }, [images, restartImage, setRestartImage, newId]);
 
   return (
     <StylesWrapper>
       <div className="line-container">
-        {images.length > 1
+        {images?.length > 1
           ? Array.from({ length: images.length }).map((_, index) => (
               <LineCounter
                 key={index}
@@ -40,15 +43,18 @@ export const CarouselImage: FC<ICarouselImage> = ({
                 activeIndex={currentId}
                 totalLine={imageLength}
                 restartImage={restartImage}
-                onClick={() => handleLineClick(index)}
-                currentImage={images[currentId].mainImage}
+                onClick={() => {
+                  setNewId(index);
+                  setRestartImage(true);
+                }}
+                currentImage={images[currentId].src}
               />
             ))
           : null}
       </div>
       <TransitionImage
-        image={images[currentId].mainImage}
-        placeholder={images[currentId].placeholder}
+        image={images[currentId].src}
+        placeholder={imagePlaceholder}
         alt={images[currentId].alt}
       />
     </StylesWrapper>
