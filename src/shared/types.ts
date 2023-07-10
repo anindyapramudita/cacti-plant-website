@@ -4,8 +4,7 @@ export type levelInfoType = {
 };
 
 export type plantImagesType = {
-  mainImage: string;
-  placeholder: string;
+  src: string;
   alt: string;
 };
 
@@ -17,13 +16,15 @@ export type seasonType = {
 };
 
 export type plantDataType = {
-  id: number;
+  _id: string;
+  _createdAt: Date;
   name: string;
   images: plantImagesType[];
   description: string;
   water: levelInfoType;
-  difficulty: levelInfoType;
-  season: seasonType;
+  care: levelInfoType;
+  seasons: seasonType;
   size: levelInfoType;
   color: string[];
+  total: number;
 };
