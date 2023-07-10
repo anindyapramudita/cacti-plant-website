@@ -1,4 +1,3 @@
-import config from "@/shared/config";
 import Link from "next/link";
 import { FC, useState } from "react";
 import { CardOverlay } from "../card-overlay";
@@ -7,6 +6,7 @@ import { TransitionImage } from "../image";
 import { ICardProps } from "./card.interface";
 import { StylesWrapper } from "./card.styles";
 import { BiChevronUp, BiChevronDown } from "react-icons/bi";
+import { imagePlaceholder } from "@/shared/utils/image-placeholder";
 
 export const Card: FC<ICardProps> = ({ data }) => {
   const [showSummary, setShowSummary] = useState<boolean>(false);
@@ -31,10 +31,10 @@ export const Card: FC<ICardProps> = ({ data }) => {
         <CardOverlay data={data} />
       </div>
       <FavoriteButton />
-      <Link href={`${config.websiteUrl}/plant/${data.id}`}>
+      <Link href={`/plant/${data._id}`}>
         <TransitionImage
-          placeholder={data.images[0].placeholder}
-          image={data.images[0].mainImage}
+          placeholder={imagePlaceholder}
+          image={data.images[0].src}
           alt={data.images[0].alt}
         />
       </Link>
