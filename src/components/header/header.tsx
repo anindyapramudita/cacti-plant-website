@@ -20,7 +20,7 @@ export const Header: FC<IHeaderProps> = ({ role = "all" }) => {
 
   return (
     <StylesWrapper data-testid="card-layout">
-      <Link href={`${config.websiteUrl}`} className="logo-link">
+      <Link href={`/`} className="logo-link">
         <LogoWrapper>
           <Logo />
           <p>Cacti</p>
