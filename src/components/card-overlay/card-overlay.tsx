@@ -15,6 +15,10 @@ export const CardOverlay: FC<ICardOverlayProps> = ({ data }) => {
     return null;
   }
 
+  const colorGenerator = (white: boolean) => {
+    return white ? "white" : "#0e1d1d";
+  };
+
   return (
     <StylesWrapper data-testid="card-layout">
       <h3>{data.name.toUpperCase()}</h3>
@@ -26,7 +30,7 @@ export const CardOverlay: FC<ICardOverlayProps> = ({ data }) => {
             .map((_, index) => (
               <PiDrop
                 key={index}
-                color={index < data.water.level ? "white" : "#0e1d1d"}
+                color={colorGenerator(index < data.water.level)}
               />
             ))}
         </LevelWrapper>
@@ -39,7 +43,7 @@ export const CardOverlay: FC<ICardOverlayProps> = ({ data }) => {
             .map((_, index) => (
               <RiLeafLine
                 key={index}
-                color={index < data.water.level ? "white" : "#0e1d1d"}
+                color={colorGenerator(index < data.water.level)}
               />
             ))}
         </LevelWrapper>
@@ -53,7 +57,7 @@ export const CardOverlay: FC<ICardOverlayProps> = ({ data }) => {
               <PiPottedPlant
                 key={index}
                 size={(index + 1) * 3 + 15}
-                color={index + 1 == data.size.level ? "white" : "#0e1d1d"}
+                color={colorGenerator(index + 1 == data.size.level)}
               />
             ))}
         </LevelWrapper>
@@ -61,10 +65,10 @@ export const CardOverlay: FC<ICardOverlayProps> = ({ data }) => {
       <div>
         <p>Season: </p>
         <LevelWrapper>
-          <PiFlower color={data.season.spring ? "white" : "#0e1d1d"} />
-          <FiSun color={data.season.summer ? "white" : "#0e1d1d"} />
-          <RiLeafLine color={data.season.fall ? "white" : "#0e1d1d"} />
-          <PiSnowflakeBold color={data.season.winter ? "white" : "#0e1d1d"} />
+          <PiFlower color={colorGenerator(data.seasons.spring)} />
+          <FiSun color={colorGenerator(data.seasons.summer)} />
+          <RiLeafLine color={colorGenerator(data.seasons.fall)} />
+          <PiSnowflakeBold color={colorGenerator(data.seasons.winter)} />
         </LevelWrapper>
       </div>
     </StylesWrapper>
