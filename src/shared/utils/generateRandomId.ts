@@ -1,11 +1,11 @@
-const generateRandomNumber = () => {
-  return Math.ceil(Math.random() * 3);
+const generateRandomNumber = (maxNumber: number) => {
+  return Math.ceil(Math.random() * maxNumber);
 };
 
-const randomId = (currentId: number) => {
-  let number = generateRandomNumber();
+const randomId = (currentId: number, totalData: number) => {
+  let number = generateRandomNumber(totalData);
   while (number === currentId) {
-    number = generateRandomNumber();
+    number = generateRandomNumber(totalData);
   }
   return number;
 };
