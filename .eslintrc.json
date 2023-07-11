@@ -16,7 +16,10 @@
     "@typescript-eslint/no-unused-vars": ["error"]
 
   },
-  "plugins": ["import", "@typescript-eslint", "prettier"],
+  "env": {
+    "jest/globals": true
+  },
+  "plugins": ["import", "@typescript-eslint", "prettier", "jest"],
   "settings": {
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]
