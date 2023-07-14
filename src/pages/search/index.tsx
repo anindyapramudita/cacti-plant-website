@@ -1,36 +1,65 @@
-import config from "@/shared/config";
-import { plantDataType } from "@/shared/types";
-import { HomeLayout } from "@/components/layouts/home";
-import { Header } from "@/components/header";
-import { useEffect } from "react";
 import { FilterHeader } from "@/components/filter-header";
+import { getPlants } from "@/sanity/get-plants";
+import { handleUpdateFilter } from "@/hooks/get-filter-query";
+import { Filter } from "@/hooks/use-plant-filter";
+import { useState } from "react";
+import { FilterContext } from "@/components/filter-accordion/utils/season-filter";
 
-export default function Home() {
-  useEffect(() => {
-    function handleKeyDown(e: any) {
-      if (e.keyCode == 32) {
-        console.log("hai");
-      }
-    }
+const defaultFilter = {
+  search: "",
+  filter: {
+    water: [],
+    season: [],
+    care: [],
+  },
+};
 
-    document.addEventListener("keydown", handleKeyDown);
+export default function SearchPage() {
+  const [filterQuery, setFilterQuery] = useState<Filter>(defaultFilter);
 
-    return function cleanup() {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, []);
+  const onSaveSearch = async (search: string) => {
+    let temp = { ...filterQuery };
+    temp.search = search;
+    setFilterQuery(temp);
+
+    handleUpdateData(temp);
+  };
+
+  const onSaveFilter = async (filter: FilterContext) => {
+    let temp = { ...filterQuery };
+    temp.filter = filter;
+    setFilterQuery(temp);
+
+    handleUpdateData(temp);
+  };
+
+  const handleUpdateData = async (newQuery: Filter) => {
+    const query = handleUpdateFilter(newQuery);
+    const newData = await getPlants(0, query);
+
+    console.log("newData", newData);
+  };
+
+  const onClearFilter = async () => {
+    setFilterQuery(defaultFilter);
+    const newData = await getPlants(0);
+
+    console.log("newData", newData);
+  };
 
   return (
-    <HomeLayout>
-      <Header />
-      <FilterHeader />
-    </HomeLayout>
+    <>
+      <FilterHeader
+        onSaveSearch={onSaveSearch}
+        onSaveFilter={onSaveFilter}
+        onClearFilter={onClearFilter}
+      />
+    </>
   );
 }
 
 export async function getServerSideProps() {
-  const fetchAPI = await fetch(`${config.databaseUrl}/plants`);
-  const data: plantDataType[] = await fetchAPI.json();
+  const data = await getPlants(0);
 
   return {
     props: {
