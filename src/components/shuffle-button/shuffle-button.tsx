@@ -5,7 +5,7 @@ import { BiShuffle } from "react-icons/bi";
 
 export const ShuffleButton: FC<IShuffleButtonProps> = ({ handleShuffle }) => {
   return (
-    <StylesWrapper data-testid="button" onClick={handleShuffle}>
+    <StylesWrapper data-testid="shuffle-button" onClick={handleShuffle}>
       <BiShuffle size={20} />
     </StylesWrapper>
   );
