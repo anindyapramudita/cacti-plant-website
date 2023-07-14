@@ -2,7 +2,6 @@ import { gridBreakpoint } from "@/shared/breakpoints";
 import styled from "styled-components";
 
 export const StylesWrapper = styled.div<{}>`
-  position: relative;
   display: flex;
   flex-direction: column;
 
