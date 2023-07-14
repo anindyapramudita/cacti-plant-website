@@ -10,11 +10,6 @@ export const navigation = [
     roles: ["admin", "user", "all"],
   },
   {
-    path: "/login",
-    name: "Login",
-    roles: ["admin", "user", "all"],
-  },
-  {
     path: "/register",
     name: "Register",
     roles: ["admin", "user", "all"],
