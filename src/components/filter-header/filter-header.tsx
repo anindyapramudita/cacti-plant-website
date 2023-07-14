@@ -5,12 +5,17 @@ import { IFilterHeaderProps } from "./filter-header.interface";
 import { StylesWrapper } from "./filter-header.styles";
 import { BsFilterLeft } from "react-icons/bs";
 
-export const FilterHeader: FC<IFilterHeaderProps> = () => {
+export const FilterHeader: FC<IFilterHeaderProps> = ({
+  onSaveFilter,
+  onClearFilter,
+  onSaveSearch,
+}) => {
   const [isFilterShown, setIsFilterShown] = useState<boolean>(false);
+
   return (
     <StylesWrapper>
       <div className="filter-top">
-        <SearchInput />
+        <SearchInput onSaveSearch={onSaveSearch} />
         <button
           className={isFilterShown ? "filter-button clicked" : "filter-button"}
           onClick={() => setIsFilterShown(!isFilterShown)}
@@ -18,7 +23,11 @@ export const FilterHeader: FC<IFilterHeaderProps> = () => {
           <BsFilterLeft size={20} />
         </button>
       </div>
-      <FilterAccordion isOpen={isFilterShown} />
+      <FilterAccordion
+        isOpen={isFilterShown}
+        onSaveFilter={onSaveFilter}
+        onClearFilter={onClearFilter}
+      />
     </StylesWrapper>
   );
 };
