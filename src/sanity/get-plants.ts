@@ -1,8 +1,10 @@
 import { groq } from "next-sanity";
 import { client } from "./get-client";
 
-export const getPlants = async (id: number) => {
-  return client.fetch(groq`*[_type == "plant"][${id}..${id + 2}]{
+export const getPlants = async (id: number, query?: string | null) => {
+  return client.fetch(groq`*[_type == "plant" ${query ? query : ""}][${id}..${
+    id + 2
+  }]{
     _id,
     _createdAt,
     name,
