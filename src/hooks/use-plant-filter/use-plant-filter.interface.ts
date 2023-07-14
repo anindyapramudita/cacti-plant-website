@@ -1,7 +1,7 @@
 interface FilterType {
-  water: number[];
-  season: string[];
-  difficulty: number[];
+  water: (number | string)[];
+  season: (number | string)[];
+  care: (number | string)[];
 }
 
 export interface Filter {
