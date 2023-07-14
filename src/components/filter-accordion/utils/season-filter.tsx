@@ -1,57 +1,89 @@
-import { PiDrop, PiFlower, PiSnowflakeBold, PiHeartFill } from "react-icons/pi";
+import { PiDrop, PiFlower, PiSnowflakeBold } from "react-icons/pi";
 import { FiSun } from "react-icons/fi";
 import { RiLeafLine } from "react-icons/ri";
+import { AiOutlineHeart } from "react-icons/ai";
 
-export const waterFilter = [
-  { label: "low", value: 1, icon: <PiDrop size={12} /> },
-  { label: "med", value: 2, icon: <PiDrop size={16} /> },
-  { label: "high", value: 3, icon: <PiDrop size={20} /> },
-];
+export type FilterContext = {
+  water: (number | string)[];
+  season: (number | string)[];
+  care: (number | string)[];
+};
 
-export const seasonFilter = [
-  {
-    label: "spring",
-    value: "spring",
-    icon: <PiFlower size={20} />,
-  },
-  {
-    label: "summer",
-    value: "summer",
-    icon: <FiSun size={20} />,
-  },
-  {
-    label: "autumn",
-    value: "autumn",
-    icon: <RiLeafLine size={20} />,
-  },
-  {
-    label: "winter",
-    value: "winter",
-    icon: <PiSnowflakeBold size={20} />,
-  },
-];
+export const defaultForm: FilterContext = {
+  water: [],
+  season: [],
+  care: [],
+};
 
-export const difficultyFilter = [
-  { label: "easy", value: 1, icon: <PiHeartFill /> },
+export const waterContent = [
   {
-    label: "medium",
+    label: "Low",
+    value: 1,
+    icon: (
+      <div>
+        <PiDrop size={12} />
+      </div>
+    ),
+  },
+  {
+    label: "Med",
     value: 2,
     icon: (
       <div>
-        <PiHeartFill />
-        <PiHeartFill />
+        <PiDrop size={12} />
+        <PiDrop size={12} />
       </div>
     ),
   },
   {
-    label: "hard",
+    label: "High",
     value: 3,
     icon: (
       <div>
-        <PiHeartFill />
-        <PiHeartFill />
-        <PiHeartFill />
+        <PiDrop size={12} />
+        <PiDrop size={12} />
+        <PiDrop size={12} />
       </div>
     ),
   },
+];
+
+export const careContent = [
+  {
+    label: "Low",
+    value: 1,
+    icon: (
+      <div>
+        <AiOutlineHeart size={12} />
+      </div>
+    ),
+  },
+  {
+    label: "Med",
+    value: 2,
+    icon: (
+      <div>
+        <AiOutlineHeart size={12} />
+        <AiOutlineHeart size={12} />
+      </div>
+    ),
+  },
+  {
+    label: "High",
+    value: 3,
+    icon: (
+      <div>
+        <AiOutlineHeart size={12} />
+        <AiOutlineHeart size={12} />
+        <AiOutlineHeart size={12} />
+      </div>
+    ),
+  },
+];
+
+export const seasonContent = [
+  { label: "Spring", value: "spring", icon: <PiFlower size={12} /> },
+  { label: "Summer", value: "summer", icon: <FiSun size={12} /> },
+  { label: "Fall", value: "fall", icon: <RiLeafLine size={12} /> },
+  { label: "Winter", value: "winter", icon: <PiSnowflakeBold size={12} /> },
 ];
