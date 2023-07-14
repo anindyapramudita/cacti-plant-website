@@ -1,7 +1,5 @@
 import { plantDataType } from "@/shared/types";
 import { CardLayout } from "@/components/card-layout";
-import { HomeLayout } from "@/components/layouts/home";
-import { Header } from "@/components/header";
 import { useEffect, useMemo, useState } from "react";
 import useDeviceSize from "@/hooks/use-device-size";
 import { Card } from "@/components/card";
@@ -60,14 +58,13 @@ export default function Home({ plants }: plantData) {
   }, [currentId, plants]);
 
   return (
-    <HomeLayout>
-      <Header />
+    <>
       <CardLayout>
         {cardData.map((plant, index) => (
           <Card key={index} data={plant} />
         ))}
       </CardLayout>
-    </HomeLayout>
+    </>
   );
 }
 
