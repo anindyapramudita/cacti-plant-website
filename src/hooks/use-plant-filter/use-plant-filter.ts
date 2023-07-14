@@ -7,7 +7,7 @@ export const usePlantFilter = () => {
     filter: {
       water: [],
       season: [],
-      difficulty: [],
+      care: [],
     },
   };
 
