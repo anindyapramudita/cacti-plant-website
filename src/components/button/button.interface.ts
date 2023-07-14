@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes } from "react";
 
 export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: string;
+  children?: string;
   color?: "primary" | "secondary";
   variant?: "filled" | "reversed" | "outlined";
   size?: "small" | "medium" | "large";

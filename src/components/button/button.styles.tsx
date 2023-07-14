@@ -1,72 +1,98 @@
 import { ralewayThin } from "@/styles/fonts";
 import styled from "styled-components";
 
-export const StylesWrapper = styled.button<{
-  color?: "primary" | "secondary";
-  variant?: "filled" | "reversed" | "outlined";
-  isLoading?: boolean;
-  disabled?: boolean;
-  size?: "small" | "medium" | "large";
-  fullWidth?: boolean;
-}>`
+export const StylesWrapper = styled.button`
   ${ralewayThin}
 
-  --padding-small: .625rem 16px;
-  --padding-medium: 0.6875em 3em;
-  --padding-large: 0.7125em 3.0125em;
+  --button-padding: 0.6875em 3em;
+  --button-font-size: 1rem;
+  --button-background-color: var(--primary);
+  --button-color: var(--white);
+  --button-border-color: var(--primary);
+  --button-border: 0.0625rem solid var(--button-border-color);
 
   cursor: pointer;
   display: "inline-block";
   line-height: 1;
   transition: background-color 0.4s ease, border-color 0.4s ease;
-
-  position: ${(props) => props.isLoading && "relative"};
-  border: ${(props) =>
-    props.variant === "reversed"
-      ? ".0625rem solid var(--white)"
-      : `.0625rem solid var(--${props.color})`};
-  padding: ${(props) =>
-    props.size ? `var(--padding-${props.size})` : "var(--padding-medium"};
-  color: ${(props) =>
-    props.variant === "filled" ? "var(--white)" : `var(--${props.color})`};
-  background-color: ${(props) =>
-    props.variant === "filled"
-      ? `var(--${props.color})`
-      : props.variant === "reversed"
-      ? "var(--white)"
-      : "transparent"};
-  font-size: ${(props) => `var(--font-size--${props.size})`};
-  width: ${(props) => (props.fullWidth ? "100%" : "")};
+  background-color: var(--button-background-color);
+  border: var(--button-border);
+  padding: var(--button-padding);
+  color: var(--button-color);
+  font-size: var(--button-font-size);
 
   &:hover {
     color: var(--white);
-    background-color: ${(props) =>
-      props.variant === "filled"
-        ? `var(--${props.color}-light)`
-        : `var(--${props.color})`};
-    border-color: ${(props) =>
-      props.variant === "filled"
-        ? `var(--${props.color}-light)`
-        : `var(--${props.color})`};
+    --button-background-color: var(--primary-light);
+    --button-border: 0.0625rem solid var(--primary-light);
+  }
+
+  &.button-filled-secondary {
+    --button-background-color: var(--secondary);
+    --button-border: 0.0625rem solid var(--secondary);
+    &:hover {
+      --button-background-color: var(--secondary-light);
+      --button-border: 0.0625rem solid var(--secondary-light);
+    }
+  }
+
+  &.button-outlined-primary,
+  &.button-reversed-primary {
+    --button-background-color: var(--white);
+    --button-color: var(--primary);
+
+    &:hover {
+      --button-background-color: var(--primary);
+      --button-border: 0.0625rem solid var(--primary);
+    }
+  }
+
+  &.button-outlined-secondary,
+  &.button-reversed-secondary {
+    --button-background-color: var(--white);
+    --button-color: var(--secondary);
+
+    &:hover {
+      --button-background-color: var(--secondary);
+      --button-border: 0.0625rem solid var(--secondary);
+    }
+  }
+
+  &.button-reversed-primary {
+    --button-border: 0.0625rem solid var(--white);
+  }
+
+  &.button-reversed-secondary {
+    --button-border: 0.0625rem solid var(--white);
+  }
+
+  &.size-small {
+    --button-padding: 0.625rem 16px;
+    --button-font-size: 0.875rem;
+  }
+
+  &.size-large {
+    --button-padding: 0.7125em 3.0125em;
+    --button-font-size: 1.125rem;
+  }
+
+  &.button-fullwidth {
+    width: 100%;
   }
 
   &:disabled {
-    background-color: var(--disabled-light);
-    border-color: var(--disabled-light);
-    color: ${(props) =>
-      props.isLoading ? "var(--black)" : "var(--disabled-dark)"};
-    // color: ${(props) =>
-      props.isLoading ? "transparent" : "var(--disabled-dark)"};
+    --button-background-color: var(--disabled-light);
+    --button-border: 0.0625rem solid var(--disabled-light);
+    --button-color: var(--disabled-dark);
     cursor: default;
   }
 
-  p {
-    visibility: ${(props) => (props.isLoading ? "hidden" : "")};
-  }
-`;
+  &.button-loading {
+    position: relative;
+    --button-color: var(--black);
 
-export const StylesText = styled.p<{
-  isLoading?: boolean;
-}>`
-  visibility: ${(props) => (props.isLoading ? "hidden" : "")};
+    p {
+      visibility: hidden;
+    }
+  }
 `;

@@ -21,16 +21,17 @@ export const Button: FC<IButtonProps> = ({
 
   return (
     <StylesWrapper
-      data-testid="button"
-      color={color}
-      variant={variant}
-      disabled={disabled || isLoading}
-      isLoading={isLoading}
-      size={size}
-      fullWidth={fullWidth}
       {...props}
+      data-testid="button"
+      disabled={disabled || isLoading}
+      className={[
+        `button-${variant}-${color}`,
+        `size-${size}`,
+        `${fullWidth ? "button-fullwidth" : ""}`,
+        `${isLoading ? "button-loading" : ""}`,
+      ].join(" ")}
     >
-      <p>{children}</p>
+      <p role="label">{children}</p>
       {isLoading && <Loader size={loaderSize} number={loaderDot} />}
     </StylesWrapper>
   );
