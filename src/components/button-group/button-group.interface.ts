@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 
-type FilterCategory = "water" | "season" | "difficulty";
+export type FilterCategory = "water" | "season" | "care";
 
 type button = {
   label: string;
@@ -9,6 +9,11 @@ type button = {
 };
 export interface IButtonGroupProps {
   buttons: button[];
-  handleButtonClick: (category: FilterCategory, value: string | number) => void;
+  handleButtonClick: (
+    category: FilterCategory,
+    value: (string | number)[]
+  ) => void;
   category: FilterCategory;
+  buttonClear: boolean;
+  setButtonClear: Dispatch<SetStateAction<boolean>>;
 }
