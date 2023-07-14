@@ -1,27 +1,36 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { ISeachInputProps } from "./search-input.interface";
 import { StylesWrapper } from "./search-input.styles";
-import { usePlantFilter } from "@/hooks/use-plant-filter";
 import { AiOutlineSearch } from "react-icons/ai";
+import { useForm } from "react-hook-form";
 
-export const SearchInput: FC<ISeachInputProps> = () => {
-  const { dispatch } = usePlantFilter();
+export type searchContext = { search: string };
 
-  const [searchText, setSearchText] = useState<string>("");
-  const handleSearch = () => {
-    dispatch({ type: "search.plant", payload: searchText });
-  };
+export const defaultForm: searchContext = {
+  search: "",
+};
+
+export const SearchInput: FC<ISeachInputProps> = ({ onSaveSearch }) => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isDirty },
+  } = useForm<searchContext>({ defaultValues: defaultForm });
+
+  const onSubmit = handleSubmit((data) => {
+    onSaveSearch(data.search);
+    reset(data);
+  });
 
   return (
     <StylesWrapper>
-      <input
-        type="textbox"
-        placeholder="search..."
-        onChange={(e) => setSearchText(e.target.value)}
-      />
-      <button className="search-button" onClick={handleSearch}>
-        <AiOutlineSearch size={15} />
-      </button>
+      <form onSubmit={onSubmit}>
+        <input type="textbox" placeholder="search..." {...register("search")} />
+        <button className="search-button" type="submit">
+          <AiOutlineSearch size={15} />
+        </button>
+      </form>
     </StylesWrapper>
   );
 };
