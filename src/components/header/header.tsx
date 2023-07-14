@@ -15,7 +15,7 @@ import {
 import { RxHamburgerMenu } from "react-icons/rx";
 import { AiOutlineClose } from "react-icons/ai";
 
-export const Header: FC<IHeaderProps> = ({ role = "all" }) => {
+export const Header: FC<IHeaderProps> = ({ role = "all", onLogin }) => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
 
   return (
@@ -48,10 +48,12 @@ export const Header: FC<IHeaderProps> = ({ role = "all" }) => {
           ))}
       </NavigationWrapper>
       <ButtonWrapper>
-        <Button variant="outlined" size="small" onClick={() => null}>
+        <Button variant="outlined" size="small" onClick={onLogin}>
           Log in
         </Button>
-        <Button size="small">Sign up</Button>
+        <Button size="small" color="secondary">
+          Sign up
+        </Button>
       </ButtonWrapper>
     </StylesWrapper>
   );
