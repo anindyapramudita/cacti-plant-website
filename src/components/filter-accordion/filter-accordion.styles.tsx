@@ -1,12 +1,9 @@
 import { gridBreakpoint } from "@/shared/breakpoints";
-import { ralewayThin } from "@/styles/fonts";
 import styled from "styled-components";
 
 export const StylesWrapper = styled.div<{
   //  isOpen: boolean
 }>`
-  // ${ralewayThin}
-
   .content {
     max-height: 0;
     overflow: hidden;
@@ -37,6 +34,40 @@ export const StylesWrapper = styled.div<{
     border-top: 1px solid var(--disabled-light);
     border-bottom: 1px solid var(--disabled-light);
     transition: all 0.3s cubic-bezier(1, 0, 1, 0);
+  }
+
+  input[type="checkbox"].button + label {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 14px;
+    width: 4.8em;
+    height: 3.5em;
+    color: var(--primary);
+    cursor: pointer;
+    border: 1px solid var(--primary);
+    border-left: none;
+    margin-top: 0.5em;
+    padding: 0.3em;
+  }
+
+  input[type="checkbox"].first-child + label {
+    border-left: 1px solid var(--primary);
+    border-radius: 15px 0 0 15px;
+  }
+
+  input[type="checkbox"].last-child + label {
+    border-radius: 0 15px 15px 0;
+  }
+
+  input[type="checkbox"].button:checked + label {
+    background-color: var(--primary);
+    color: var(--white);
+  }
+
+  .button-group {
+    display: flex;
   }
 
   @media (min-width: ${gridBreakpoint.sm}) {

@@ -1,53 +1,140 @@
 import { FC } from "react";
 import { Button } from "../button";
-import { ButtonGroup } from "../button-group";
 import { IFilterAccordionProps } from "./filter-accordion.interface";
 import { StylesWrapper } from "./filter-accordion.styles";
 import {
-  difficultyFilter,
-  seasonFilter,
-  waterFilter,
+  FilterContext,
+  careContent,
+  defaultForm,
+  seasonContent,
+  waterContent,
 } from "./utils/season-filter";
+import { useForm } from "react-hook-form";
 
-export const FilterAccordion: FC<IFilterAccordionProps> = ({ isOpen }) => {
+export const FilterAccordion: FC<IFilterAccordionProps> = ({
+  isOpen,
+  onSaveFilter,
+  onClearFilter,
+}) => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    formState: { isDirty },
+  } = useForm<FilterContext>({ defaultValues: defaultForm });
+
+  const currentField = watch();
+
+  const getClassName = (index: number, array: any[]) => {
+    let className = ["button"];
+    if (index === 0) className.push("first-child");
+    if (index === array.length - 1) className.push("last-child");
+    return className.join(" ");
+  };
+
+  const handleClear = () => {
+    onClearFilter();
+    reset(defaultForm);
+  };
+
+  const onSubmit = handleSubmit((data) => {
+    onSaveFilter(data);
+    reset(data);
+  });
+
   return (
     <StylesWrapper>
-      <div className={isOpen ? "content show" : "content"}>
+      <form className={isOpen ? "content show" : "content"} onSubmit={onSubmit}>
         <div className="content-row">
           <div>
             <p>Water Needs:</p>
-            <ButtonGroup
-              buttons={waterFilter}
-              category="water"
-              handleButtonClick={() => null}
-            />
+            <div className="button-group">
+              {waterContent.map((content, index) => (
+                <>
+                  <input
+                    hidden
+                    type="checkbox"
+                    id={`water-${content.value}`}
+                    className={getClassName(index, waterContent)}
+                    value={content.value}
+                    {...register("water")}
+                  />
+                  <label htmlFor={`water-${content.value}`}>
+                    {content?.icon ? content.icon : null}
+                    {content.label}
+                  </label>
+                </>
+              ))}
+            </div>
           </div>
           <div>
             <p>Bloom Season:</p>
-            <ButtonGroup
-              buttons={seasonFilter}
-              category="season"
-              handleButtonClick={() => null}
-            />
+            <div className="button-group">
+              {seasonContent.map((content, index) => (
+                <>
+                  <input
+                    hidden
+                    type="checkbox"
+                    id={`season-${content.value}`}
+                    className={getClassName(index, seasonContent)}
+                    value={content.value}
+                    {...register("season")}
+                  />
+                  <label htmlFor={`season-${content.value}`}>
+                    {content?.icon ? content.icon : null}
+                    {content.label}
+                  </label>
+                </>
+              ))}
+            </div>
           </div>
           <div>
             <p>Care Level:</p>
-            <ButtonGroup
-              buttons={difficultyFilter}
-              category="difficulty"
-              handleButtonClick={() => null}
-            />
+            <div className="button-group">
+              {careContent.map((content, index) => (
+                <>
+                  <input
+                    hidden
+                    type="checkbox"
+                    id={`care-${content.value}`}
+                    className={getClassName(index, careContent)}
+                    value={content.value}
+                    {...register("care")}
+                  />
+                  <label htmlFor={`care-${content.value}`}>
+                    {content?.icon ? content.icon : null}
+                    {content.label}
+                  </label>
+                </>
+              ))}
+            </div>
           </div>
         </div>
         <div className="buttons">
-          <Button size="small" color="secondary" onClick={() => null}>
+          <Button
+            type="submit"
+            size="small"
+            color="secondary"
+            disabled={isDirty ? !isDirty : true}
+          >
             Save
           </Button>
-          <Button variant="outlined" size="small" color="secondary">
+          <Button
+            variant="outlined"
+            size="small"
+            color="secondary"
+            onClick={handleClear}
+            disabled={
+              currentField.water.length === 0 &&
+              currentField.season.length === 0 &&
+              currentField.care.length === 0
+            }
+          >
             Clear
           </Button>
         </div>
-      </div>
+      </form>
     </StylesWrapper>
   );
 };
