@@ -1,6 +1,4 @@
 import { plantDataType } from "@/shared/types";
-import { HomeLayout } from "@/components/layouts/home";
-import { Header } from "@/components/header";
 import { PlantDetailsLayout } from "@/components/layouts/plant-details";
 import { OverviewCard } from "@/components/overview-card";
 import { ShuffleButton } from "@/components/shuffle-button";
@@ -41,24 +39,21 @@ export default function PlantDetails({ plants }: plantData) {
   };
 
   return (
-    <HomeLayout>
-      <Header />
-      <PlantDetailsLayout>
-        <div className="plant-image">
-          <CarouselImage
-            images={currentData?.images}
-            restartImage={restartImage}
-            setRestartImage={setRestartImage}
-          />
-          <FavoriteButton />
-        </div>
-        <div className="plant-details">
-          <h3>{currentData?.name.toUpperCase()}</h3>
-          <OverviewCard data={currentData} />
-        </div>
-      </PlantDetailsLayout>
+    <PlantDetailsLayout>
+      <div className="plant-image">
+        <CarouselImage
+          images={currentData?.images}
+          restartImage={restartImage}
+          setRestartImage={setRestartImage}
+        />
+        <FavoriteButton />
+      </div>
+      <div className="plant-details">
+        <h3>{currentData?.name.toUpperCase()}</h3>
+        <OverviewCard data={currentData} />
+      </div>
       <ShuffleButton handleShuffle={handleShuffleData} />
-    </HomeLayout>
+    </PlantDetailsLayout>
   );
 }
 
