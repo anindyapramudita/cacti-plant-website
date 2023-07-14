@@ -6,7 +6,14 @@ export const Loader: FC<ILoaderProps> = ({ size = "small", number = 3 }) => {
   const renderCircle = useMemo(() => {
     const array = new Array(number).fill("");
     return array.map((_, index) => {
-      return <StylesCircle number={index} size={size} key={index} />;
+      return (
+        <StylesCircle
+          number={index}
+          size={size}
+          key={index}
+          data-testid="loader-dot"
+        />
+      );
     });
   }, [number, size]);
 
