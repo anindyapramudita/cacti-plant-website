@@ -1,4 +1,4 @@
-import { plantDataType } from "@/shared/types";
+import { plantDataType } from "@/shared/type/data-types";
 import { PlantDetailsLayout } from "@/components/layouts/plant-details";
 import { OverviewCard } from "@/components/overview-card";
 import { ShuffleButton } from "@/components/shuffle-button";
@@ -12,9 +12,10 @@ import { getRandomPlantByIndex } from "@/sanity/get-random-plant-by-index";
 
 type plantData = {
   plants: plantDataType;
+  openLoginModal: () => void;
 };
 
-export default function PlantDetails({ plants }: plantData) {
+export default function PlantDetails({ plants, openLoginModal }: plantData) {
   const [currentId, setCurrentId] = useState<number>(-1);
   const [currentData, setCurrentData] = useState<plantDataType>(plants);
   const [restartImage, setRestartImage] = useState<boolean>(false);
@@ -46,7 +47,7 @@ export default function PlantDetails({ plants }: plantData) {
           restartImage={restartImage}
           setRestartImage={setRestartImage}
         />
-        <FavoriteButton />
+        <FavoriteButton openLoginModal={openLoginModal} />
       </div>
       <div className="plant-details">
         <h3>{currentData?.name.toUpperCase()}</h3>
