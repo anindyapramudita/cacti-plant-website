@@ -1,1 +1,3 @@
-export interface IFavoriteButtonProps {}
+export interface IFavoriteButtonProps {
+  openLoginModal: () => void;
+}
