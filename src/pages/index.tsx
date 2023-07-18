@@ -1,4 +1,4 @@
-import { plantDataType } from "@/shared/types";
+import { plantDataType } from "@/shared/type/data-types";
 import { CardLayout } from "@/components/card-layout";
 import { useEffect, useMemo, useState } from "react";
 import useDeviceSize from "@/hooks/use-device-size";
@@ -8,9 +8,10 @@ import randomId from "@/shared/utils/generateRandomId";
 
 type plantData = {
   plants: plantDataType[];
+  openLoginModal: () => void;
 };
 
-export default function Home({ plants }: plantData) {
+export default function Home({ plants, openLoginModal }: plantData) {
   const [width] = useDeviceSize();
   const [currentData, setCurrentData] = useState<plantDataType[]>(plants);
   const [currentId, setCurrentId] = useState<number>(-1);
@@ -61,7 +62,7 @@ export default function Home({ plants }: plantData) {
     <>
       <CardLayout>
         {cardData.map((plant, index) => (
-          <Card key={index} data={plant} />
+          <Card key={index} data={plant} openLoginModal={openLoginModal} />
         ))}
       </CardLayout>
     </>
