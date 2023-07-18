@@ -1,4 +1,4 @@
-import { plantImagesType } from "@/shared/types";
+import { plantImagesType } from "@/shared/type/data-types";
 import { Dispatch, SetStateAction } from "react";
 
 export interface ICarouselImage {
