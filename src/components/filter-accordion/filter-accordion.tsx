@@ -51,7 +51,7 @@ export const FilterAccordion: FC<IFilterAccordionProps> = ({
             <p>Water Needs:</p>
             <div className="button-group">
               {waterContent.map((content, index) => (
-                <>
+                <div key={`water-${index}`}>
                   <input
                     hidden
                     type="checkbox"
@@ -64,7 +64,7 @@ export const FilterAccordion: FC<IFilterAccordionProps> = ({
                     {content?.icon ? content.icon : null}
                     {content.label}
                   </label>
-                </>
+                </div>
               ))}
             </div>
           </div>
@@ -72,7 +72,7 @@ export const FilterAccordion: FC<IFilterAccordionProps> = ({
             <p>Bloom Season:</p>
             <div className="button-group">
               {seasonContent.map((content, index) => (
-                <>
+                <div key={`season-${index}`}>
                   <input
                     hidden
                     type="checkbox"
@@ -85,7 +85,7 @@ export const FilterAccordion: FC<IFilterAccordionProps> = ({
                     {content?.icon ? content.icon : null}
                     {content.label}
                   </label>
-                </>
+                </div>
               ))}
             </div>
           </div>
@@ -93,7 +93,7 @@ export const FilterAccordion: FC<IFilterAccordionProps> = ({
             <p>Care Level:</p>
             <div className="button-group">
               {careContent.map((content, index) => (
-                <>
+                <div key={`care-${index}`}>
                   <input
                     hidden
                     type="checkbox"
@@ -106,7 +106,7 @@ export const FilterAccordion: FC<IFilterAccordionProps> = ({
                     {content?.icon ? content.icon : null}
                     {content.label}
                   </label>
-                </>
+                </div>
               ))}
             </div>
           </div>
