@@ -8,7 +8,7 @@ import { StylesWrapper } from "./card.styles";
 import { BiChevronUp, BiChevronDown } from "react-icons/bi";
 import { imagePlaceholder } from "@/shared/utils/image-placeholder";
 
-export const Card: FC<ICardProps> = ({ data }) => {
+export const Card: FC<ICardProps> = ({ data, openLoginModal }) => {
   const [showSummary, setShowSummary] = useState<boolean>(false);
 
   if (!data) {
@@ -30,7 +30,7 @@ export const Card: FC<ICardProps> = ({ data }) => {
       <div className="card-overlay">
         <CardOverlay data={data} />
       </div>
-      <FavoriteButton />
+      <FavoriteButton openLoginModal={openLoginModal} />
       <Link href={`/plant/${data._id}`}>
         <TransitionImage
           placeholder={imagePlaceholder}
