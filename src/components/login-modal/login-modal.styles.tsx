@@ -69,6 +69,13 @@ export const StylesWrapper = styled.div<{}>`
     cursor: pointer;
   }
 
+  .error-message {
+    color: red;
+    font-size: 0.725rem;
+    font-style: italic;
+    margin: 1rem 0;
+  }
+
   .footer-container {
     margin-top: 1rem;
     text-align: center;
