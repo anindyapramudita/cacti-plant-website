@@ -2,7 +2,7 @@ import { Logo } from "@/assets/logo";
 import config from "@/shared/config";
 import { navigation } from "@/shared/navigation";
 import Link from "next/link";
-import { FC, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { Button } from "../button";
 import { IHeaderProps } from "./header.interface";
 import {
@@ -14,9 +14,21 @@ import {
 } from "./header.styles";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { AiOutlineClose } from "react-icons/ai";
+import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
-export const Header: FC<IHeaderProps> = ({ role = "all", onLogin }) => {
+export const Header: FC<IHeaderProps> = ({ onLogin }) => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
+  const { data } = useSession();
+  const router = useRouter();
+
+  const currentRoll = useMemo(() => {
+    if (data?.user?.role) {
+      return data?.user?.role;
+    } else {
+      return "all";
+    }
+  }, [data]);
 
   return (
     <StylesWrapper data-testid="card-layout">
@@ -38,7 +50,7 @@ export const Header: FC<IHeaderProps> = ({ role = "all", onLogin }) => {
       </MenuWrapper>
       <NavigationWrapper drawerOpen={drawerOpen}>
         {navigation
-          .filter((item) => item.roles.includes(role))
+          .filter((item) => item.roles.includes(currentRoll))
           .map((path: any, index) => (
             <li key={index}>
               <a href={`${config.websiteUrl}/${path.path}`} key={index}>
@@ -47,14 +59,34 @@ export const Header: FC<IHeaderProps> = ({ role = "all", onLogin }) => {
             </li>
           ))}
       </NavigationWrapper>
-      <ButtonWrapper>
-        <Button variant="outlined" size="small" onClick={onLogin}>
-          Log in
-        </Button>
-        <Button size="small" color="secondary">
-          Sign up
-        </Button>
-      </ButtonWrapper>
+      {data?.user?.name ? (
+        <ButtonWrapper>
+          <p>Welcome back, {data?.user?.name}</p>
+          <Button
+            variant="outlined"
+            size="small"
+            color="secondary"
+            onClick={() => signOut()}
+          >
+            Sign out
+          </Button>
+        </ButtonWrapper>
+      ) : (
+        <ButtonWrapper>
+          <Button variant="outlined" size="small" onClick={onLogin}>
+            Log in
+          </Button>
+          <Button
+            size="small"
+            color="secondary"
+            onClick={() => {
+              router.push("/register");
+            }}
+          >
+            Sign up
+          </Button>
+        </ButtonWrapper>
+      )}
     </StylesWrapper>
   );
 };
