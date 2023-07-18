@@ -5,6 +5,7 @@ import { StylesWrapper } from "./button.styles";
 
 export const Button: FC<IButtonProps> = ({
   children,
+  className,
   disabled = false,
   isLoading = false,
   variant = "filled",
@@ -29,9 +30,10 @@ export const Button: FC<IButtonProps> = ({
         `size-${size}`,
         `${fullWidth ? "button-fullwidth" : ""}`,
         `${isLoading ? "button-loading" : ""}`,
+        className,
       ].join(" ")}
     >
-      <p role="label">{children}</p>
+      <p>{children}</p>
       {isLoading && <Loader size={loaderSize} number={loaderDot} />}
     </StylesWrapper>
   );
