@@ -58,6 +58,10 @@ export const StylesWrapper = styled.button`
     }
   }
 
+  &.button-outlined-secondary {
+    --button-border: 0.0625rem solid var(--secondary);
+  }
+
   &.button-reversed-primary {
     --button-border: 0.0625rem solid var(--white);
   }
@@ -85,6 +89,7 @@ export const StylesWrapper = styled.button`
     --button-border: 0.0625rem solid var(--disabled-light);
     --button-color: var(--disabled-dark);
     cursor: default;
+    position: relative;
   }
 
   &.button-loading {
