@@ -22,7 +22,7 @@ export const StylesWrapper = styled.button`
   font-size: var(--button-font-size);
 
   &:hover {
-    color: var(--white);
+    color: var(--button-color);
     --button-background-color: var(--primary-light);
     --button-border: 0.0625rem solid var(--primary-light);
   }
@@ -44,6 +44,7 @@ export const StylesWrapper = styled.button`
     &:hover {
       --button-background-color: var(--primary);
       --button-border: 0.0625rem solid var(--primary);
+      --button-color: var(--white);
     }
   }
 
@@ -90,14 +91,25 @@ export const StylesWrapper = styled.button`
     --button-color: var(--disabled-dark);
     cursor: default;
     position: relative;
+
+    &:hover {
+      --button-background-color: var(--disabled-light);
+      --button-border: 0.0625rem solid var(--disabled-light);
+      --button-color: var(--disabled-dark);
+      cursor: default;
+    }
   }
 
   &.button-loading {
     position: relative;
     --button-color: var(--black);
 
-    p {
-      visibility: hidden;
+    color: transparent;
+
+    &:hover {
+      --button-background-color: var(--disabled-light);
+      --button-border: 0.0625rem solid var(--disabled-light);
+      cursor: default;
     }
   }
 `;
