@@ -5,16 +5,18 @@ import useDeviceSize from "@/hooks/use-device-size";
 import { Card } from "@/components/card";
 import { getPlants } from "@/sanity/get-plants";
 import randomId from "@/shared/utils/generateRandomId";
+import { useSession } from "next-auth/react";
 
 type plantData = {
   plants: plantDataType[];
-  openLoginModal: () => void;
+  onLikeClick: () => void;
 };
 
-export default function Home({ plants, openLoginModal }: plantData) {
+export default function Home({ plants, onLikeClick }: plantData) {
   const [width] = useDeviceSize();
   const [currentData, setCurrentData] = useState<plantDataType[]>(plants);
   const [currentId, setCurrentId] = useState<number>(-1);
+  const { data: session } = useSession();
 
   const cardData = useMemo(() => {
     let newData = [...currentData];
@@ -62,7 +64,12 @@ export default function Home({ plants, openLoginModal }: plantData) {
     <>
       <CardLayout>
         {cardData.map((plant, index) => (
-          <Card key={index} data={plant} openLoginModal={openLoginModal} />
+          <Card
+            key={index}
+            data={plant}
+            onLikeClick={onLikeClick}
+            session={session}
+          />
         ))}
       </CardLayout>
     </>
