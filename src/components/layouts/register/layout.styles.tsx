@@ -1,4 +1,5 @@
 import { gridBreakpoint } from "@/shared/breakpoints";
+import { errorMessage } from "@/styles/error-text.styles";
 import styled from "styled-components";
 
 export const StylesWrapper = styled.div<{}>`
@@ -11,7 +12,7 @@ export const StylesWrapper = styled.div<{}>`
     position: relative;
     width: 100vw;
 
-    div {
+    .welcome-header {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -20,34 +21,33 @@ export const StylesWrapper = styled.div<{}>`
       color: white;
       text-shadow: 1px 1px 4px #000000;
 
-      h3 {
+      .header-text {
         font-size: 30px;
       }
 
-      h1 {
+      .logo-text {
         font-size: 48px;
       }
     }
   }
 
-  .form-wrapper > form {
+  .register-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    h1 {
+
+    .register-header {
       display: none;
     }
+
     .input-wrapper {
       margin: 2rem 0 0 0;
     }
 
     .error-message {
-      color: red;
-      font-size: 0.725rem;
-      font-style: italic;
-      margin: 1rem 0;
+      ${errorMessage}
     }
 
     button[type="submit"].error-hidden {
@@ -58,19 +58,21 @@ export const StylesWrapper = styled.div<{}>`
   @media (min-width: ${gridBreakpoint.lg}) {
     flex-direction: row;
     justify-content: center;
+
     .image-side {
       position: relative;
       width: 50vw;
-      height: calc(100vh - 3rem);
+      height: calc(100vh - var(--header-height));
 
-      div {
+      .welcome-header {
         display: none;
       }
     }
 
     .form-wrapper {
       width: 50vw;
-      h1 {
+
+      register-header {
         display: block;
         margin: 2rem 0 0 0;
       }
