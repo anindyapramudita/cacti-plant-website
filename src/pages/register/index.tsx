@@ -7,8 +7,17 @@ import { useForm } from "react-hook-form";
 import { imagePlaceholder } from "@/shared/utils/image-placeholder";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { createNewUser } from "@/hooks/authentication";
 import { defaultForm, formType, imageType } from "@/shared/type/register-type";
+import {
+  CACTI,
+  EMAIL,
+  NAME,
+  PASSWORD,
+  PASSWORD_CONFIRMATION,
+  REGISTER_HEADER,
+  SIGN_UP,
+} from "@/shared/utils/constant";
+import { createNewUser } from "@/shared/utils/user-sign-up";
 
 export default function Register({ image }: imageType) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -38,6 +47,10 @@ export default function Register({ image }: imageType) {
     }
   });
 
+  const onPasswordClicked = () => setIsPasswordVisible(!isPasswordVisible);
+  const onConfirmationClicked = () =>
+    setIsConfirmationVisible(!isConfirmationVisible);
+
   return (
     <RegisterLayout>
       <div className="image-side">
@@ -46,15 +59,17 @@ export default function Register({ image }: imageType) {
           alt={image?.alt}
           placeholder={imagePlaceholder}
         />
-        <div>
-          <h3>Welcome to</h3>
-          <h1>Cacti</h1>
+        <div className="welcome-header">
+          <h3 className="header-text">{REGISTER_HEADER}</h3>
+          <h1 className="logo-text">{CACTI}</h1>
         </div>
       </div>
       <div className="form-wrapper">
-        <h1>Welcome to Cacti</h1>
-        <form onSubmit={onSubmit}>
-          <InputContainer id="name" label="Name">
+        <h1 className="register-header">
+          {REGISTER_HEADER} {CACTI}
+        </h1>
+        <form className="register-form" onSubmit={onSubmit}>
+          <InputContainer id="name" label={NAME}>
             <input
               id="name"
               type="text"
@@ -62,7 +77,7 @@ export default function Register({ image }: imageType) {
               {...register("name")}
             />
           </InputContainer>
-          <InputContainer id="email" label="Email">
+          <InputContainer id="email" label={EMAIL}>
             <input
               id="email"
               type="text"
@@ -72,9 +87,9 @@ export default function Register({ image }: imageType) {
           </InputContainer>
           <InputContainer
             id="password"
-            label="Password"
+            label={PASSWORD}
             isVisible={isPasswordVisible}
-            setIsVisible={setIsPasswordVisible}
+            onClick={onPasswordClicked}
           >
             <input
               id="password"
@@ -85,9 +100,9 @@ export default function Register({ image }: imageType) {
           </InputContainer>
           <InputContainer
             id="passwordConf"
-            label="Password Confirmation"
+            label={PASSWORD_CONFIRMATION}
             isVisible={isConfirmationVisible}
-            setIsVisible={setIsConfirmationVisible}
+            onClick={onConfirmationClicked}
           >
             <input
               id="passwordConf"
@@ -102,7 +117,7 @@ export default function Register({ image }: imageType) {
             className={errorVisible ? "" : "error-hidden"}
             type="submit"
           >
-            Sign Up
+            {SIGN_UP}
           </Button>
         </form>
       </div>
