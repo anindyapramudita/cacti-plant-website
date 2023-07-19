@@ -1,3 +1,4 @@
 export interface IFavoriteButtonProps {
-  openLoginModal: () => void;
+  onLikeClick: () => void;
+  isLiked: boolean;
 }
