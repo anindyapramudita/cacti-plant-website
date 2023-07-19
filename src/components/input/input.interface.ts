@@ -1,12 +1,12 @@
-import { Dispatch, InputHTMLAttributes, SetStateAction } from "react";
+import { InputHTMLAttributes, ReactElement } from "react";
 
 export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
 }
 export interface IInputContainerProps {
-  children: any;
+  children: ReactElement;
   id: string;
   label: string;
   isVisible?: boolean;
-  setIsVisible?: Dispatch<SetStateAction<boolean>>;
+  onClick?: () => void;
 }
