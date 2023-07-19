@@ -39,7 +39,7 @@ export const Card: FC<ICardProps> = ({ data, onLikeClick, session }) => {
       <div className="card-overlay">
         <CardOverlay data={data} />
       </div>
-      <FavoriteButton onLikeClick={onFavoriteClick} />
+      <FavoriteButton onLikeClick={onFavoriteClick} isLiked={isLiked} />
       <Link href={`/plant/${data._id}`}>
         <TransitionImage
           placeholder={imagePlaceholder}
