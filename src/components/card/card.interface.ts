@@ -1,7 +1,8 @@
 import { plantDataType } from "@/shared/type/data-types";
+import { Session } from "next-auth";
 
 export interface ICardProps {
   data: plantDataType;
-  session?: any;
-  openLoginModal: () => void;
+  session?: Session | null;
+  onLikeClick: () => void;
 }
