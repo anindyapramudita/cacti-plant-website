@@ -8,9 +8,10 @@ export const StylesWrapper = styled.div`
   align-items: center;
   flex-direction: column;
 
-  p {
+  .loading-text {
     margin: 0.5rem 0 0 0;
   }
+
   @keyframes spinner {
     0% {
       transform: rotate(0deg);
