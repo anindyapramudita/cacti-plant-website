@@ -33,7 +33,7 @@ export const Button: FC<IButtonProps> = ({
         className,
       ].join(" ")}
     >
-      <p>{children}</p>
+      {children}
       {isLoading && <Loader size={loaderSize} number={loaderDot} />}
     </StylesWrapper>
   );
