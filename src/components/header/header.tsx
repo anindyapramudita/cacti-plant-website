@@ -16,13 +16,20 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { AiOutlineClose } from "react-icons/ai";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import {
+  CACTI,
+  HEADER_USER_NAME,
+  SIGN_IN,
+  SIGN_OUT,
+  SIGN_UP,
+} from "@/shared/utils/constant";
 
 export const Header: FC<IHeaderProps> = ({ onLogin }) => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
   const { data } = useSession();
   const router = useRouter();
 
-  const currentRoll = useMemo(() => {
+  const currentRole = useMemo(() => {
     if (data?.user?.role) {
       return data?.user?.role;
     } else {
@@ -35,7 +42,7 @@ export const Header: FC<IHeaderProps> = ({ onLogin }) => {
       <Link href={`/`} className="logo-link">
         <LogoWrapper>
           <Logo />
-          <p>Cacti</p>
+          <p>{CACTI}</p>
         </LogoWrapper>
       </Link>
       <MenuWrapper
@@ -50,7 +57,7 @@ export const Header: FC<IHeaderProps> = ({ onLogin }) => {
       </MenuWrapper>
       <NavigationWrapper drawerOpen={drawerOpen}>
         {navigation
-          .filter((item) => item.roles.includes(currentRoll))
+          .filter((item) => item.roles.includes(currentRole))
           .map((path: any, index) => (
             <li key={index}>
               <a href={`${config.websiteUrl}/${path.path}`} key={index}>
@@ -61,20 +68,22 @@ export const Header: FC<IHeaderProps> = ({ onLogin }) => {
       </NavigationWrapper>
       {data?.user?.name ? (
         <ButtonWrapper>
-          <p>Welcome back, {data?.user?.name}</p>
+          <p>
+            {HEADER_USER_NAME} {data?.user?.name}
+          </p>
           <Button
             variant="outlined"
             size="small"
             color="secondary"
             onClick={() => signOut()}
           >
-            Sign out
+            {SIGN_OUT}
           </Button>
         </ButtonWrapper>
       ) : (
         <ButtonWrapper>
           <Button variant="outlined" size="small" onClick={onLogin}>
-            Log in
+            {SIGN_IN}
           </Button>
           <Button
             size="small"
@@ -83,7 +92,7 @@ export const Header: FC<IHeaderProps> = ({ onLogin }) => {
               router.push("/register");
             }}
           >
-            Sign up
+            {SIGN_UP}
           </Button>
         </ButtonWrapper>
       )}
