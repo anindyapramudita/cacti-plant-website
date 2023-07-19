@@ -43,9 +43,6 @@ export const StylesWrapper = styled.div`
     border: 2px solid var(--secondary-light);
   }
 
-  input:not(:placeholder-shown) {
-  }
-
   .eye-icon {
     position: absolute;
     right: 0.25rem;
@@ -56,8 +53,4 @@ export const StylesWrapper = styled.div`
     background-color: transparent;
     cursor: pointer;
   }
-`;
-
-export const InputWrapper = styled.input`
-  ${ralewayThin}
 `;
