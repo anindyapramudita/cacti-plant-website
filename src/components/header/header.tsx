@@ -22,7 +22,7 @@ import {
   SIGN_IN,
   SIGN_OUT,
   SIGN_UP,
-} from "@/shared/utils/constant";
+} from "@/shared/utils/constants";
 
 export const Header: FC<IHeaderProps> = ({ onLogin }) => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);

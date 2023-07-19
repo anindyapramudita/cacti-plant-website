@@ -3,7 +3,7 @@ import { ISeachInputProps } from "./search-input.interface";
 import { StylesWrapper } from "./search-input.styles";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useForm } from "react-hook-form";
-import { SEARCH } from "@/shared/utils/constant";
+import { SEARCH } from "@/shared/utils/constants";
 
 export type searchContext = { search: string };
 

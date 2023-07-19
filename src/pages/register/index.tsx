@@ -16,7 +16,7 @@ import {
   PASSWORD_CONFIRMATION,
   REGISTER_HEADER,
   SIGN_UP,
-} from "@/shared/utils/constant";
+} from "@/shared/utils/constants";
 import { createNewUser } from "@/shared/utils/user-sign-up";
 
 export default function Register({ image }: imageType) {

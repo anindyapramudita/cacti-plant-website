@@ -18,7 +18,7 @@ import {
   OR,
   PASSWORD,
   SIGN_IN,
-} from "@/shared/utils/constant";
+} from "@/shared/utils/constants";
 import { userSignIn } from "@/shared/utils/user-sign-in";
 
 export const LoginModal: FC<ILoginModalProps> = ({ open = true, onClose }) => {

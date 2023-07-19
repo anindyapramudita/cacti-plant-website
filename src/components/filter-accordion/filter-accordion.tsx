@@ -16,7 +16,7 @@ import {
   CLEAR,
   SAVE,
   WATER_NEEDS,
-} from "@/shared/utils/constant";
+} from "@/shared/utils/constants";
 
 export const FilterAccordion: FC<IFilterAccordionProps> = ({
   isOpen,

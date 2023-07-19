@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { ILoadingProps } from "./loading.interface";
 import { StylesWrapper } from "./loading.styles";
-import { LOADING } from "@/shared/utils/constant";
+import { LOADING } from "@/shared/utils/constants";
 
 export const Loading: FC<ILoadingProps> = () => {
   return (

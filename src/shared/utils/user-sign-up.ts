@@ -1,5 +1,5 @@
 import { createUser } from "../../../db/utils/create-user";
-import { FORM_ERROR, PASSWORD_NOT_MATCH, SOMETHING_WRONG } from "./constant";
+import { FORM_ERROR, PASSWORD_NOT_MATCH, SOMETHING_WRONG } from "./constants";
 import { userSignIn } from "./user-sign-in";
 
 type DataType = {
