@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import {
   ILoginModalProps,
   defaultForm,
-  formType,
+  FormType,
 } from "./login-modal.interface";
 import { Modal } from "@/components/modal";
 import { Button } from "../button";
@@ -11,7 +11,15 @@ import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { InputContainer } from "../input";
-import { userSignIn } from "@/hooks/authentication";
+import {
+  EMAIL,
+  GOOGLE_SIGN_IN,
+  LOGIN_HEADER,
+  OR,
+  PASSWORD,
+  SIGN_IN,
+} from "@/shared/utils/constant";
+import { userSignIn } from "@/shared/utils/user-sign-in";
 
 export const LoginModal: FC<ILoginModalProps> = ({ open = true, onClose }) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -19,7 +27,7 @@ export const LoginModal: FC<ILoginModalProps> = ({ open = true, onClose }) => {
   const [errorVisible, setErrorVisible] = useState<boolean>(false);
   const router = useRouter();
 
-  const { register, handleSubmit, reset } = useForm<formType>({
+  const { register, handleSubmit, reset } = useForm<FormType>({
     defaultValues: defaultForm,
   });
 
@@ -50,14 +58,16 @@ export const LoginModal: FC<ILoginModalProps> = ({ open = true, onClose }) => {
     return null;
   }
 
+  const onPasswordClicked = () => setIsVisible(!isVisible);
+
   return (
     <Modal open={open} onClose={handleClose}>
       <StylesWrapper>
         <div className="modal-header">
-          <h2>Welcome back!</h2>
+          <h2>{LOGIN_HEADER}</h2>
         </div>
         <form onSubmit={onSubmit}>
-          <InputContainer id="email" label="Email">
+          <InputContainer id="email" label={EMAIL}>
             <input
               type="text"
               id="email"
@@ -67,8 +77,8 @@ export const LoginModal: FC<ILoginModalProps> = ({ open = true, onClose }) => {
           </InputContainer>
           <InputContainer
             id="password"
-            label="Password"
-            setIsVisible={setIsVisible}
+            label={PASSWORD}
+            onClick={onPasswordClicked}
             isVisible={isVisible}
           >
             <input
@@ -82,18 +92,18 @@ export const LoginModal: FC<ILoginModalProps> = ({ open = true, onClose }) => {
             <p className="error-message">email or password is invalid</p>
           )}
           <Button fullWidth type="submit" isLoading={isLoading}>
-            Login
+            {SIGN_IN}
           </Button>
         </form>
         <div className="footer-container">
           <div className="or-container">
             <p className="no-span">
-              <span>or</span>
+              <span>{OR}</span>
             </p>
           </div>
           <button type="button" onClick={() => null}>
             <FcGoogle />
-            Sign in with Google
+            {GOOGLE_SIGN_IN}
           </button>
         </div>
       </StylesWrapper>
