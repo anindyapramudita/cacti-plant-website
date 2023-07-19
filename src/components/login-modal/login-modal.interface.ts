@@ -8,7 +8,7 @@ export const defaultForm = {
   password: "",
 };
 
-export type formType = {
+export type FormType = {
   email: string;
   password: string;
 };
