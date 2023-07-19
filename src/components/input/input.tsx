@@ -8,18 +8,14 @@ export const InputContainer: FC<IInputContainerProps> = ({
   id,
   label,
   isVisible,
-  setIsVisible,
+  onClick,
 }) => {
   return (
     <StylesWrapper className="input-wrapper">
       {children}
       <label htmlFor={id}>{label}</label>
-      {setIsVisible ? (
-        <button
-          onClick={() => setIsVisible(!isVisible)}
-          type="button"
-          className="eye-icon"
-        >
+      {onClick ? (
+        <button onClick={onClick} type="button" className="eye-icon">
           {isVisible ? (
             <AiOutlineEyeInvisible size={20} />
           ) : (
