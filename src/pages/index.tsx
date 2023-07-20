@@ -1,4 +1,4 @@
-import { plantDataType } from "@/shared/type/data-types";
+import { PlantDataType } from "@/shared/type/data-types";
 import { CardLayout } from "@/components/card-layout";
 import { useEffect, useMemo, useState } from "react";
 import useDeviceSize from "@/hooks/use-device-size";
@@ -7,14 +7,14 @@ import { getPlants } from "@/sanity/get-plants";
 import randomId from "@/shared/utils/generateRandomId";
 import { useSession } from "next-auth/react";
 
-type plantData = {
-  plants: plantDataType[];
-  onLikeClick: () => void;
+type PlantData = {
+  plants: PlantDataType[];
+  handleOpenLogin: () => void;
 };
 
-export default function Home({ plants, onLikeClick }: plantData) {
+export default function Home({ plants, handleOpenLogin }: PlantData) {
   const [width] = useDeviceSize();
-  const [currentData, setCurrentData] = useState<plantDataType[]>(plants);
+  const [currentData, setCurrentData] = useState<PlantDataType[]>(plants);
   const [currentId, setCurrentId] = useState<number>(-1);
   const { data: session } = useSession();
 
@@ -36,7 +36,7 @@ export default function Home({ plants, onLikeClick }: plantData) {
       try {
         const newId = randomId(currentId, plants[0].total - 3);
         setCurrentId(newId);
-        const fetchAPI: plantDataType[] = await getPlants(newId);
+        const fetchAPI: PlantDataType[] = await getPlants(newId);
         if (fetchAPI) {
           setCurrentData(fetchAPI);
         } else {
@@ -67,7 +67,7 @@ export default function Home({ plants, onLikeClick }: plantData) {
           <Card
             key={index}
             data={plant}
-            onLikeClick={onLikeClick}
+            handleOpenLogin={handleOpenLogin}
             session={session}
           />
         ))}
