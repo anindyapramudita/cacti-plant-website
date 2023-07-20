@@ -1,15 +1,15 @@
-export type imageType = {
+export type ImageType = {
   image: { src: string; alt: string };
 };
 
-export const defaultForm = {
+export const DefaultForm = {
   name: "",
   email: "",
   password: "",
   passwordConfirmation: "",
 };
 
-export type formType = {
+export type FormType = {
   name: string;
   email: string;
   password: string;
