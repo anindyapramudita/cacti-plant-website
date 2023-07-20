@@ -8,13 +8,13 @@ import { StylesWrapper } from "./card.styles";
 import { BiChevronUp, BiChevronDown } from "react-icons/bi";
 import { imagePlaceholder } from "@/shared/utils/image-placeholder";
 
-export const Card: FC<ICardProps> = ({ data, onLikeClick, session }) => {
+export const Card: FC<ICardProps> = ({ data, handleOpenLogin, session }) => {
   const [showSummary, setShowSummary] = useState<boolean>(false);
   const [isLiked, setIsLiked] = useState<boolean>(false);
 
-  const onFavoriteClick = () => {
+  const handleLikeClick = () => {
     if (!session) {
-      onLikeClick();
+      handleOpenLogin();
     } else {
       setIsLiked(!isLiked);
     }
@@ -39,7 +39,7 @@ export const Card: FC<ICardProps> = ({ data, onLikeClick, session }) => {
       <div className="card-overlay">
         <CardOverlay data={data} />
       </div>
-      <FavoriteButton onLikeClick={onFavoriteClick} isLiked={isLiked} />
+      <FavoriteButton onLikeClick={handleLikeClick} isLiked={isLiked} />
       <Link href={`/plant/${data._id}`}>
         <TransitionImage
           placeholder={imagePlaceholder}

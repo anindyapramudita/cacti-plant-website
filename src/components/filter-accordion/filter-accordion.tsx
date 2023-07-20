@@ -33,7 +33,7 @@ export const FilterAccordion: FC<IFilterAccordionProps> = ({
 
   const currentField = watch();
 
-  const getClassName = (index: number, array: any[]) => {
+  const handleGetClass = (index: number, array: any[]) => {
     let className = ["button"];
     if (index === 0) className.push("first-child");
     if (index === array.length - 1) className.push("last-child");
@@ -63,7 +63,7 @@ export const FilterAccordion: FC<IFilterAccordionProps> = ({
                     hidden
                     type="checkbox"
                     id={`water-${content.value}`}
-                    className={getClassName(index, waterContent)}
+                    className={handleGetClass(index, waterContent)}
                     value={content.value}
                     {...register("water")}
                   />
@@ -84,7 +84,7 @@ export const FilterAccordion: FC<IFilterAccordionProps> = ({
                     hidden
                     type="checkbox"
                     id={`season-${content.value}`}
-                    className={getClassName(index, seasonContent)}
+                    className={handleGetClass(index, seasonContent)}
                     value={content.value}
                     {...register("season")}
                   />
@@ -105,7 +105,7 @@ export const FilterAccordion: FC<IFilterAccordionProps> = ({
                     hidden
                     type="checkbox"
                     id={`care-${content.value}`}
-                    className={getClassName(index, careContent)}
+                    className={handleGetClass(index, careContent)}
                     value={content.value}
                     {...register("care")}
                   />
