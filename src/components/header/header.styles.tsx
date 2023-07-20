@@ -8,7 +8,7 @@ export const StylesWrapper = styled.nav<{}>`
   align-items: center;
   justify-content: space-between;
   padding: 5.2px 10px;
-  height: 3rem;
+  height: var(--header-height);
 
   .logo-link {
     text-decoration: none;

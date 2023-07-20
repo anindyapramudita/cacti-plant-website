@@ -1,19 +1,22 @@
-import { plantDataType } from "@/shared/types";
+import { plantDataType } from "@/shared/type/data-types";
 import { CardLayout } from "@/components/card-layout";
 import { useEffect, useMemo, useState } from "react";
 import useDeviceSize from "@/hooks/use-device-size";
 import { Card } from "@/components/card";
 import { getPlants } from "@/sanity/get-plants";
 import randomId from "@/shared/utils/generateRandomId";
+import { useSession } from "next-auth/react";
 
 type plantData = {
   plants: plantDataType[];
+  onLikeClick: () => void;
 };
 
-export default function Home({ plants }: plantData) {
+export default function Home({ plants, onLikeClick }: plantData) {
   const [width] = useDeviceSize();
   const [currentData, setCurrentData] = useState<plantDataType[]>(plants);
   const [currentId, setCurrentId] = useState<number>(-1);
+  const { data: session } = useSession();
 
   const cardData = useMemo(() => {
     let newData = [...currentData];
@@ -61,7 +64,12 @@ export default function Home({ plants }: plantData) {
     <>
       <CardLayout>
         {cardData.map((plant, index) => (
-          <Card key={index} data={plant} />
+          <Card
+            key={index}
+            data={plant}
+            onLikeClick={onLikeClick}
+            session={session}
+          />
         ))}
       </CardLayout>
     </>

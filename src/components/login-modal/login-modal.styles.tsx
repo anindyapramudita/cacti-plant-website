@@ -1,3 +1,4 @@
+import { errorMessage } from "@/styles/error-text.styles";
 import { ralewayThin } from "@/styles/fonts";
 import styled from "styled-components";
 
@@ -55,9 +56,6 @@ export const StylesWrapper = styled.div<{}>`
     border: 2px solid var(--secondary-light);
   }
 
-  input:not(:placeholder-shown) {
-  }
-
   .eye-icon {
     position: absolute;
     right: 0.25rem;
@@ -67,6 +65,10 @@ export const StylesWrapper = styled.div<{}>`
     border: none;
     background-color: transparent;
     cursor: pointer;
+  }
+
+  .error-message {
+    ${errorMessage}
   }
 
   .footer-container {

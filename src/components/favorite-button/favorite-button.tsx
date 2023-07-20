@@ -1,13 +1,14 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { IFavoriteButtonProps } from "./favorite-button.interface";
 import { FavoriteWrapper } from "./favorite-button.styles";
 import { AiFillHeart } from "react-icons/ai";
 
-export const FavoriteButton: FC<IFavoriteButtonProps> = () => {
-  const [isLiked, setIsLiked] = useState<boolean>(false);
-
+export const FavoriteButton: FC<IFavoriteButtonProps> = ({
+  onLikeClick,
+  isLiked,
+}) => {
   return (
-    <FavoriteWrapper isLiked={isLiked} onClick={() => setIsLiked(!isLiked)}>
+    <FavoriteWrapper isLiked={isLiked} onClick={onLikeClick}>
       <AiFillHeart />
     </FavoriteWrapper>
   );

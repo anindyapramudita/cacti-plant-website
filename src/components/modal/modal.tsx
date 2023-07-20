@@ -9,7 +9,7 @@ export const Modal: FC<IModalProps> = ({ open = true, children, onClose }) => {
   }
 
   return (
-    <ModalWrapper onClick={onClose}>
+    <ModalWrapper>
       <ModalContent>
         {children}
         <button onClick={onClose} className="close-button">

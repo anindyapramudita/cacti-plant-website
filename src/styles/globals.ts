@@ -13,6 +13,7 @@ export const GlobalStyles = createGlobalStyle`
     --secondary-light: #a17b6f;
     --disabled-dark: #AFAEAE;
     --disabled-light: #E5E5E5;
+    --error-color: red;
     /** Spacings */
     --spacing-xxs: 0.25rem;
     --spacing-xs: 0.5rem;
@@ -51,6 +52,7 @@ export const GlobalStyles = createGlobalStyle`
     --font-size-regular: 1rem;
     --font-size--large: 1.125rem;
     --line-height: 1.5;
+    --header-height: 3rem;
     font-size: var(--font-size-regular);
     line-height: var(--line-height);
     font-weight: 400;

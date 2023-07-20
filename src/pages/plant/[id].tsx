@@ -1,4 +1,4 @@
-import { plantDataType } from "@/shared/types";
+import { plantDataType } from "@/shared/type/data-types";
 import { PlantDetailsLayout } from "@/components/layouts/plant-details";
 import { OverviewCard } from "@/components/overview-card";
 import { ShuffleButton } from "@/components/shuffle-button";
@@ -9,17 +9,21 @@ import randomId from "@/shared/utils/generateRandomId";
 import { useRouter } from "next/navigation";
 import { getPlantById } from "@/sanity/get-plants-by-id";
 import { getRandomPlantByIndex } from "@/sanity/get-random-plant-by-index";
+import { useSession } from "next-auth/react";
 
 type plantData = {
   plants: plantDataType;
+  onLikeClick: () => void;
 };
 
-export default function PlantDetails({ plants }: plantData) {
+export default function PlantDetails({ plants, onLikeClick }: plantData) {
   const [currentId, setCurrentId] = useState<number>(-1);
   const [currentData, setCurrentData] = useState<plantDataType>(plants);
   const [restartImage, setRestartImage] = useState<boolean>(false);
+  const [isLiked, setIsLiked] = useState<boolean>(false);
 
   const router = useRouter();
+  const { data: session } = useSession();
 
   const handleShuffleData = async () => {
     try {
@@ -38,6 +42,14 @@ export default function PlantDetails({ plants }: plantData) {
     }
   };
 
+  const onFavoriteClick = () => {
+    if (!session) {
+      onLikeClick();
+    } else {
+      setIsLiked(!isLiked);
+    }
+  };
+
   return (
     <PlantDetailsLayout>
       <div className="plant-image">
@@ -46,7 +58,7 @@ export default function PlantDetails({ plants }: plantData) {
           restartImage={restartImage}
           setRestartImage={setRestartImage}
         />
-        <FavoriteButton />
+        <FavoriteButton onLikeClick={onFavoriteClick} isLiked={isLiked} />
       </div>
       <div className="plant-details">
         <h3>{currentData?.name.toUpperCase()}</h3>

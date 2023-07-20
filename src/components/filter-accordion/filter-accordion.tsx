@@ -10,6 +10,13 @@ import {
   waterContent,
 } from "./utils/season-filter";
 import { useForm } from "react-hook-form";
+import {
+  BLOOM_SEASON,
+  CARE_LEVEL,
+  CLEAR,
+  SAVE,
+  WATER_NEEDS,
+} from "@/shared/utils/constants";
 
 export const FilterAccordion: FC<IFilterAccordionProps> = ({
   isOpen,
@@ -48,10 +55,10 @@ export const FilterAccordion: FC<IFilterAccordionProps> = ({
       <form className={isOpen ? "content show" : "content"} onSubmit={onSubmit}>
         <div className="content-row">
           <div>
-            <p>Water Needs:</p>
+            <p>{WATER_NEEDS}</p>
             <div className="button-group">
               {waterContent.map((content, index) => (
-                <>
+                <div key={`water-${index}`}>
                   <input
                     hidden
                     type="checkbox"
@@ -64,15 +71,15 @@ export const FilterAccordion: FC<IFilterAccordionProps> = ({
                     {content?.icon ? content.icon : null}
                     {content.label}
                   </label>
-                </>
+                </div>
               ))}
             </div>
           </div>
           <div>
-            <p>Bloom Season:</p>
+            <p>{BLOOM_SEASON}</p>
             <div className="button-group">
               {seasonContent.map((content, index) => (
-                <>
+                <div key={`season-${index}`}>
                   <input
                     hidden
                     type="checkbox"
@@ -85,15 +92,15 @@ export const FilterAccordion: FC<IFilterAccordionProps> = ({
                     {content?.icon ? content.icon : null}
                     {content.label}
                   </label>
-                </>
+                </div>
               ))}
             </div>
           </div>
           <div>
-            <p>Care Level:</p>
+            <p>{CARE_LEVEL}</p>
             <div className="button-group">
               {careContent.map((content, index) => (
-                <>
+                <div key={`care-${index}`}>
                   <input
                     hidden
                     type="checkbox"
@@ -106,7 +113,7 @@ export const FilterAccordion: FC<IFilterAccordionProps> = ({
                     {content?.icon ? content.icon : null}
                     {content.label}
                   </label>
-                </>
+                </div>
               ))}
             </div>
           </div>
@@ -118,7 +125,7 @@ export const FilterAccordion: FC<IFilterAccordionProps> = ({
             color="secondary"
             disabled={isDirty ? !isDirty : true}
           >
-            Save
+            {SAVE}
           </Button>
           <Button
             variant="outlined"
@@ -131,7 +138,7 @@ export const FilterAccordion: FC<IFilterAccordionProps> = ({
               currentField.care.length === 0
             }
           >
-            Clear
+            {CLEAR}
           </Button>
         </div>
       </form>

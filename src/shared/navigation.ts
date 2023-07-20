@@ -12,7 +12,12 @@ export const navigation = [
   {
     path: "/register",
     name: "Register",
-    roles: ["admin", "user", "all"],
+    roles: ["admin", "all"],
+  },
+  {
+    path: "/collection",
+    name: "Collection",
+    roles: ["user"],
   },
   {
     path: "/profile",
