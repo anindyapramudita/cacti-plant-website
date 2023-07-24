@@ -7,7 +7,7 @@ export const StylesWrapper = styled.nav<{}>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 5.2px 10px;
+  padding: 0 2rem;
   height: var(--header-height);
 
   .logo-link {
