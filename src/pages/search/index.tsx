@@ -25,56 +25,67 @@ type SearchProp = {
 };
 
 export default function SearchPage({ plants, onLikeClick }: SearchProp) {
-  const [filterQuery, setFilterQuery] = useState<Filter>(defaultFilter);
-  const [data, setData] = useState<plantDataType[]>(plants);
+  const [currentState, setCurrentState] = useState<{
+    filterQuery: Filter;
+    data: plantDataType[];
+    totalPage: number;
+    currentPage: number;
+    offset: number;
+  }>({
+    filterQuery: defaultFilter,
+    data: plants,
+    totalPage: Math.ceil(plants[0].total / 10),
+    currentPage: 1,
+    offset: 10,
+  });
+
   const { data: session } = useSession();
-  const [totalPage, setTotalPage] = useState<number>(
-    Math.ceil(plants[0].total / 10)
-  );
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const offset = 10;
 
   const onSaveSearch = async (search: string) => {
-    let temp = { ...filterQuery };
+    let temp = { ...currentState.filterQuery };
     temp.search = search;
-    setFilterQuery(temp);
+    setCurrentState({ ...currentState, filterQuery: temp });
 
     handleUpdateData(temp);
   };
 
   const onSaveFilter = async (filter: FilterContext) => {
-    let temp = { ...filterQuery };
+    let temp = { ...currentState.filterQuery };
     temp.filter = filter;
-    setFilterQuery(temp);
+    setCurrentState({ ...currentState, filterQuery: temp });
 
     handleUpdateData(temp);
   };
 
   const handleUpdateData = async (newQuery: Filter) => {
     const query = handleUpdateFilter(newQuery);
-    const newData = await getPlants(0, query, offset);
+    const newData = await getPlants(0, query, currentState.offset);
 
-    setData(newData);
-    setCurrentPage(1);
-    setTotalPage(Math.ceil(newData[0].total / 10));
+    setCurrentState({
+      ...currentState,
+      data: newData,
+      currentPage: 1,
+      totalPage: Math.ceil(newData[0].total / 10),
+    });
   };
 
   const onClearFilter = async () => {
-    setFilterQuery(defaultFilter);
     const newData = await getPlants(0, null, 10);
-
-    setData(newData);
-    setTotalPage(Math.ceil(newData[0].total / 10));
-    setCurrentPage(1);
+    setCurrentState({
+      ...currentState,
+      filterQuery: defaultFilter,
+      data: newData,
+      currentPage: 1,
+      totalPage: Math.ceil(newData[0].total / 10),
+    });
   };
 
   const handlePageClick = async (newPage: number) => {
-    setCurrentPage(newPage);
-    const newId = (newPage - 1) * offset;
-    const query = handleUpdateFilter(filterQuery);
-    const newData = await getPlants(newId, query, offset);
+    const newId = (newPage - 1) * currentState.offset;
+    const query = handleUpdateFilter(currentState.filterQuery);
+    const newData = await getPlants(newId, query, currentState.offset);
 
-    setData(newData);
+    setCurrentState({ ...currentState, currentPage: newPage, data: newData });
   };
 
   return (
@@ -85,7 +96,7 @@ export default function SearchPage({ plants, onLikeClick }: SearchProp) {
         onClearFilter={onClearFilter}
       />
       <SmallCardLayout>
-        {data.map((plant, index) => (
+        {currentState.data.map((plant, index) => (
           <SmallCard
             data={plant}
             key={index}
@@ -95,8 +106,8 @@ export default function SearchPage({ plants, onLikeClick }: SearchProp) {
         ))}
       </SmallCardLayout>
       <Pagination
-        totalPage={totalPage}
-        currentPage={currentPage}
+        totalPage={currentState.totalPage}
+        currentPage={currentState.currentPage}
         onPageClick={handlePageClick}
       />
     </>
