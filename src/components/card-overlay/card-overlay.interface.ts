@@ -1,5 +1,5 @@
-import { plantDataType } from "@/shared/type/data-types";
+import { PlantDataType } from "@/shared/type/data-types";
 
 export interface ICardOverlayProps {
-  data: plantDataType;
+  data: PlantDataType;
 }

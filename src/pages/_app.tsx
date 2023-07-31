@@ -34,7 +34,7 @@ export default function App({
     };
   }, [router.events]);
 
-  const onLikeClick = () => setLoginOpen(true);
+  const handleOpenLogin = () => setLoginOpen(true);
 
   return (
     <>
@@ -45,7 +45,7 @@ export default function App({
         ) : (
           <HomeLayout>
             <Header onLogin={() => setLoginOpen(!loginOpen)} />
-            <Component {...pageProps} onLikeClick={onLikeClick} />
+            <Component {...pageProps} onLikeClick={handleOpenLogin} />
             <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} />
           </HomeLayout>
         )}

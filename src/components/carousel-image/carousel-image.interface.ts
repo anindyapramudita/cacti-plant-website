@@ -1,8 +1,8 @@
-import { plantImagesType } from "@/shared/type/data-types";
+import { PlantImagesType } from "@/shared/type/data-types";
 import { Dispatch, SetStateAction } from "react";
 
 export interface ICarouselImage {
-  images: plantImagesType[];
+  images: PlantImagesType[];
   restartImage: boolean;
   setRestartImage: Dispatch<SetStateAction<boolean>>;
 }

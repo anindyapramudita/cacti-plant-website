@@ -17,7 +17,7 @@ const defaultFilter = {
 export default function SearchPage() {
   const [filterQuery, setFilterQuery] = useState<Filter>(defaultFilter);
 
-  const onSaveSearch = async (search: string) => {
+  const handleSaveSearch = async (search: string) => {
     let temp = { ...filterQuery };
     temp.search = search;
     setFilterQuery(temp);
@@ -25,7 +25,7 @@ export default function SearchPage() {
     handleUpdateData(temp);
   };
 
-  const onSaveFilter = async (filter: FilterContext) => {
+  const handleSaveFilter = async (filter: FilterContext) => {
     let temp = { ...filterQuery };
     temp.filter = filter;
     setFilterQuery(temp);
@@ -40,7 +40,7 @@ export default function SearchPage() {
     console.log("newData", newData);
   };
 
-  const onClearFilter = async () => {
+  const handleClearFilter = async () => {
     setFilterQuery(defaultFilter);
     const newData = await getPlants(0);
 
@@ -50,9 +50,9 @@ export default function SearchPage() {
   return (
     <>
       <FilterHeader
-        onSaveSearch={onSaveSearch}
-        onSaveFilter={onSaveFilter}
-        onClearFilter={onClearFilter}
+        onSaveSearch={handleSaveSearch}
+        onSaveFilter={handleSaveFilter}
+        onClearFilter={handleClearFilter}
       />
     </>
   );

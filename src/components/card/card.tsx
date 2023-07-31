@@ -12,7 +12,7 @@ export const Card: FC<ICardProps> = ({ data, onLikeClick, session }) => {
   const [showSummary, setShowSummary] = useState<boolean>(false);
   const [isLiked, setIsLiked] = useState<boolean>(false);
 
-  const onFavoriteClick = () => {
+  const handleLikeClick = () => {
     if (!session) {
       onLikeClick();
     } else {
@@ -39,7 +39,7 @@ export const Card: FC<ICardProps> = ({ data, onLikeClick, session }) => {
       <div className="card-overlay">
         <CardOverlay data={data} />
       </div>
-      <FavoriteButton onLikeClick={onFavoriteClick} isLiked={isLiked} />
+      <FavoriteButton onLikeClick={handleLikeClick} isLiked={isLiked} />
       <Link href={`/plant/${data._id}`}>
         <TransitionImage
           placeholder={imagePlaceholder}

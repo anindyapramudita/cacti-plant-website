@@ -1,8 +1,8 @@
-import { plantDataType } from "@/shared/type/data-types";
+import { PlantDataType } from "@/shared/type/data-types";
 import { Session } from "next-auth";
 
 export interface ICardProps {
-  data: plantDataType;
+  data: PlantDataType;
   session?: Session | null;
   onLikeClick: () => void;
 }
