@@ -45,7 +45,7 @@ export default function App({
         ) : (
           <HomeLayout>
             <Header onLogin={() => setLoginOpen(!loginOpen)} />
-            <Component {...pageProps} handleOpenLogin={handleOpenLogin} />
+            <Component {...pageProps} onLikeClick={handleOpenLogin} />
             <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} />
           </HomeLayout>
         )}

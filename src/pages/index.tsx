@@ -9,10 +9,10 @@ import { useSession } from "next-auth/react";
 
 type PlantData = {
   plants: PlantDataType[];
-  handleOpenLogin: () => void;
+  onLikeClick: () => void;
 };
 
-export default function Home({ plants, handleOpenLogin }: PlantData) {
+export default function Home({ plants, onLikeClick }: PlantData) {
   const [width] = useDeviceSize();
   const [currentData, setCurrentData] = useState<PlantDataType[]>(plants);
   const [currentId, setCurrentId] = useState<number>(-1);
@@ -67,7 +67,7 @@ export default function Home({ plants, handleOpenLogin }: PlantData) {
           <Card
             key={index}
             data={plant}
-            handleOpenLogin={handleOpenLogin}
+            onLikeClick={onLikeClick}
             session={session}
           />
         ))}

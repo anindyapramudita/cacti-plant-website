@@ -13,10 +13,10 @@ import { useSession } from "next-auth/react";
 
 type PlantData = {
   plants: PlantDataType;
-  handleOpenLogin: () => void;
+  onLikeClick: () => void;
 };
 
-export default function PlantDetails({ plants, handleOpenLogin }: PlantData) {
+export default function PlantDetails({ plants, onLikeClick }: PlantData) {
   const [currentId, setCurrentId] = useState<number>(-1);
   const [currentData, setCurrentData] = useState<PlantDataType>(plants);
   const [restartImage, setRestartImage] = useState<boolean>(false);
@@ -44,7 +44,7 @@ export default function PlantDetails({ plants, handleOpenLogin }: PlantData) {
 
   const handleLikeClick = () => {
     if (!session) {
-      handleOpenLogin();
+      onLikeClick();
     } else {
       setIsLiked(!isLiked);
     }

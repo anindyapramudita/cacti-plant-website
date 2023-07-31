@@ -8,13 +8,13 @@ import { StylesWrapper } from "./card.styles";
 import { BiChevronUp, BiChevronDown } from "react-icons/bi";
 import { imagePlaceholder } from "@/shared/utils/image-placeholder";
 
-export const Card: FC<ICardProps> = ({ data, handleOpenLogin, session }) => {
+export const Card: FC<ICardProps> = ({ data, onLikeClick, session }) => {
   const [showSummary, setShowSummary] = useState<boolean>(false);
   const [isLiked, setIsLiked] = useState<boolean>(false);
 
   const handleLikeClick = () => {
     if (!session) {
-      handleOpenLogin();
+      onLikeClick();
     } else {
       setIsLiked(!isLiked);
     }
