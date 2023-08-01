@@ -7,6 +7,8 @@ import {
   BsChevronDoubleLeft,
   BsChevronDoubleRight,
 } from "react-icons/bs";
+import classNames from "classnames";
+import { getPagesValidity } from "./utils/get-pages-validity";
 
 export const Pagination: FC<IPaginationProps> = ({
   totalPage,
@@ -17,22 +19,14 @@ export const Pagination: FC<IPaginationProps> = ({
     return null;
   }
 
-  const getClassName = (id: number) => {
-    if (id + 1 === currentPage) return "page-button active";
-    return "page-button";
-  };
-
-  const getPagesValidity = (id: number) =>
-    (currentPage - 1 <= 0 && id < 5) || // to check if current page is below 3
-    (currentPage + 2 > totalPage && totalPage - (id + 1) < 5) || // to check if current page is 1 less than the last page
-    Math.abs(id + 1 - currentPage) <= 2; // to only print 2 pages before and after current page
-
-  const getPages = (id: number) => {
-    if (getPagesValidity(id))
+  const renderPages = (id: number) => {
+    if (getPagesValidity(id, currentPage, totalPage))
       return (
         <button
           key={id}
-          className={getClassName(id)}
+          className={classNames('page-button',  {
+            'active': id + 1 === currentPage,
+          })}
           onClick={() => onPageClick(id + 1)}
         >
           {id + 1}
@@ -56,7 +50,7 @@ export const Pagination: FC<IPaginationProps> = ({
       >
         <BsChevronLeft />
       </button>
-      {Array.from({ length: totalPage }).map((_, i) => getPages(i))}
+      {Array.from({ length: totalPage }).map((_, i) => renderPages(i))}
       <button
         className="page-button"
         onClick={() => onPageClick(currentPage + 1)}
