@@ -6,3 +6,5 @@ export interface ISmallCardProps {
   session?: Session | null;
   onLikeClick: () => void;
 }
+
+export type LevelRange = 1 | 2 | 3
