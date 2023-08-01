@@ -2,13 +2,13 @@ import { Dispatch, ReactNode, SetStateAction } from "react";
 
 export type FilterCategory = "water" | "season" | "care";
 
-type button = {
+type Button = {
   label: string;
   value: any;
   icon?: ReactNode;
 };
 export interface IButtonGroupProps {
-  buttons: button[];
+  buttons: Button[];
   handleButtonClick: (
     category: FilterCategory,
     value: (string | number)[]

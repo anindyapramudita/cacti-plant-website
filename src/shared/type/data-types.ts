@@ -1,32 +1,32 @@
 export type LevelRange = 1 | 2 | 3
 
-export type levelInfoType = {
+export type LevelInfoType = {
   level: LevelRange;
   info: string;
 };
 
-export type plantImagesType = {
+export type PlantImagesType = {
   src: string;
   alt: string;
 };
 
-export type seasonType = {
+export type SeasonType = {
   spring: boolean;
   summer: boolean;
   fall: boolean;
   winter: boolean;
 };
 
-export type plantDataType = {
+export type PlantDataType = {
   _id: string;
   _createdAt: Date;
   name: string;
-  images: plantImagesType[];
+  images: PlantImagesType[];
   description: string;
-  water: levelInfoType;
-  care: levelInfoType;
-  seasons: seasonType;
-  size: levelInfoType;
+  water: LevelInfoType;
+  care: LevelInfoType;
+  seasons: SeasonType;
+  size: LevelInfoType;
   color: string[];
   total: number;
 };

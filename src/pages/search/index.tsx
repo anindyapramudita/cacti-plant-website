@@ -4,7 +4,7 @@ import { handleUpdateFilter } from "@/hooks/get-filter-query";
 import { Filter } from "@/hooks/use-plant-filter";
 import { useState } from "react";
 import { FilterContext } from "@/components/filter-accordion/utils/season-filter";
-import { plantDataType } from "@/shared/type/data-types";
+import { PlantDataType } from "@/shared/type/data-types";
 import { SmallCard } from "@/components/small-card";
 import { SmallCardLayout } from "@/components/layouts/small-card";
 import { useSession } from "next-auth/react";
@@ -20,14 +20,14 @@ const defaultFilter = {
 };
 
 type SearchProp = {
-  plants: plantDataType[];
+  plants: PlantDataType[];
   onLikeClick: () => void;
 };
 
 export default function SearchPage({ plants, onLikeClick }: SearchProp) {
   const [currentState, setCurrentState] = useState<{
     filterQuery: Filter;
-    data: plantDataType[];
+    data: PlantDataType[];
     totalPage: number;
     currentPage: number;
     offset: number;
@@ -41,7 +41,7 @@ export default function SearchPage({ plants, onLikeClick }: SearchProp) {
 
   const { data: session } = useSession();
 
-  const onSaveSearch = async (search: string) => {
+  const handleSaveSearch = async (search: string) => {
     let temp = { ...currentState.filterQuery };
     temp.search = search;
     setCurrentState({ ...currentState, filterQuery: temp });
@@ -49,7 +49,7 @@ export default function SearchPage({ plants, onLikeClick }: SearchProp) {
     handleUpdateData(temp);
   };
 
-  const onSaveFilter = async (filter: FilterContext) => {
+  const handleSaveFilter = async (filter: FilterContext) => {
     let temp = { ...currentState.filterQuery };
     temp.filter = filter;
     setCurrentState({ ...currentState, filterQuery: temp });
@@ -69,7 +69,7 @@ export default function SearchPage({ plants, onLikeClick }: SearchProp) {
     });
   };
 
-  const onClearFilter = async () => {
+  const handleClearFilter = async () => {
     const newData = await getPlants(0, null, 10);
     setCurrentState({
       ...currentState,
@@ -91,9 +91,9 @@ export default function SearchPage({ plants, onLikeClick }: SearchProp) {
   return (
     <>
       <FilterHeader
-        onSaveSearch={onSaveSearch}
-        onSaveFilter={onSaveFilter}
-        onClearFilter={onClearFilter}
+        onSaveSearch={handleSaveSearch}
+        onSaveFilter={handleSaveFilter}
+        onClearFilter={handleClearFilter}
       />
       <SmallCardLayout>
         {currentState.data.map((plant, index) => (
