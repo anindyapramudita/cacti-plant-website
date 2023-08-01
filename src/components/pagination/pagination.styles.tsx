@@ -1,26 +1,41 @@
 import styled from "styled-components";
 
-export const StylesWrapper = styled.div<{}>`
-  display: flex;
-  gap: 1rem;
-  margin: 1rem;
-  justify-content: center;
+export const StylesWrapper = styled.div`
+
+  --pagination-display: flex;
+  --pagination-gap: 1rem;
+  --pagination-margin: 1rem;
+  --pagination-justify-content: center;
+
+  --button-background-color: transparent;
+  --button-border: none;
+  --button-size: 2rem;
+  --button-cursor: pointer;
+
+  --button-border-radius: 0%;
+
+  display: var(--pagination-display);
+  gap: var(--pagination-gap);
+  margin: var(--pagination-margin);
+  justify-content: var(--pagination-justify-content);
 
   .page-button {
-    background-color: transparent;
-    border: none;
-    width: 2rem;
-    height: 2rem;
-    cursor: pointer;
+    background-color: var(--button-background-color);
+    border: var(--button-border);
+    width: var(--button-size);
+    height: var(--button-size);
+    cursor: var(--button-cursor);
+    border-radius: var(--button-border-radius);
 
     &:disabled {
-      cursor: default;
+      --button-cursor: default;
     }
   }
 
   .active {
+    --button-border-radius: 50%;
+    
     background-color: var(--secondary-light);
-    border-radius: 50%;
     color: var(--white);
   }
 `;
