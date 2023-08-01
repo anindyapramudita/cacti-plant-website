@@ -1,7 +1,7 @@
 import { gridBreakpoint } from "@/shared/breakpoints";
 import styled from "styled-components";
 
-export const StylesWrapper = styled.div<{}>`
+export const StylesWrapper = styled.div`
   --padding-size: 2rem;
   --gap-per-row: 4;
   --card-per-row: 5;
@@ -12,42 +12,48 @@ export const StylesWrapper = styled.div<{}>`
           (2 * var(--padding-size))
       ) / var(--card-per-row)
   );
+  --card-content-width: 80vw;
+  --card-content-padding: 1rem 0.5rem;
+  --overflow-hidden: hidden;
+  --card-display: flex;
+  --card-flex-direction: column;
+  --card-justify-content: center;
+  --card-align-items: center;
+  --card-radius: 5%;
+  --title-font-weight: 600;
+  --card-image-position: relative;
+  --info-white-space: nowrap;
+  --info-text-overflow: ellipsis;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: var(--card-display);
+  flex-direction: var(--card-flex-direction);
+  justify-content: var(--card-justify-content);
+  align-items: var(--card-align-items);
 
   .card-image {
-    width: 80vw;
-    height: 80vw;
-    border-radius: 5%;
-    overflow: hidden;
-    position: relative;
+    width: var(--card-content-width);
+    height: var(--card-content-width);
+    border-radius: var(--card-radius);
+    overflow: var(--overflow-hidden);
+    position: var(--card-image-position);
   }
 
   .card-info {
-    width: 80vw;
-    display: flex;
-    flex-direction: column;
-    padding: 1rem 0.5rem;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    width: var(--card-content-width);
+    display: var(--card-display);
+    flex-direction: var(--card-flex-direction);
+    padding: var(--card-content-padding);
+    overflow: var(--overflow-hidden);
+    white-space: var(--info-white-space);
+    text-overflow: var(--info-text-overflow);
 
     .plant-name {
-      font-weight: 600;
+      font-weight: var(--title-font-weight);
     }
 
     .plant-info {
       color: var(--dark-grey);
     }
-  }
-
-  @media (min-width: ${gridBreakpoint.sm}) {
-  }
-
-  @media (min-width: ${gridBreakpoint.md}) {
   }
 
   @media (min-width: ${gridBreakpoint.lg}) {
@@ -59,11 +65,5 @@ export const StylesWrapper = styled.div<{}>`
     .card-info {
       width: var(--card-size-calc);
     }
-  }
-
-  @media (min-width: ${gridBreakpoint.xl}) {
-  }
-
-  @media (min-width: ${gridBreakpoint.xxl}) {
   }
 `;
