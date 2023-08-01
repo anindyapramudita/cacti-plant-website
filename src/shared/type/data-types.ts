@@ -1,5 +1,7 @@
+export type LevelRange = 1 | 2 | 3
+
 export type levelInfoType = {
-  level: number;
+  level: LevelRange;
   info: string;
 };
 
