@@ -1,10 +1,10 @@
 import { FC, useState } from "react";
-import { ISmallCardProps } from "./small-card.interface";
+import { ISmallCardProps, LevelRange } from "./small-card.interface";
 import { StylesWrapper } from "./small-card.styles";
 import { TransitionImage } from "../image";
-import { imagePlaceholder } from "@/shared/utils/image-placeholder";
 import { FavoriteButton } from "../favorite-button";
 import Link from "next/link";
+import { LEVELS } from "./small-card.constants";
 
 export const SmallCard: FC<ISmallCardProps> = ({
   data,
@@ -13,10 +13,8 @@ export const SmallCard: FC<ISmallCardProps> = ({
 }) => {
   const [isLiked, setIsLiked] = useState<boolean>(false);
 
-  const handleGetLevel = (level: number) => {
-    if (level === 1) return "Low";
-    if (level === 2) return "Medium";
-    if (level === 3) return "High";
+  const handleGetLevel = (level: LevelRange = 1) => {
+    return LEVELS[level]
   };
 
   const handleLikeClicked = () => {
@@ -36,9 +34,8 @@ export const SmallCard: FC<ISmallCardProps> = ({
       <div className="card-image">
         <Link href={`/plant/${data._id}`}>
           <TransitionImage
-            image={data.images[0].src}
-            alt={data.images[0].alt}
-            placeholder={imagePlaceholder}
+            image={data?.images[0]?.src}
+            alt={data?.images[0]?.alt}
           />
         </Link>
         <FavoriteButton onLikeClick={handleLikeClicked} isLiked={isLiked} />
