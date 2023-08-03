@@ -8,8 +8,8 @@ export const FavoriteButton: FC<IFavoriteButtonProps> = ({
   isLiked,
 }) => {
   return (
-    <FavoriteWrapper isLiked={isLiked} onClick={onLikeClick}>
-      <AiFillHeart />
+    <FavoriteWrapper isLiked={isLiked} onClick={onLikeClick} data-testid="favorite-button">
+      <AiFillHeart className="heart-icon" />
     </FavoriteWrapper>
   );
 };
