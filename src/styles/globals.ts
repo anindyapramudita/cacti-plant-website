@@ -10,12 +10,14 @@ export const GlobalStyles = createGlobalStyle`
     /**Colors */
     --primary: #123132;
     --primary-light: #44595b;
+    --primary-dark: #0e1d1d;
     --secondary: #9F5841;
     --secondary-dark: #3C2B25;
     --secondary-light: #a17b6f;
     --disabled-dark: #AFAEAE;
     --disabled-light: #E5E5E5;
     --error-color: red;
+    --like-color: #DB5461;
     /** Spacings */
     --spacing-xxs: 0.25rem;
     --spacing-xs: 0.5rem;
