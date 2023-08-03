@@ -22,7 +22,7 @@ export const PlantCard: FC<IPlantCardProps> = ({
   }
 
   return (
-    <StylesWrapper showSummary={showSummary}>
+    <StylesWrapper showSummary={showSummary} data-testid="plant-card">
       <div
         role="button"
         tabIndex={0}
