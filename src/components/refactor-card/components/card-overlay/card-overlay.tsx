@@ -9,66 +9,61 @@ import {
   PiFlower,
   PiSnowflakeBold,
 } from "react-icons/pi";
+import classNames from "classnames";
+import { CARE_LEVEL_TITLE, SEASON_TITLE, SIZE_TITLE, WATER_TITLE } from "./card.overlay.constants";
 
 export const CardOverlay: FC<ICardOverlayProps> = ({ data }) => {
   if (!data) {
     return null;
   }
 
-  const colorGenerator = (white: boolean) => {
-    return white ? "white" : "#0e1d1d";
-  };
-
   return (
-    <StylesWrapper data-testid="card-layout">
-      <h3>{data.name.toUpperCase()}</h3>
-      <div>
-        <p>Water: </p>
+    <StylesWrapper className="category-level" data-testid="card-overlay">
+      <h3 className="plant-name">{data?.name.toUpperCase()}</h3>
+      <div className="category-level">
+        <p className="level-title">{WATER_TITLE}</p>
         <LevelWrapper>
-          {Array(5)
-            .fill("")
+          {Array.from({length: 5})
             .map((_, index) => (
               <PiDrop
                 key={index}
-                color={colorGenerator(index < data.water.level)}
+                className={classNames({'active': index < data?.water?.level})}
               />
             ))}
         </LevelWrapper>
       </div>
-      <div>
-        <p>Difficulty: </p>
+      <div className="category-level">
+        <p className="level-title">{CARE_LEVEL_TITLE}</p>
         <LevelWrapper>
-          {Array(5)
-            .fill("")
+          {Array.from({length: 5})
             .map((_, index) => (
               <RiLeafLine
                 key={index}
-                color={colorGenerator(index < data.water.level)}
+                className={classNames({'active': index < data?.care?.level})}
               />
             ))}
         </LevelWrapper>
       </div>
-      <div>
-        <p>Size: </p>
+      <div className="category-level">
+        <p className="level-title">{SIZE_TITLE}</p>
         <LevelWrapper>
-          {Array(3)
-            .fill("")
+          {Array.from({length: 3})
             .map((_, index) => (
               <PiPottedPlant
                 key={index}
                 size={(index + 1) * 3 + 15}
-                color={colorGenerator(index + 1 == data.size.level)}
+                className={classNames({'active': index + 1 == data?.size?.level})}
               />
             ))}
         </LevelWrapper>
       </div>
-      <div>
-        <p>Season: </p>
+      <div className="category-level">
+        <p className="level-title">{SEASON_TITLE}</p>
         <LevelWrapper>
-          <PiFlower color={colorGenerator(data.seasons.spring)} />
-          <FiSun color={colorGenerator(data.seasons.summer)} />
-          <RiLeafLine color={colorGenerator(data.seasons.fall)} />
-          <PiSnowflakeBold color={colorGenerator(data.seasons.winter)} />
+          <PiFlower data-testid="spring-icon" className={classNames({'active': data?.seasons?.spring})} />
+          <FiSun data-testid="summer-icon" className={classNames({'active': data?.seasons?.summer})} />
+          <RiLeafLine data-testid="fall-icon" className={classNames({'active': data?.seasons?.fall})} />
+          <PiSnowflakeBold data-testid="winter-icon" className={classNames({'active': data?.seasons?.winter})} />
         </LevelWrapper>
       </div>
     </StylesWrapper>
