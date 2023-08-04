@@ -1,6 +1,8 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css2?family=Merriweather&family=Raleway:wght@100;400;500;700&display=swap');
+
   :root {
     /**Achromatic */
     --white: #ffffff;
@@ -8,12 +10,14 @@ export const GlobalStyles = createGlobalStyle`
     /**Colors */
     --primary: #123132;
     --primary-light: #44595b;
+    --primary-dark: #0e1d1d;
     --secondary: #9F5841;
     --secondary-dark: #3C2B25;
     --secondary-light: #a17b6f;
     --disabled-dark: #AFAEAE;
     --disabled-light: #E5E5E5;
     --error-color: red;
+    --like-color: #DB5461;
     /** Spacings */
     --spacing-xxs: 0.25rem;
     --spacing-xs: 0.5rem;
@@ -38,12 +42,19 @@ export const GlobalStyles = createGlobalStyle`
     --breakpoint-lg: 992px;
     --breakpoint-xl: 1200px;
     --breakpoint-xxl: 1400px;
+    /** Font Family */
+    --font-family: Raleway, Poppins, sans-serif, -apple-system, blinkmacsystemfont, avenir next, avenir, segoe ui, helvetica neue, helvetica,
+    ubuntu, roboto, noto, arial, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol;
   }
 
   *{
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+  }
+
+  h1,h2,h3,h4,h5,h6 {
+    font-family: var(--font-family);
   }
 
     body {
@@ -56,8 +67,7 @@ export const GlobalStyles = createGlobalStyle`
     font-size: var(--font-size-regular);
     line-height: var(--line-height);
     font-weight: 400;
-    font-family: Raleway, Poppins, sans-serif, -apple-system, blinkmacsystemfont, avenir next, avenir, segoe ui, helvetica neue, helvetica,
-      ubuntu, roboto, noto, arial, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol;
+    font-family: var(--font-family);
   }
 
   html, body {
