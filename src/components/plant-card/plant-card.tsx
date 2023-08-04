@@ -9,6 +9,7 @@ import { BiChevronUp, BiChevronDown } from "react-icons/bi";
 import { imagePlaceholder } from "@/shared/utils/image-placeholder";
 import { CardOverlay } from "./components/card-overlay";
 import { HIDE_SUMMARY, SEE_SUMMARY } from "./plant-card.constants";
+import classNames from "classnames";
 
 export const PlantCard: FC<IPlantCardProps> = ({
   plant,
@@ -33,8 +34,17 @@ export const PlantCard: FC<IPlantCardProps> = ({
         {showSummary ? <BiChevronDown size={40} /> : <BiChevronUp size={40} />}
         <p>{showSummary ? HIDE_SUMMARY : SEE_SUMMARY}</p>
       </div>
-      <div className="card-overlay">
-        <CardOverlay data={plant} />
+      <div
+        className={classNames("card-overlay", { "show-overlay": showSummary })}
+        data-testid="card-overlay-wrapper"
+      >
+        <CardOverlay
+          name={plant.name}
+          waterLevel={plant.water.level}
+          careLevel={plant.care.level}
+          sizeLevel={plant.size.level}
+          seasons={plant.seasons}
+        />
       </div>
       <FavoriteButton onLikeClick={onLikeClick} isLiked={isLiked} />
       <Link href={`/plant/${plant._id}`}>

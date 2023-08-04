@@ -20,7 +20,7 @@ export const StylesWrapper = styled.div<{
   --icon-background-color: transparent;
   --icon-border: none;
 
-  --overlay-visibility: ${(props) => (!props.showSummary ? "hidden" : "visible")};
+  --overlay-visibility: hidden;
   --overlay-top: ${(props) => (props.showSummary ? "80%" : "100%")};
   --overlay-background: rgba(18, 49, 50, 0.8);
   --overlay-width: 100%;
@@ -48,7 +48,7 @@ export const StylesWrapper = styled.div<{
   }
 
   .card-overlay {
-    visibility: var(--overlay-visibility);
+    visibility: hidden;
     position: var(--icon-position);
     top: var(--overlay-top);
     background: var(--overlay-background);
@@ -59,13 +59,16 @@ export const StylesWrapper = styled.div<{
     justify-content: var(--overlay-justify-content);
     color: var(--icon-color);
     transition: var(--overlay-transition);
+  }
 
+  .card-overlay.show-overlay {
+    visibility: visible;
   }
 
   @media (min-width: ${gridBreakpoint.lg}) {
     &:hover .card-overlay {
       --overlay-top: 80%;
-      --overlay-visibility: visible;
+      visibility: visible;
     }
 
     .swipe-up-icon {
