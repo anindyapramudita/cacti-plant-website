@@ -1,11 +1,11 @@
 import { PlantDataType } from "@/shared/type/data-types";
 import { useEffect, useMemo, useState } from "react";
 import useDeviceSize from "@/hooks/use-device-size";
-import { PlantCard } from "@/components/refactor-card";
 import { getPlants } from "@/sanity/get-plants";
 import randomId from "@/shared/utils/generateRandomId";
 import { StylesWrapper } from "./index.styles";
 import { useSession } from "next-auth/react";
+import { PlantCard } from "@/components/plant-card";
 
 type PlantData = {
   plants: PlantDataType[];
@@ -15,14 +15,18 @@ type PlantData = {
 export default function Home({ plants, onLikeClick }: PlantData) {
   const { data: session } = useSession();
   const [width] = useDeviceSize();
-  const [currentState, setCurrentState] = useState<{plants: PlantDataType[], currentId: number, isLiked: boolean[]}>({
+  const [currentState, setCurrentState] = useState<{
+    plants: PlantDataType[];
+    currentId: number;
+    isLiked: boolean[];
+  }>({
     plants,
     currentId: -1,
-    isLiked: [false, false, false] //this is temporary until we have isLiked is in the database
-  })
+    isLiked: [false, false, false], //this is temporary until we have isLiked is in the database
+  });
 
   const cardData = useMemo(() => {
-    let newData = [...currentState.plants]
+    let newData = [...currentState.plants];
     if (width < 576 && width > 0) {
       newData = [newData[0]];
       return newData;
@@ -40,7 +44,12 @@ export default function Home({ plants, onLikeClick }: PlantData) {
         const newId = randomId(currentState.currentId, plants[0].total - 3);
         const fetchAPI: PlantDataType[] = await getPlants(newId);
         if (fetchAPI) {
-          setCurrentState({...currentState, currentId: newId, plants: fetchAPI, isLiked: [false, false, false]})
+          setCurrentState({
+            ...currentState,
+            currentId: newId,
+            plants: fetchAPI,
+            isLiked: [false, false, false],
+          });
         } else {
           console.log("error");
         }
@@ -63,15 +72,15 @@ export default function Home({ plants, onLikeClick }: PlantData) {
   }, [currentState, plants]);
 
   const handleLikeClick = (id: number) => {
-    if(!session){
+    if (!session) {
       onLikeClick();
     } else {
-      console.log('liked!')
-      let temp = [...currentState.isLiked]
-      temp[id] = !temp[id]
-      setCurrentState({...currentState, isLiked: temp});
+      console.log("liked!");
+      let temp = [...currentState.isLiked];
+      temp[id] = !temp[id];
+      setCurrentState({ ...currentState, isLiked: temp });
     }
-  }
+  };
 
   return (
     <>
@@ -80,7 +89,7 @@ export default function Home({ plants, onLikeClick }: PlantData) {
           <PlantCard
             key={index}
             plant={plant}
-            onLikeClick={()=>handleLikeClick(index)}
+            onLikeClick={() => handleLikeClick(index)}
             isLiked={currentState.isLiked[index]}
           />
         ))}
