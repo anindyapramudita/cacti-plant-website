@@ -61,6 +61,10 @@ export const StylesWrapper = styled.button`
 
   &.button-outlined-secondary {
     --button-border: 0.0625rem solid var(--secondary);
+
+    &:hover {
+      --button-color: var(--white);
+    }
   }
 
   &.button-reversed-primary {
