@@ -11,15 +11,15 @@ export type PlantImagesType = {
 };
 
 export type SeasonType = {
-  spring: boolean;
-  summer: boolean;
-  fall: boolean;
-  winter: boolean;
+  spring?: boolean;
+  summer?: boolean;
+  fall?: boolean;
+  winter?: boolean;
 };
 
 export type PlantDataType = {
   _id: string;
-  _createdAt: Date;
+  _createdAt: string;
   name: string;
   images: PlantImagesType[];
   description: string;
@@ -27,6 +27,6 @@ export type PlantDataType = {
   care: LevelInfoType;
   seasons: SeasonType;
   size: LevelInfoType;
-  color: string[];
+  colors: string[];
   total: number;
 };
