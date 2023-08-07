@@ -24,10 +24,11 @@ export const Pagination: FC<IPaginationProps> = ({
       return (
         <button
           key={id}
-          className={classNames('page-button',  {
-            'active': id + 1 === currentPage,
+          className={classNames("page-button", {
+            active: id + 1 === currentPage,
           })}
           onClick={() => onPageClick(id + 1)}
+          disabled={currentPage === id + 1}
         >
           {id + 1}
         </button>
@@ -40,6 +41,7 @@ export const Pagination: FC<IPaginationProps> = ({
         className="page-button"
         onClick={() => onPageClick(1)}
         disabled={currentPage === 1}
+        data-testid="first-page-button"
       >
         <BsChevronDoubleLeft />
       </button>
@@ -47,6 +49,7 @@ export const Pagination: FC<IPaginationProps> = ({
         className="page-button"
         onClick={() => onPageClick(currentPage - 1)}
         disabled={currentPage === 1}
+        data-testid="previous-page-button"
       >
         <BsChevronLeft />
       </button>
@@ -55,6 +58,7 @@ export const Pagination: FC<IPaginationProps> = ({
         className="page-button"
         onClick={() => onPageClick(currentPage + 1)}
         disabled={currentPage === totalPage}
+        data-testid="next-page-button"
       >
         <BsChevronRight />
       </button>
@@ -62,6 +66,7 @@ export const Pagination: FC<IPaginationProps> = ({
         className="page-button"
         onClick={() => onPageClick(totalPage)}
         disabled={currentPage === totalPage}
+        data-testid="last-page-button"
       >
         <BsChevronDoubleRight />
       </button>
