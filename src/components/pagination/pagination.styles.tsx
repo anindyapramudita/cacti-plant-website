@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const StylesWrapper = styled.div`
-
   --pagination-display: flex;
   --pagination-gap: 1rem;
   --pagination-margin: 1rem;
@@ -11,7 +10,7 @@ export const StylesWrapper = styled.div`
   --button-border: none;
   --button-size: 2rem;
   --button-cursor: pointer;
-
+  --button-color: var(--black);
   --button-border-radius: 0%;
 
   display: var(--pagination-display);
@@ -26,16 +25,16 @@ export const StylesWrapper = styled.div`
     height: var(--button-size);
     cursor: var(--button-cursor);
     border-radius: var(--button-border-radius);
+    color: var(--button-color);
 
     &:disabled {
       --button-cursor: default;
     }
   }
 
-  .active {
+  .page-button.active {
     --button-border-radius: 50%;
-    
-    background-color: var(--secondary-light);
-    color: var(--white);
+    --button-background-color: var(--secondary-light);
+    --button-color: var(--white);
   }
 `;
