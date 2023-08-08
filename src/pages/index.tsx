@@ -1,25 +1,32 @@
-import { plantDataType } from "@/shared/type/data-types";
-import { CardLayout } from "@/components/card-layout";
+import { PlantDataType } from "@/shared/type/data-types";
 import { useEffect, useMemo, useState } from "react";
 import useDeviceSize from "@/hooks/use-device-size";
-import { Card } from "@/components/card";
 import { getPlants } from "@/sanity/get-plants";
 import randomId from "@/shared/utils/generateRandomId";
+import { StylesWrapper } from "./index.styles";
 import { useSession } from "next-auth/react";
+import { PlantCard } from "@/components/plant-card";
 
-type plantData = {
-  plants: plantDataType[];
+type PlantData = {
+  plants: PlantDataType[];
   onLikeClick: () => void;
 };
 
-export default function Home({ plants, onLikeClick }: plantData) {
-  const [width] = useDeviceSize();
-  const [currentData, setCurrentData] = useState<plantDataType[]>(plants);
-  const [currentId, setCurrentId] = useState<number>(-1);
+export default function Home({ plants, onLikeClick }: PlantData) {
   const { data: session } = useSession();
+  const [width] = useDeviceSize();
+  const [currentState, setCurrentState] = useState<{
+    plants: PlantDataType[];
+    currentId: number;
+    isLiked: boolean[];
+  }>({
+    plants,
+    currentId: -1,
+    isLiked: [false, false, false], //this is temporary until we have isLiked is in the database
+  });
 
   const cardData = useMemo(() => {
-    let newData = [...currentData];
+    let newData = [...currentState.plants];
     if (width < 576 && width > 0) {
       newData = [newData[0]];
       return newData;
@@ -29,16 +36,20 @@ export default function Home({ plants, onLikeClick }: plantData) {
     } else {
       return newData;
     }
-  }, [currentData, width]);
+  }, [currentState.plants, width]);
 
   useEffect(() => {
     const handleShuffleData = async () => {
       try {
-        const newId = randomId(currentId, plants[0].total - 3);
-        setCurrentId(newId);
-        const fetchAPI: plantDataType[] = await getPlants(newId);
+        const newId = randomId(currentState.currentId, plants[0].total - 3);
+        const fetchAPI: PlantDataType[] = await getPlants(newId);
         if (fetchAPI) {
-          setCurrentData(fetchAPI);
+          setCurrentState({
+            ...currentState,
+            currentId: newId,
+            plants: fetchAPI,
+            isLiked: [false, false, false],
+          });
         } else {
           console.log("error");
         }
@@ -58,20 +69,31 @@ export default function Home({ plants, onLikeClick }: plantData) {
     return function cleanup() {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [currentId, plants]);
+  }, [currentState, plants]);
+
+  const handleLikeClick = (id: number) => {
+    if (!session) {
+      onLikeClick();
+    } else {
+      console.log("liked!");
+      let temp = [...currentState.isLiked];
+      temp[id] = !temp[id];
+      setCurrentState({ ...currentState, isLiked: temp });
+    }
+  };
 
   return (
     <>
-      <CardLayout>
+      <StylesWrapper className="home-layout">
         {cardData.map((plant, index) => (
-          <Card
+          <PlantCard
             key={index}
-            data={plant}
-            onLikeClick={onLikeClick}
-            session={session}
+            plant={plant}
+            onLikeClick={() => handleLikeClick(index)}
+            isLiked={currentState.isLiked[index]}
           />
         ))}
-      </CardLayout>
+      </StylesWrapper>
     </>
   );
 }

@@ -1,30 +1,30 @@
-export type levelInfoType = {
+export type LevelInfoType = {
   level: number;
   info: string;
 };
 
-export type plantImagesType = {
+export type PlantImagesType = {
   src: string;
   alt: string;
 };
 
-export type seasonType = {
-  spring: boolean;
-  summer: boolean;
-  fall: boolean;
-  winter: boolean;
+export type SeasonType = {
+  spring?: boolean;
+  summer?: boolean;
+  fall?: boolean;
+  winter?: boolean;
 };
 
-export type plantDataType = {
+export type PlantDataType = {
   _id: string;
-  _createdAt: Date;
+  _createdAt: string;
   name: string;
-  images: plantImagesType[];
+  images: PlantImagesType[];
   description: string;
-  water: levelInfoType;
-  care: levelInfoType;
-  seasons: seasonType;
-  size: levelInfoType;
-  color: string[];
+  water: LevelInfoType;
+  care: LevelInfoType;
+  seasons: SeasonType;
+  size: LevelInfoType;
+  colors: string[];
   total: number;
 };

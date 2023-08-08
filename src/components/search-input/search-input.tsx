@@ -5,14 +5,14 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { useForm } from "react-hook-form";
 import { SEARCH } from "@/shared/utils/constants";
 
-export type searchContext = { search: string };
+export type SearchContext = { search: string };
 
-export const defaultForm: searchContext = {
+export const defaultForm: SearchContext = {
   search: "",
 };
 
 export const SearchInput: FC<ISeachInputProps> = ({ onSaveSearch }) => {
-  const { register, handleSubmit, reset } = useForm<searchContext>({
+  const { register, handleSubmit, reset } = useForm<SearchContext>({
     defaultValues: defaultForm,
   });
 

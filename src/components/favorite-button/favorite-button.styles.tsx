@@ -1,47 +1,39 @@
-import { gridBreakpoint } from "@/shared/breakpoints";
 import styled from "styled-components";
 
 export const FavoriteWrapper = styled.button<{ isLiked: boolean }>`
-  position: absolute;
-  margin: 0.625rem;
-  top: 0.75rem;
-  right: 0.75rem;
-  cursor: pointer;
+  --button-position: absolute;
+  --button-margin: 0.625rem;
+  --button-position-gap: 0.75rem;
+  --button-cursor: pointer;
+  --button-background-color: transparent;
+  --button-color: var(--white);
+  --button-border: none;
+  --button-size: 45px;
+  --button-transition: scale 0.2s ease-out, color 0.5s ease;
+  --button-transform: scale(1.1);
 
-  background-color: transparent;
-  border: none;
+  position: var(--button-position);
+  margin: var(--button-margin);
+  top: var(--button-position-gap);
+  right: var(--button-position-gap);
+  cursor: var(--button-cursor);
 
-  svg {
-    width: 45px;
-    height: 45px;
-    fill: ${(props) => (props.isLiked ? "#DB5461" : "var(--white)")};
-    stroke: ${(props) => (props.isLiked ? "#DB5461" : "var(--white)")};
-    transition: scale 0.2s ease-out, fill 0.5s ease;
+  background-color: var(--button-background-color);
+  border: var(--button-border);
+
+  .heart-icon {
+    ${props => props.isLiked && '--button-color: var(--like-color)'};
+    width: var(--button-size);
+    height: var(--button-size);
+    color: var(--button-color);
+    transition: var(button-transition);
+    
+    &:hover {
+      transform: var(--button-transform);
+    }
   }
 
-  svg:hover {
-    transform: scale(1.1);
-  }
-
-  &:active svg {
-    transform: scale(1);
-  }
-
-  &:hover {
-  }
-
-  @media (min-width: ${gridBreakpoint.sm}) {
-  }
-
-  @media (min-width: ${gridBreakpoint.md}) {
-  }
-
-  @media (min-width: ${gridBreakpoint.lg}) {
-  }
-
-  @media (min-width: ${gridBreakpoint.xl}) {
-  }
-
-  @media (min-width: ${gridBreakpoint.xxl}) {
+  &:active .heart-icon {
+    --button-transform: scale(1);
   }
 `;

@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { imagePlaceholder } from "@/shared/utils/image-placeholder";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { defaultForm, formType, imageType } from "@/shared/type/register-type";
+import { DefaultForm, FormType, ImageType } from "@/shared/type/register-type";
 import {
   CACTI,
   EMAIL,
@@ -20,7 +20,7 @@ import {
 import { createNewUser } from "@/shared/utils/user-sign-up";
 import { NoUserProtectedRoute } from "@/components/protected-route";
 
-export default function Register({ image }: imageType) {
+export default function Register({ image }: ImageType) {
   const [currentState, setCurrentState] = useState<{
     isLoading: boolean;
     isPasswordVisible: boolean;
@@ -34,8 +34,8 @@ export default function Register({ image }: imageType) {
     errorVisible: false,
     isConfirmationVisible: false,
   });
-  const { register, handleSubmit } = useForm<formType>({
-    defaultValues: defaultForm,
+  const { register, handleSubmit } = useForm<FormType>({
+    defaultValues: DefaultForm,
   });
 
   const router = useRouter();
