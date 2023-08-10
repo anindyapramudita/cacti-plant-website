@@ -16,12 +16,13 @@ import {
   SIGN_IN,
   SOMETHING_WRONG,
 } from "@/shared/utils/constants";
-import { InputContainer } from "@/components/input";
+// import { InputContainer } from "@/components/input";
 import { FcGoogle } from "react-icons/fc";
 import { Button } from "@/components/button";
 import { useForm } from "react-hook-form";
 import { userSignIn } from "@/shared/utils/user-sign-in";
 import { useRouter } from "next/router";
+import { Input } from "@/components/input";
 
 export const LoginContent: FC<ILoginContentProps> = ({
   onClose,
@@ -98,27 +99,22 @@ export const LoginContent: FC<ILoginContentProps> = ({
         <h2>{LOGIN_HEADER}</h2>
       </div>
       <form onSubmit={onSubmit}>
-        <InputContainer id="email" label={EMAIL}>
-          <input
-            type="text"
-            id="email"
-            placeholder=" "
-            {...register("email")}
-          />
-        </InputContainer>
-        <InputContainer
-          id="password"
+        <Input
+          id="login-modal-email"
+          label={EMAIL}
+          name={"email"}
+          register={register}
+          type="text"
+        />
+        <Input
+          id="login-modal-password"
           label={PASSWORD}
+          name={"password"}
+          register={register}
+          type={currentState.isVisible ? "text" : "password"}
           onClick={onPasswordClicked}
           isVisible={currentState.isVisible}
-        >
-          <input
-            type={currentState.isVisible ? "text" : "password"}
-            id="password"
-            placeholder=" "
-            {...register("password")}
-          />
-        </InputContainer>
+        />
         <div className="forgot-password-container">
           <button
             className="forgot-password"
