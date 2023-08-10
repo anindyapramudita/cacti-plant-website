@@ -87,10 +87,20 @@ export default function Register({ image }: ImageType) {
             {REGISTER_HEADER} {CACTI}
           </h1>
           <form className="register-form" onSubmit={onSubmit}>
-            <Input id="name" label={NAME} name="name" register={register} />
-            <Input id="email" label={EMAIL} name="email" register={register} />
             <Input
-              id="password"
+              id="register-name"
+              label={NAME}
+              name="name"
+              register={register}
+            />
+            <Input
+              id="register-email"
+              label={EMAIL}
+              name="email"
+              register={register}
+            />
+            <Input
+              id="register-password"
               label={PASSWORD}
               name="password"
               register={register}
@@ -99,7 +109,7 @@ export default function Register({ image }: ImageType) {
               type={currentState.isPasswordVisible ? "text" : "password"}
             />
             <Input
-              id="passwordConfirmation"
+              id="register-password-confirmation"
               label={PASSWORD_CONFIRMATION}
               name="passwordConfirmation"
               register={register}
