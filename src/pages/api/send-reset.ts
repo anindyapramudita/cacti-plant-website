@@ -2,11 +2,10 @@ import { findUser } from "../../../db/utils/find-user";
 import dbConnect from "../../../db/utils/dbConnect";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getEmailHTML } from "@/shared/utils/get-email-html";
+import { sign } from "jsonwebtoken";
+import { createTransport } from "nodemailer";
 
-const nodemailer = require("nodemailer");
-const jwt = require("jsonwebtoken");
-
-const secret = process.env.SECRET;
+const secret = process.env.SECRET || "";
 
 export default async function handler(
   request: NextApiRequest,
@@ -24,14 +23,14 @@ export default async function handler(
 
   const { name, email } = user;
 
-  const token = jwt.sign({ name, email }, secret, {
+  const token = sign({ name, email }, secret, {
     expiresIn: "12h",
   });
 
   const message = {
     from: {
       name: "Cacti Assistant",
-      address: process.env.GMAIL_EMAIL_ADDRESS,
+      address: process.env.GMAIL_EMAIL_ADDRESS || "",
     },
     to: request.body.email,
     subject: "Reset Password",
@@ -39,7 +38,7 @@ export default async function handler(
     html: getEmailHTML(name, token),
   };
 
-  let transporter = nodemailer.createTransport({
+  let transporter = createTransport({
     service: "gmail",
     auth: {
       user: process.env.GMAIL_EMAIL_ADDRESS,
