@@ -1,9 +1,9 @@
 import { FC, useState } from "react";
 import { ILoginModalProps } from "./login-modal.interface";
 import { Modal } from "@/components/modal";
-import { LoginContent } from "./modal-content/login-content";
-import { ForgotPasswordContent } from "./modal-content/forgot-password-content/forgot-password-content";
 import { StylesWrapper } from "./login-modal.styles";
+import { LoginContent } from "./components/login-content";
+import { ForgotPasswordContent } from "./components/forgot-password-content";
 
 export const LoginModal: FC<ILoginModalProps> = ({ open = true, onClose }) => {
   const [isForgotPassword, setIsForgotPassword] = useState<boolean>(false);
@@ -18,7 +18,6 @@ export const LoginModal: FC<ILoginModalProps> = ({ open = true, onClose }) => {
     <Modal open={open} onClose={handleClose}>
       <StylesWrapper>
         <ForgotPasswordContent
-          onClose={handleClose}
           onBackClick={handleForgotClicked}
           isForgotPassword={isForgotPassword}
         />
