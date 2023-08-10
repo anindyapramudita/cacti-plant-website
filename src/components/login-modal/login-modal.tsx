@@ -5,12 +5,12 @@ import {
   FormType,
 } from "./login-modal.interface";
 import { Modal } from "@/components/modal";
-import { Button } from "../button";
+import { Button } from "@/components/button";
 import { StylesWrapper } from "./login-modal.styles";
 import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
-import { InputContainer } from "../input";
+import { Input } from "@/components/input";
 import {
   EMAIL,
   GOOGLE_SIGN_IN,
@@ -67,27 +67,16 @@ export const LoginModal: FC<ILoginModalProps> = ({ open = true, onClose }) => {
           <h2>{LOGIN_HEADER}</h2>
         </div>
         <form onSubmit={onSubmit}>
-          <InputContainer id="email" label={EMAIL}>
-            <input
-              type="text"
-              id="email"
-              placeholder=" "
-              {...register("email")}
-            />
-          </InputContainer>
-          <InputContainer
+          <Input id="email" label={EMAIL} name="email" register={register} />
+          <Input
             id="password"
             label={PASSWORD}
+            name="password"
+            register={register}
             onClick={onPasswordClicked}
             isVisible={isVisible}
-          >
-            <input
-              type={isVisible ? "text" : "password"}
-              id="password"
-              placeholder=" "
-              {...register("password")}
-            />
-          </InputContainer>
+            type={isVisible ? "text" : "password"}
+          />
           {errorVisible && (
             <p className="error-message">email or password is invalid</p>
           )}

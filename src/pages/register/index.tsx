@@ -1,6 +1,6 @@
 import { TransitionImage } from "@/components/image";
 import { Button } from "@/components/button";
-import { InputContainer } from "@/components/input";
+import { Input } from "@/components/input";
 import { RegisterLayout } from "@/components/layouts/register";
 import { getRegisterImage } from "@/sanity/get-register-image";
 import { useForm } from "react-hook-form";
@@ -69,48 +69,26 @@ export default function Register({ image }: ImageType) {
           {REGISTER_HEADER} {CACTI}
         </h1>
         <form className="register-form" onSubmit={onSubmit}>
-          <InputContainer id="name" label={NAME}>
-            <input
-              id="name"
-              type="text"
-              placeholder=" "
-              {...register("name")}
-            />
-          </InputContainer>
-          <InputContainer id="email" label={EMAIL}>
-            <input
-              id="email"
-              type="text"
-              placeholder=" "
-              {...register("email")}
-            />
-          </InputContainer>
-          <InputContainer
+          <Input id="name" label={NAME} name="name" register={register} />
+          <Input id="email" label={EMAIL} name="email" register={register} />
+          <Input
             id="password"
             label={PASSWORD}
+            name="password"
+            register={register}
             isVisible={isPasswordVisible}
             onClick={onPasswordClicked}
-          >
-            <input
-              id="password"
-              type={isPasswordVisible ? "text" : "password"}
-              placeholder=" "
-              {...register("password")}
-            />
-          </InputContainer>
-          <InputContainer
-            id="passwordConf"
+            type={isPasswordVisible ? "text" : "password"}
+          />
+          <Input
+            id="passwordConfirmation"
             label={PASSWORD_CONFIRMATION}
+            name="passwordConfirmation"
+            register={register}
             isVisible={isConfirmationVisible}
             onClick={onConfirmationClicked}
-          >
-            <input
-              id="passwordConf"
-              type={isConfirmationVisible ? "text" : "password"}
-              placeholder=" "
-              {...register("passwordConfirmation")}
-            />
-          </InputContainer>
+            type={isConfirmationVisible ? "text" : "password"}
+          />
           {errorVisible && <p className="error-message">{errorMessage}</p>}
           <Button
             isLoading={isLoading}
