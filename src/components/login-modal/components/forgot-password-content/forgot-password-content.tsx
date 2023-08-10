@@ -15,7 +15,7 @@ import {
   SOMETHING_WRONG,
   SUBMIT,
 } from "@/shared/utils/constants";
-import { InputContainer } from "@/components/input";
+import { Input } from "@/components/input";
 import { Button } from "@/components/button";
 import { useForm } from "react-hook-form";
 import { BsArrowLeftShort } from "react-icons/bs";
@@ -117,14 +117,13 @@ export const ForgotPasswordContent: FC<IForgotPasswordContentProps> = ({
             <p className="text-subtitle">{FORGOT_PASSWORD_SUBTITLE}</p>
           </div>
           <form onSubmit={onSubmit}>
-            <InputContainer id="email" label={EMAIL}>
-              <input
-                type="text"
-                id="email"
-                placeholder=" "
-                {...register("email")}
-              />
-            </InputContainer>
+            <Input
+              id="forgot-password-email"
+              label={EMAIL}
+              name={"email"}
+              register={register}
+              type="text"
+            />
             {currentState.errorVisible && (
               <p className="error-message" data-testid="error-message">
                 {currentState.errorMessage}
