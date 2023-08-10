@@ -1,4 +1,4 @@
-export const sendResetPassword = async (email) => {
+export const sendResetPassword = async (email: string) => {
   const response = await fetch("/api/send-reset", {
     method: "POST",
     body: JSON.stringify({ email }),
