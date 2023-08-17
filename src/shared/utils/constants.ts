@@ -4,6 +4,7 @@ export const SIGN_UP = "Sign Up";
 
 export const SAVE = "Save";
 export const CLEAR = "Clear";
+export const SEND = "Send";
 
 export const HEADER_USER_NAME = "Welcome back,";
 export const LOGIN_HEADER = "Welcome back!";
@@ -19,6 +20,8 @@ export const OR = "or";
 
 export const GOOGLE_SIGN_IN = "Sign in with Google";
 
+export const CONTACT_US_HEADER = "CONTACT US";
+
 export const LOADING = "Loading...";
 
 export const SEARCH = "search...";
@@ -31,3 +34,7 @@ export const SOMETHING_WRONG = "something is wrong. Please try again";
 export const FORM_ERROR =
   "Please fill in the forms correctly and have min 6 characters in your password";
 export const PASSWORD_NOT_MATCH = "passwords do not match";
+
+export const EMAIL_NOT_VALID = "your email is not valid";
+
+export const EMAIL_SENT = "Your email has been sent";
