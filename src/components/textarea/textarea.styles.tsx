@@ -12,19 +12,21 @@ export const StylesWrapper = styled.div<{
 
   --border-color: var(--disabled-dark);
 
-  --input-min-height: 2.5rem;
-  --input-width: 100%;
-  --input-border: 1px solid var(--border-color);
-  --input-border-radius: 5px;
-  --input-padding: 0.5rem;
-  --input-outline: none !important;
+  --textarea-min-height: 2.5rem;
+  --textarea-width: 100%;
+  --textarea-border: 1px solid var(--border-color);
+  --textarea-border-radius: 5px;
+  --textarea-padding: 0.5rem;
+  --textarea-resize: none;
+  --textarea-outline: none !important;
 
   --label-position: absolute;
+  --label-left: 0.25rem;
   --label-top: 1.25rem;
   --label-padding: 0;
   --label-transform: translate(0, -50%);
   --label-font-size: 0.9rem;
-  --label-transition: top 0.3s, font-size 0.3s, padding 0.3s;
+  --label-ransition: top 0.3s, font-size 0.3s, padding 0.3s;
   --label-background-color: var(--white);
   --label-left: 0.4rem;
   --label-cursor: text;
@@ -33,46 +35,38 @@ export const StylesWrapper = styled.div<{
   margin: var(--wrapper-margin);
   width: var(--wrapper-width);
 
-  .input-component {
-    height: var(--input-min-height);
-    width: var(--input-width);
-    border: var(--input-border);
-    border-radius: var(--input-border-radius);
-    padding: var(--input-padding);
-    outline: var(--input-outline);
+  .textarea-component {
+    min-height: var(--textarea-min-height);
+    width: var(--textarea-width);
+    border: var(--textarea-border);
+    border-radius: var(--textarea-border-radius);
+    padding: var(--textarea-padding);
+    resize: var(--textarea-resize);
+    outline: var(--label-outline);
   }
 
-  .input-label {
+  .textarea-label {
     position: var(--label-position);
+    left: var(--label-left);
     top: var(--label-top);
     transform: var(--label-transform);
     font-size: var(--label-font-size);
-    -webkit-transition: var(--label-transition);
+    -webkit-transition: var(--label-ransition);
     background-color: var(--label-background-color);
     left: var(--label-left);
     cursor: var(--label-cursor);
+    padding: var(--label-padding);
   }
 
-  .input-component:focus + .input-label,
-  input-component:not(:placeholder-shown) + .input-label {
+  .textarea-component:focus + .textarea-label,
+  .textarea-component:not(:placeholder-shown) + .textarea-label {
     --label-font-size: 0.75rem;
     --label-top: 0;
     --label-padding: 0.3rem;
   }
 
-  .input-component:focus {
+  .textarea-component:focus {
     --border-color: var(--secondary-light);
-    --input-border: 2px solid var(--border-color);
-  }
-
-  .eye-icon {
-    position: absolute;
-    right: 0.25rem;
-    top: 50%;
-    transform: translate(0, -50%);
-
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
+    --textarea-border: 2px solid var(--border-color);
   }
 `;

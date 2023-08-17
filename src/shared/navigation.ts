@@ -24,4 +24,9 @@ export const navigation = [
     name: "Profile",
     roles: ["user"],
   },
+  {
+    path: "/contact-us",
+    name: "Contact Us",
+    roles: ["user", "admin", "all"],
+  },
 ];
