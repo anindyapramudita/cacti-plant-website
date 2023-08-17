@@ -9,4 +9,5 @@ export interface IInputProps {
   isVisible?: boolean;
   onClick?: () => void;
   type?: HTMLInputTypeAttribute;
+  width?: string;
 }

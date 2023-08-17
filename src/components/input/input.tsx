@@ -11,17 +11,25 @@ export const Input: FC<IInputProps> = ({
   isVisible,
   onClick,
   type = "text",
+  width,
 }) => {
   return (
-    <StylesWrapper className="input-wrapper" data-testid="input-container">
+    <StylesWrapper
+      className="input-wrapper"
+      data-testid="input-container"
+      width={width}
+    >
       <input
         type={type}
         id={id}
         placeholder=" "
+        className="input-component"
         {...register(name)}
         data-testid="input-component"
       />
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id} className="input-label">
+        {label}
+      </label>
       {onClick ? (
         <button onClick={onClick} type="button" className="eye-icon">
           {isVisible ? (
