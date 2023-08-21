@@ -18,14 +18,22 @@ import {
   SIGN_UP,
 } from "@/shared/utils/constants";
 import { createNewUser } from "@/shared/utils/user-sign-up";
+import { NoUserProtectedRoute } from "@/components/protected-route";
 
 export default function Register({ image }: ImageType) {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string | number>("");
-  const [errorVisible, setErrorVisible] = useState<boolean>(false);
-  const [isConfirmationVisible, setIsConfirmationVisible] =
-    useState<boolean>(false);
+  const [currentState, setCurrentState] = useState<{
+    isLoading: boolean;
+    isPasswordVisible: boolean;
+    errorMessage: string | number;
+    errorVisible: boolean;
+    isConfirmationVisible: boolean;
+  }>({
+    isLoading: false,
+    isPasswordVisible: false,
+    errorMessage: "",
+    errorVisible: false,
+    isConfirmationVisible: false,
+  });
   const { register, handleSubmit } = useForm<FormType>({
     defaultValues: DefaultForm,
   });
@@ -33,73 +41,96 @@ export default function Register({ image }: ImageType) {
   const router = useRouter();
 
   const onSubmit = handleSubmit(async (data) => {
-    setIsLoading(true);
-    setErrorVisible(false);
+    setCurrentState({ ...currentState, isLoading: true, errorVisible: false });
     const response = await createNewUser(data);
     if (response.ok) {
       router.push("/");
-      setIsLoading(false);
+      setCurrentState({ ...currentState, isLoading: false });
     } else {
       console.log(response);
-      setErrorMessage(response?.status);
-      setErrorVisible(true);
-      setIsLoading(false);
+      setCurrentState({
+        ...currentState,
+        errorMessage: response?.status,
+        errorVisible: true,
+        isLoading: false,
+      });
     }
   });
 
-  const onPasswordClicked = () => setIsPasswordVisible(!isPasswordVisible);
+  const onPasswordClicked = () =>
+    setCurrentState({
+      ...currentState,
+      isPasswordVisible: !currentState.isPasswordVisible,
+    });
   const onConfirmationClicked = () =>
-    setIsConfirmationVisible(!isConfirmationVisible);
+    setCurrentState({
+      ...currentState,
+      isConfirmationVisible: !currentState.isConfirmationVisible,
+    });
 
   return (
-    <RegisterLayout>
-      <div className="image-side">
-        <TransitionImage
-          image={image?.src}
-          alt={image?.alt}
-          placeholder={imagePlaceholder}
-        />
-        <div className="welcome-header">
-          <h3 className="header-text">{REGISTER_HEADER}</h3>
-          <h1 className="logo-text">{CACTI}</h1>
+    <NoUserProtectedRoute>
+      <RegisterLayout>
+        <div className="image-side">
+          <TransitionImage
+            image={image?.src}
+            alt={image?.alt}
+            placeholder={imagePlaceholder}
+          />
+          <div className="welcome-header">
+            <h3 className="header-text">{REGISTER_HEADER}</h3>
+            <h1 className="logo-text">{CACTI}</h1>
+          </div>
         </div>
-      </div>
-      <div className="form-wrapper">
-        <h1 className="register-header">
-          {REGISTER_HEADER} {CACTI}
-        </h1>
-        <form className="register-form" onSubmit={onSubmit}>
-          <Input id="name" label={NAME} name="name" register={register} />
-          <Input id="email" label={EMAIL} name="email" register={register} />
-          <Input
-            id="password"
-            label={PASSWORD}
-            name="password"
-            register={register}
-            isVisible={isPasswordVisible}
-            onClick={onPasswordClicked}
-            type={isPasswordVisible ? "text" : "password"}
-          />
-          <Input
-            id="passwordConfirmation"
-            label={PASSWORD_CONFIRMATION}
-            name="passwordConfirmation"
-            register={register}
-            isVisible={isConfirmationVisible}
-            onClick={onConfirmationClicked}
-            type={isConfirmationVisible ? "text" : "password"}
-          />
-          {errorVisible && <p className="error-message">{errorMessage}</p>}
-          <Button
-            isLoading={isLoading}
-            className={errorVisible ? "" : "error-hidden"}
-            type="submit"
-          >
-            {SIGN_UP}
-          </Button>
-        </form>
-      </div>
-    </RegisterLayout>
+        <div className="form-wrapper">
+          <h1 className="register-header">
+            {REGISTER_HEADER} {CACTI}
+          </h1>
+          <form className="register-form" onSubmit={onSubmit}>
+            <Input
+              id="register-name"
+              label={NAME}
+              name="name"
+              register={register}
+            />
+            <Input
+              id="register-email"
+              label={EMAIL}
+              name="email"
+              register={register}
+            />
+            <Input
+              id="register-password"
+              label={PASSWORD}
+              name="password"
+              register={register}
+              isVisible={currentState.isPasswordVisible}
+              onClick={onPasswordClicked}
+              type={currentState.isPasswordVisible ? "text" : "password"}
+            />
+            <Input
+              id="register-password-confirmation"
+              label={PASSWORD_CONFIRMATION}
+              name="passwordConfirmation"
+              register={register}
+              isVisible={currentState.isConfirmationVisible}
+              onClick={onConfirmationClicked}
+              type={currentState.isConfirmationVisible ? "text" : "password"}
+            />
+            {currentState.errorVisible && (
+              <p className="error-message">{currentState.errorMessage}</p>
+            )}
+            <Button
+              isLoading={currentState.isLoading}
+              className={currentState.errorVisible ? "" : "error-hidden"}
+              type="submit"
+            >
+              {SIGN_UP}
+            </Button>
+          </form>
+        </div>
+      </RegisterLayout>
+    </NoUserProtectedRoute>
   );
 }
 

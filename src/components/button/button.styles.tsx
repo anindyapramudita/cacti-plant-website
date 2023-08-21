@@ -56,6 +56,7 @@ export const StylesWrapper = styled.button`
     &:hover {
       --button-background-color: var(--secondary);
       --button-border: 0.0625rem solid var(--secondary);
+      --button-color: var(--white);
     }
   }
 

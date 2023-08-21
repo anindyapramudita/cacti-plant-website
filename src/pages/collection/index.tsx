@@ -1,11 +1,11 @@
-import ProtectedRoute from "@/components/protected-route/protected-route";
+import { UserProtectedRoute } from "@/components/protected-route";
 import { getPlants } from "@/sanity/get-plants";
 
 export default function CollectionPage() {
   return (
-    <ProtectedRoute>
+    <UserProtectedRoute>
       <p>Collection Page</p>
-    </ProtectedRoute>
+    </UserProtectedRoute>
   );
 }
 

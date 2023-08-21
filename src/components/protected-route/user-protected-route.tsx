@@ -3,7 +3,11 @@ import { useRouter } from "next/router";
 import { ReactElement } from "react";
 import { Loading } from "../loading-page";
 
-const ProtectedRoute = ({ children }: { children: ReactElement }) => {
+export const UserProtectedRoute = ({
+  children,
+}: {
+  children: ReactElement;
+}) => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -18,5 +22,3 @@ const ProtectedRoute = ({ children }: { children: ReactElement }) => {
 
   return children;
 };
-
-export default ProtectedRoute;

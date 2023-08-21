@@ -2,6 +2,7 @@ export const SIGN_OUT = "Sign Out";
 export const SIGN_IN = "Sign In";
 export const SIGN_UP = "Sign Up";
 
+export const SUBMIT = "Submit";
 export const SAVE = "Save";
 export const CLEAR = "Clear";
 
@@ -31,3 +32,18 @@ export const SOMETHING_WRONG = "something is wrong. Please try again";
 export const FORM_ERROR =
   "Please fill in the forms correctly and have min 6 characters in your password";
 export const PASSWORD_NOT_MATCH = "passwords do not match";
+export const PASSWORD_REQUIREMENT_ERROR =
+  "Password needs to be at least 6 characters";
+
+export const EMAIL_NOT_FOUND = "Email not found";
+export const FORGOT_PASSWORD_HEADING = "Forgot Password?";
+export const FORGOT_PASSWORD_SUBTITLE =
+  "Please enter your email and we'll send you a reset link";
+
+export const EMAIL_SENT_HEADING = "Email Sent!";
+export const EMAIL_SENT_SUBTITLE =
+  "We've sent the reset link to your email. Please check your inbox";
+
+export const PASSWORD_UPDATED = "Password successfully updated";
+
+export const CREDENTIALS_INVALID = "email or password is invalid";

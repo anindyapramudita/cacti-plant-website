@@ -10,6 +10,7 @@ export const ModalWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 2rem;
 `;
 
 export const ModalContent = styled.div`
