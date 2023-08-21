@@ -1,5 +1,5 @@
 import { Button } from "@/components/button";
-import { InputContainer } from "@/components/input";
+import { Input } from "@/components/input";
 import { ForgotPasswordLayout } from "@/components/layouts/forgot-password";
 import { NoUserProtectedRoute } from "@/components/protected-route";
 import {
@@ -14,7 +14,7 @@ import { useForm } from "react-hook-form";
 import { resetPassword } from "../../../db/utils/reset-password";
 import { TransitionImage } from "@/components/image";
 import { getRegisterImage } from "@/sanity/get-register-image";
-import { imageType } from "@/shared/type/register-type";
+import { ImageType } from "@/shared/type/register-type";
 import { imagePlaceholder } from "@/shared/utils/image-placeholder";
 
 export const defaultForm = {
@@ -27,7 +27,7 @@ export type FormType = {
   passwordConfirmation: string;
 };
 
-export default function ResetPasswordPage({ image }: imageType) {
+export default function ResetPasswordPage({ image }: ImageType) {
   const router = useRouter();
   const { token } = router.query;
 
@@ -118,36 +118,26 @@ export default function ResetPasswordPage({ image }: imageType) {
           <h1 className="register-header">Reset Password</h1>
           <p>Please submit your new password</p>
           <form className="register-form" onSubmit={onSubmit}>
-            <InputContainer
+            <Input
               id="new-password"
               label="New Password"
               onClick={handleTogglePassword}
               isVisible={currentState.isPasswordVisible}
-            >
-              <input
-                id="new-password"
-                type={currentState.isPasswordVisible ? "text" : "password"}
-                placeholder=" "
-                {...register("password")}
-              />
-            </InputContainer>
-            <InputContainer
+              type={currentState.isPasswordVisible ? "text" : "password"}
+              name="password"
+              register={register}
+            />
+            <Input
               id="new-password-confirmation"
               label="New Password Confirmation"
               onClick={handleTogglePasswordConfirmation}
               isVisible={currentState.isPasswordConfirmationVisible}
-            >
-              <input
-                id="new-password-confirmation"
-                type={
-                  currentState.isPasswordConfirmationVisible
-                    ? "text"
-                    : "password"
-                }
-                placeholder=" "
-                {...register("passwordConfirmation")}
-              />
-            </InputContainer>
+              name="passwordConfirmation"
+              type={
+                currentState.isPasswordConfirmationVisible ? "text" : "password"
+              }
+              register={register}
+            />
             {currentState.errorVisible && (
               <p className="error-message">{currentState.errorMessage}</p>
             )}
