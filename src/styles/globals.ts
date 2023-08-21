@@ -7,6 +7,7 @@ export const GlobalStyles = createGlobalStyle`
     /**Achromatic */
     --white: #ffffff;
     --black: #000000;
+    --dark-grey: #717171;
     /**Colors */
     --primary: #123132;
     --primary-light: #44595b;

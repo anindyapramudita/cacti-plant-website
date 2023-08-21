@@ -1,14 +1,15 @@
 import { FC } from "react";
-import { Button } from "../button";
-import { IFilterAccordionProps } from "./filter-accordion.interface";
-import { StylesWrapper } from "./filter-accordion.styles";
 import {
   FilterContext,
-  careContent,
+  IFilterAccordionProps,
   defaultForm,
+} from "./filter-accordion.interface";
+import { StylesWrapper } from "./filter-accordion.styles";
+import {
+  careContent,
   seasonContent,
   waterContent,
-} from "./utils/season-filter";
+} from "./filter-accordion.constants";
 import { useForm } from "react-hook-form";
 import {
   BLOOM_SEASON,
@@ -17,6 +18,8 @@ import {
   SAVE,
   WATER_NEEDS,
 } from "@/shared/utils/constants";
+import { Button } from "@/components/button";
+import classNames from "classnames";
 
 export const FilterAccordion: FC<IFilterAccordionProps> = ({
   isOpen,
@@ -52,7 +55,11 @@ export const FilterAccordion: FC<IFilterAccordionProps> = ({
 
   return (
     <StylesWrapper>
-      <form className={isOpen ? "content show" : "content"} onSubmit={onSubmit}>
+      <form
+        className={classNames("content", { show: isOpen })}
+        onSubmit={onSubmit}
+        data-testid="filter-accordion"
+      >
         <div className="content-row">
           <div>
             <p>{WATER_NEEDS}</p>
@@ -65,6 +72,7 @@ export const FilterAccordion: FC<IFilterAccordionProps> = ({
                     id={`water-${content.value}`}
                     className={getClassName(index, waterContent)}
                     value={content.value}
+                    data-testid="water-checkbox"
                     {...register("water")}
                   />
                   <label htmlFor={`water-${content.value}`}>
@@ -86,6 +94,7 @@ export const FilterAccordion: FC<IFilterAccordionProps> = ({
                     id={`season-${content.value}`}
                     className={getClassName(index, seasonContent)}
                     value={content.value}
+                    data-testid="season-checkbox"
                     {...register("season")}
                   />
                   <label htmlFor={`season-${content.value}`}>
@@ -107,6 +116,7 @@ export const FilterAccordion: FC<IFilterAccordionProps> = ({
                     id={`care-${content.value}`}
                     className={getClassName(index, careContent)}
                     value={content.value}
+                    data-testid="care-checkbox"
                     {...register("care")}
                   />
                   <label htmlFor={`care-${content.value}`}>
@@ -137,6 +147,7 @@ export const FilterAccordion: FC<IFilterAccordionProps> = ({
               currentField.season.length === 0 &&
               currentField.care.length === 0
             }
+            data-testid="clear-button"
           >
             {CLEAR}
           </Button>
