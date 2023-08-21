@@ -1,175 +1,121 @@
 import { gridBreakpoint } from "@/shared/breakpoints";
-import { ralewayMedium, ralewayThin } from "@/styles/fonts";
 import styled from "styled-components";
 
 export const StylesWrapper = styled.nav<{}>`
-  ${ralewayThin}
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 5.2px 10px;
+  --header-height: var(--header-height-mobile);
+  --header-background-color: var(--white);
+  --header-box-shadow: 0 -4px 25px rgba(0, 0, 0, 25%);
+  --header-overflow: hidden;
+  --header-position: fixed;
+  --header-bottom: 0;
+  --header-width: 100%;
+  --header-z-index: 2;
+  --header-display: block;
+  --header-align-items: center;
+  --header-justify-content: center;
+
+  --nav-link-color: var(--black);
+  --nav-link-text-decoration: none;
+  --nav-link-cursor: pointer;
+  --nav-link-flex: 0;
+  --nav-link-gap: 0;
+  --nav-link-justify-content: start;
+
+  --desktop-links-display: none;
+  --desktop-links-margin: 0;
+
+  --logo-width: 40px;
+  --logo-height: 40px;
+
+  --mobile-wrapper-height: var(--header-height-mobile);
+  --mobile-wrapper-display: flex;
+  --mobile-wrapper-align-items: center;
+  --mobile-wrapper-justify-content: space-evenly;
+  --mobile-wrapper-color: var(--disabled-dark);
+
   height: var(--header-height);
+  background-color: var(--header-background-color);
+  box-shadow: var(--header-box-shadow);
+  overflow: var(--header-overflow);
+  position: var(--header-position);
+  bottom: var(--header-bottom);
+  width: var(--header-width);
+  z-index: var(--header-z-index);
+  display: var(--header-display);
+  align-items: var(--header-align-items);
+  justify-content: var(--header-justify-content);
 
-  .logo-link {
-    text-decoration: none;
-    color: black;
-  }
-  @media (min-width: ${gridBreakpoint.sm}) {
-  }
-
-  @media (min-width: ${gridBreakpoint.md}) {
-  }
-
-  @media (min-width: ${gridBreakpoint.lg}) {
-  }
-
-  @media (min-width: ${gridBreakpoint.xl}) {
-  }
-
-  @media (min-width: ${gridBreakpoint.xxl}) {
-  }
-`;
-
-export const LogoWrapper = styled.div<{}>`
-  ${ralewayMedium}
-  display: flex;
-  align-items: center;
-  font-size: 24px;
-
-  @media (min-width: ${gridBreakpoint.sm}) {
+  .nav-link {
+    color: var(--nav-link-color);
+    text-decoration: var(--nav-link-text-decoration);
+    cursor: var(--nav-link-cursor);
   }
 
-  @media (min-width: ${gridBreakpoint.md}) {
+  .nav-link:hover {
+    --nav-link-text-decoration: underline;
   }
 
-  @media (min-width: ${gridBreakpoint.lg}) {
+  .nav-link.nav-link-disabled {
+    --nav-link-color: var(--disabled-dark);
   }
 
-  @media (min-width: ${gridBreakpoint.xl}) {
+  .nav-link.nav-link-disabled:hover {
+    --nav-link-text-decoration: none;
+    --nav-link-cursor: default;
   }
 
-  @media (min-width: ${gridBreakpoint.xxl}) {
-  }
-`;
-
-export const NavigationWrapper = styled.ul<{
-  drawerOpen: boolean;
-}>`
-  position: fixed;
-  inset: 0 0 0 30%;
-  background: white;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-  padding: min(20vh, 160px) 32px;
-  background: rgba(18, 49, 50, 0.8);
-  z-index: 1000;
-  a {
-    color: var(--white);
-    text-decoration: none;
+  .business-logo {
+    width: var(--logo-width);
+    height: var(--logo-height);
   }
 
-  transform: ${(props) =>
-    props.drawerOpen ? "translateX(0)" : "translateX(100%)"};
-  transition: transform 0.3s ease-out;
-
-  @supports (backdrop-filter: blur(16px)) {
-    background: rgba(18, 49, 50, 0.5);
-    backdrop-filter: blur(16px);
+  .navlinks-1,
+  .navlinks-2,
+  .desktop-logo-wrapper {
+    display: var(--desktop-links-display);
+    flex: var(--nav-link-flex);
+    gap: var(--nav-link-gap);
+    justify-content: var(--nav-link-justify-content);
+    margin: var(--desktop-links-margin);
   }
 
-  @media (min-width: ${gridBreakpoint.sm}) {
+  .mobile-logo-wrapper {
+    height: var(--mobile-wrapper-height);
+    display: var(--mobile-wrapper-display);
+    align-items: var(--mobile-wrapper-align-items);
+    justify-content: var(--mobile-wrapper-justify-content);
+    color: var(--mobile-wrapper-color);
   }
 
   @media (min-width: ${gridBreakpoint.md}) {
-    padding: 0;
-    position: static;
-    flex-direction: row;
-    ${ralewayThin}
-    align-items: center;
-    background-color: transparent;
-    gap: 32px;
-    transform: translateX(0);
-    a {
-      color: var(--black);
+    --header-height: var(--header-height-desktop);
+    --header-display: flex;
+    --header-align-items: center;
+    --header-justify-content: center;
+
+    .navlinks-1,
+    .navlinks-2 {
+      --desktop-links-display: flex;
+      --nav-link-flex: 1;
+      --nav-link-gap: 1.5rem;
     }
 
-    li {
-      cursor: pointer;
-      transition: transform 0.2s ease;
+    .navlinks-1 {
+      --nav-link-justify-content: flex-end;
     }
 
-    li:hover {
-      transform: translateY(-1.6px);
-      text-decoration: underline;
+    .desktop-logo-wrapper {
+      --desktop-links-display: flex;
+      --desktop-links-margin: 0 1.5rem;
     }
 
-    li:active {
-      transform: translateY(0);
+    .business-logo {
+      --logo-width: 60px;
+      --logo-height: 60px;
     }
-  }
 
-  @media (min-width: ${gridBreakpoint.lg}) {
-  }
-
-  @media (min-width: ${gridBreakpoint.xl}) {
-  }
-
-  @media (min-width: ${gridBreakpoint.xxl}) {
-  }
-`;
-
-export const ButtonWrapper = styled.div<{}>`
-  display: none;
-
-  @media (min-width: ${gridBreakpoint.sm}) {
-  }
-
-  @media (min-width: ${gridBreakpoint.md}) {
-    ${ralewayThin}
-    height: 36px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  @media (min-width: ${gridBreakpoint.lg}) {
-  }
-
-  @media (min-width: ${gridBreakpoint.xl}) {
-  }
-
-  @media (min-width: ${gridBreakpoint.xxl}) {
-  }
-`;
-
-export const MenuWrapper = styled.button<{
-  drawerOpen: boolean;
-}>`
-  cursor: pointer;
-  z-index: 9999;
-  position: absolute;
-  display: flex;
-  background-color: transparent;
-  border: 0;
-  top: 8px;
-  right: ${(props) => (props.drawerOpen ? "60%" : "32px")};
-  transition: right 0.3s ease-out;
-
-  @media (min-width: ${gridBreakpoint.sm}) {
-  }
-
-  @media (min-width: ${gridBreakpoint.md}) {
-    display: none;
-  }
-
-  @media (min-width: ${gridBreakpoint.lg}) {
-  }
-
-  @media (min-width: ${gridBreakpoint.xl}) {
-  }
-
-  @media (min-width: ${gridBreakpoint.xxl}) {
+    .mobile-logo-wrapper {
+      --mobile-wrapper-display: none;
+    }
   }
 `;
