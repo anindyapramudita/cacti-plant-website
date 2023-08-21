@@ -1,4 +1,4 @@
-import { FilterContext } from "../filter-accordion/utils/season-filter";
+import { FilterContext } from "./components/filter-accordion/filter-accordion.interface";
 
 export interface IFilterHeaderProps {
   onSaveFilter: (filter: FilterContext) => void;

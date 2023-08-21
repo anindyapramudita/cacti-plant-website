@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import bcrypt from "bcrypt";
 import validator from "validator";
+import { hash, compare } from "bcrypt";
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -37,12 +37,12 @@ userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     next();
   }
-  this.password = await bcrypt.hash(this.password, 10);
+  this.password = await hash(this.password, 10);
   next();
 });
 
 userSchema.methods.comparePassword = async function (enteredPassword) {
-  return await bcrypt.compare(enteredPassword, this.password);
+  return await compare(enteredPassword, this.password);
 };
 
 export default mongoose.models.User || mongoose.model("User", userSchema);

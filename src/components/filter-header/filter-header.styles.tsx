@@ -1,45 +1,42 @@
-import { gridBreakpoint } from "@/shared/breakpoints";
-import { ralewayThin } from "@/styles/fonts";
 import styled from "styled-components";
 
-export const StylesWrapper = styled.nav<{}>`
-  // ${ralewayThin}
+export const StylesWrapper = styled.nav`
+  --filter-display: flex;
+  --filter-align-items: center;
+  --filter-justify-content: center;
+  --filter-gap: 0.6rem;
+
+  --button-background-color: transparent;
+  --button-border: none;
+  --button-cursor: pointer;
+  --button-display: flex;
+  --button-align-items: center;
+  --button-justify-content: center;
+  --button-padding: 0.1875rem;
+  --button-border-radius: 20%;
+  --button-color: var(--primary);
 
   .filter-top {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+    display: var(--filter-display);
+    align-items: var(--filter-align-items);
+    justify-content: var(--filter-justify-content);
+    gap: var(--filter-gap);
   }
 
   .filter-button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.1875rem;
-    border-radius: 20%;
+    background-color: var(--button-background-color);
+    border: var(--button-border);
+    cursor: var(--button-cursor);
+    display: var(--button-display);
+    align-items: var(--button-align-items);
+    justify-content: var(--button-justify-content);
+    padding: var(--button-padding);
+    border-radius: var(--button-border-radius);
+    color: var(--button-color);
   }
 
   .filter-button.clicked {
-    background-color: var(--primary);
-    color: white;
-  }
-
-  @media (min-width: ${gridBreakpoint.sm}) {
-  }
-
-  @media (min-width: ${gridBreakpoint.md}) {
-  }
-
-  @media (min-width: ${gridBreakpoint.lg}) {
-  }
-
-  @media (min-width: ${gridBreakpoint.xl}) {
-  }
-
-  @media (min-width: ${gridBreakpoint.xxl}) {
+    --button-background-color: var(--primary);
+    --button-color: var(--white);
   }
 `;

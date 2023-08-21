@@ -1,10 +1,10 @@
-import ProtectedRoute from "@/components/protected-route/protected-route";
+import { UserProtectedRoute } from "@/components/protected-route";
 
 export default function ProfilePage() {
   return (
-    <ProtectedRoute>
+    <UserProtectedRoute>
       <p>Profile Page</p>
-    </ProtectedRoute>
+    </UserProtectedRoute>
   );
 }
 

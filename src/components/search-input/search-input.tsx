@@ -24,7 +24,7 @@ export const SearchInput: FC<ISeachInputProps> = ({ onSaveSearch }) => {
   return (
     <StylesWrapper>
       <form onSubmit={onSubmit}>
-        <input type="textbox" placeholder={SEARCH} {...register("search")} />
+        <input type="text" placeholder={SEARCH} {...register("search")} />
         <button className="search-button" type="submit">
           <AiOutlineSearch size={15} />
         </button>

@@ -3,18 +3,6 @@ import { FiSun } from "react-icons/fi";
 import { RiLeafLine } from "react-icons/ri";
 import { AiOutlineHeart } from "react-icons/ai";
 
-export type FilterContext = {
-  water: (number | string)[];
-  season: (number | string)[];
-  care: (number | string)[];
-};
-
-export const defaultForm: FilterContext = {
-  water: [],
-  season: [],
-  care: [],
-};
-
 export const waterContent = [
   {
     label: "Low",

@@ -5,7 +5,7 @@ export const StylesWrapper = styled.div`
   ${ralewayThin}
 
   position: relative;
-  margin: 1rem 0;
+  margin: 1rem 0 0 0;
   width: max-content;
 
   label {
