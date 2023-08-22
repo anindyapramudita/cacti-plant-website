@@ -26,6 +26,9 @@ export const StylesWrapper = styled.nav<{}>`
 
   --logo-width: 40px;
   --logo-height: 40px;
+  --logo-border: none;
+  --logo-background: transparent;
+  --logo-cursor: pointer;
 
   --mobile-wrapper-height: var(--header-height-mobile);
   --mobile-wrapper-display: flex;
@@ -79,12 +82,31 @@ export const StylesWrapper = styled.nav<{}>`
     margin: var(--desktop-links-margin);
   }
 
+  .desktop-logo-wrapper {
+    border: var(--logo-border);
+    background: var(--logo-background);
+    cursor: var(--logo-cursor);
+  }
+
+  .desktop-logo-wrapper.logo-disabled {
+    --logo-cursor: default;
+  }
+
   .mobile-logo-wrapper {
     height: var(--mobile-wrapper-height);
     display: var(--mobile-wrapper-display);
     align-items: var(--mobile-wrapper-align-items);
     justify-content: var(--mobile-wrapper-justify-content);
+  }
+
+  .link-button {
+    border: var(--logo-border);
+    background: var(--logo-background);
     color: var(--mobile-wrapper-color);
+  }
+
+  .link-button.link-button-disabled {
+    border-bottom: 5px solid var(--secondary);
   }
 
   @media (min-width: ${gridBreakpoint.md}) {
