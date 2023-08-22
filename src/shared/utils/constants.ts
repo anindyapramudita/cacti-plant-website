@@ -6,6 +6,10 @@ export const SUBMIT = "Submit";
 export const SAVE = "Save";
 export const CLEAR = "Clear";
 
+export const HOME_HEADING = "Find the perfect plant for your place.";
+export const HOME_SUBTITLE =
+  "Find your perfect flora companion! Search by color, water, level of care family and much more. You can also learn about cool facts information related to each plant.";
+
 export const HEADER_USER_NAME = "Welcome back,";
 export const LOGIN_HEADER = "Welcome back!";
 export const REGISTER_HEADER = "Welcome to";
