@@ -1,11 +1,10 @@
 import { getPlants } from "@/sanity/get-plants";
 import { StylesWrapper } from "./index.styles";
-// import Image from "next/image";
 import { PlantDataType } from "@/shared/type/data-types";
-// import { imagePlaceholder } from "@/shared/utils/image-placeholder";
 import { ImageCard } from "@/components/image-card";
 import { useEffect, useMemo, useState } from "react";
 import { HOME_HEADING, HOME_SUBTITLE } from "@/shared/utils/constants";
+import { useRouter } from "next/router";
 
 type PlantData = {
   plants: PlantDataType[];
@@ -28,6 +27,7 @@ export default function Home({
   plants,
 }: // onLikeClick
 PlantData) {
+  const { push } = useRouter();
   const defaultState: CarouselPlant = useMemo(() => {
     return {
       currentId: 0,
@@ -89,7 +89,9 @@ PlantData) {
         <div className="text-wrapper">
           <h1 className="homepage-heading">{HOME_HEADING}</h1>
           <p className="homepage-subtitle">{HOME_SUBTITLE}</p>
-          <button className="search-button">Search</button>
+          <button className="search-button" onClick={() => push("/search")}>
+            Search
+          </button>
         </div>
       </StylesWrapper>
     </>
