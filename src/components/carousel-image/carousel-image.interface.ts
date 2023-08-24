@@ -1,8 +1,15 @@
 import { PlantImagesType } from "@/shared/type/data-types";
-import { Dispatch, SetStateAction } from "react";
+
+export type PlantImages = {
+  currentId: number;
+  currentImage: {
+    src: string;
+    alt: string;
+  };
+};
 
 export interface ICarouselImage {
   images: PlantImagesType[];
-  restartImage: boolean;
-  setRestartImage: Dispatch<SetStateAction<boolean>>;
+  width: number;
+  height: number;
 }

@@ -1,62 +1,78 @@
-import { TransitionImage } from "@/components/image";
-import { FC, useEffect, useState } from "react";
-import { ICarouselImage } from "./carousel-image.interface";
+import { FC, useEffect, useMemo, useState } from "react";
+import { ICarouselImage, PlantImages } from "./carousel-image.interface";
 import { LineCounter, StylesWrapper } from "./carousel-image.styles";
-import { imagePlaceholder } from "@/shared/utils/image-placeholder";
+import { ImageCard } from "@/components/image-card";
 
 export const CarouselImage: FC<ICarouselImage> = ({
   images,
-  restartImage,
-  setRestartImage,
+  width,
+  height,
 }) => {
-  const [currentId, setCurrentId] = useState<number>(0);
-  const imageLength = images?.length;
-  const [newId, setNewId] = useState<number>(-1);
+  const defaultState: PlantImages = useMemo(() => {
+    return {
+      currentId: 0,
+      currentImage: {
+        src: images[0]?.src,
+        alt: images[0]?.alt,
+      },
+    };
+  }, [images]);
+
+  const [currentState, setCurrentState] = useState<PlantImages>(defaultState);
+  const [restartImage, setRestartImage] = useState<boolean>(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentId((prevCount) => (prevCount + 1) % images.length);
-    }, 4950);
+      if (currentState.currentId >= images.length - 1) {
+        setCurrentState(defaultState);
+      } else {
+        const prevId = currentState.currentId;
+        setCurrentState({
+          currentId: prevId + 1,
+          currentImage: {
+            src: images[prevId + 1]?.src,
+            alt: images[prevId + 1]?.alt,
+          },
+        });
+      }
+    }, 4980);
 
     if (!restartImage) {
       return () => clearInterval(timer);
     } else {
       clearInterval(timer);
       setRestartImage(false);
-      if (newId < 0) {
-        setCurrentId(0);
-      } else {
-        setCurrentId(newId);
-        setNewId(-1);
-      }
     }
-  }, [images, restartImage, setRestartImage, newId]);
+  }, [currentState.currentId, images, defaultState, restartImage]);
 
   return (
     <StylesWrapper>
+      <ImageCard
+        src={currentState.currentImage.src}
+        alt={currentState.currentImage.alt}
+        width={width}
+        height={height}
+        className="carousel-image"
+        carousel
+      />
       <div className="line-container">
         {images?.length > 1
           ? Array.from({ length: images.length }).map((_, index) => (
               <LineCounter
                 key={index}
                 index={index}
-                activeIndex={currentId}
-                totalLine={imageLength}
+                activeIndex={currentState.currentId}
+                totalLine={images.length}
                 restartImage={restartImage}
-                onClick={() => {
-                  setNewId(index);
-                  setRestartImage(true);
-                }}
-                currentImage={images[currentId].src}
+                // onClick={() => {
+                //   setNewId(index);
+                //   setRestartImage(true);
+                // }}
+                currentImage={images[currentState.currentId].src}
               />
             ))
           : null}
       </div>
-      <TransitionImage
-        image={images[currentId].src}
-        placeholder={imagePlaceholder}
-        alt={images[currentId].alt}
-      />
     </StylesWrapper>
   );
 };
