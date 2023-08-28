@@ -31,21 +31,16 @@ export const StylesWrapper = styled.div<{}>`
 `;
 
 export const LineCounter = styled.div<{
-  index: number;
-  activeIndex: number;
   totalLine: number;
   restartImage: boolean;
-  currentImage: string;
 }>`
   --line-width: ${(props) =>
     props.totalLine && `calc(100% / ${props.totalLine})`};
   --line-height: 0.1875rem;
   --line-position: relative;
   --line-overflow: hidden;
-  --line-background-color: ${(props) =>
-    props.index >= props.activeIndex
-      ? "var(--new-secondary-light)"
-      : "var(--new-secondary)"};
+
+  --line-background-color: var(--new-secondary);
   --line-border-radius: 1.25rem;
 
   --line-load-content: "";
@@ -61,34 +56,29 @@ export const LineCounter = styled.div<{
   overflow: var(--line-overflow);
   background-color: var(--line-background-color);
 
+  &.next-index {
+    --line-background-color: var(--new-secondary-light);
+  }
+
   -webkit-border-radius: var(--line-border-radius);
   -moz-border-radius: var(--line-border-radius);
   border-radius: var(--line-border-radius);
 
   // cursor: pointer;
 
-  ${(props) =>
-    props.index === props.activeIndex &&
-    `
-  :before {
+  &.active-index.image-loaded:before {
     content: var(--line-load-content);
     position: var(--line-load-position);
     left: var(--line-load-left);
     height: var(--line-load-height);
     background-color: var(--line-load-background-color);
-    ${
-      !props.restartImage && props.currentImage
-        ? `-webkit-animation: var(--line-load-animation);
+    -webkit-animation: var(--line-load-animation);
     -moz-animation: var(--line-load-animation);
     animation: var(--line-load-animation);
-    `
-        : ""
-    }
     -webkit-border-radius: var(--line-border-radius);
     -moz-border-radius: var(--line-border-radius);
     border-radius: var(--line-border-radius);
   }
-  `}
 
   @keyframes lineAnim {
     0% {

@@ -2,6 +2,7 @@ import { FC, useEffect, useMemo, useState } from "react";
 import { ICarouselImage, PlantImages } from "./carousel-image.interface";
 import { LineCounter, StylesWrapper } from "./carousel-image.styles";
 import { ImageCard } from "@/components/image-card";
+import classNames from "classnames";
 
 export const CarouselImage: FC<ICarouselImage> = ({
   images,
@@ -60,15 +61,17 @@ export const CarouselImage: FC<ICarouselImage> = ({
           ? Array.from({ length: images.length }).map((_, index) => (
               <LineCounter
                 key={index}
-                index={index}
-                activeIndex={currentState.currentId}
                 totalLine={images.length}
                 restartImage={restartImage}
-                // onClick={() => {
-                //   setNewId(index);
-                //   setRestartImage(true);
-                // }}
-                currentImage={images[currentState.currentId].src}
+                className={classNames(
+                  {
+                    "active-index": index === currentState.currentId,
+                  },
+                  { "next-index": index >= currentState.currentId },
+                  {
+                    "image-loaded": images[currentState.currentId].src,
+                  }
+                )}
               />
             ))
           : null}
