@@ -11,7 +11,7 @@ export const StylesWrapper = styled.div`
   --layout-align-items: stretch;
   --layout-justify-content: flex-start;
 
-  --header-font-size: 46px;
+  --header-font-size: 36px;
 
   --line-display: none;
   --line-height: 550px;
@@ -36,9 +36,9 @@ export const StylesWrapper = styled.div`
   --category-font-size: 24px;
   --category-font-weight: 700;
 
-  --image-wrapper-display: block;
-  --image-wrapper-flex-direction: row;
-  --image-wrapper-gap: 0;
+  --image-wrapper-display: flex;
+  --image-wrapper-flex-direction: column;
+  --image-wrapper-gap: 24px;
 
   height: var(--layout-height);
   display: var(--layout-display);
@@ -73,37 +73,7 @@ export const StylesWrapper = styled.div`
     gap: var(--content-gap);
     width: var(--content-width);
     height: var(--content-height);
-
-    .info-text {
-      display: var(--text-display);
-      width: var(--text-width);
-      flex-direction: var(--text-flex-direction);
-      gap: var(--text-gap);
-
-      .category-header {
-        font-size: var(--category-font-size);
-        font-weight: var(--category-font-weight);
-      }
-    }
-  }
-
-  .info-text.text-changed {
-    animation-name: var(--text-animation-name);
-    animation-duration: var(--text-animation-duration);
-    animation: var(--text-animation);
-
-    -webkit-animation: var(--text-animation);
-    -webkit-animation-name: var(--text-animation-name);
-    -webkit-animation-duration: var(--text-animation-duration);
-
-    @keyframes text-fade-in {
-      0% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
+    position: relative;
   }
 
   @media (min-width: ${gridBreakpoint.md}) {
@@ -118,9 +88,6 @@ export const StylesWrapper = styled.div`
     --layout-gap: 64px;
     --layout-padding: 24px;
 
-    --image-wrapper-display: flex;
-    --image-wrapper-flex-direction: column;
-    --image-wrapper-gap: 24px;
     --content-gap: 24px;
     --content-width: 480px;
     --content-height: 550px;
