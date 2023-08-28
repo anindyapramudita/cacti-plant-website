@@ -66,9 +66,7 @@ export const StylesWrapper = styled.div<{
   --wrapper-border-bottom: none;
   --wrapper-padding-bottom: 0;
 
-  --outline-animation-name: mobile-outline-fade;
-  --outline-animation-duration: 0.5s;
-  --outline-animation: linear;
+  --outline-transition: top 0.5s, left 0.5s;
 
   position: var(--wrapper-position);
   display: var(--wrapper-display);
@@ -104,62 +102,17 @@ export const StylesWrapper = styled.div<{
     display: var(--outline-wrapper-display);
     flex-direction: var(--outline-wrapper-flex-direction);
     align-items: var(--outline-wrapper-align-items);
+    top: ${(props) =>
+      props.buttonEnd
+        ? `var(--button-${props.buttonEnd}-top)`
+        : "var(--button-0-top)"};
+    left: ${(props) =>
+      props.buttonEnd
+        ? `var(--button-${props.buttonEnd}-left)`
+        : "var(--button-0-left)"};
 
-    ${(props) =>
-      props.buttonStart && props.buttonEnd
-        ? `
-        top: var(--button-${props.buttonEnd}-top);
-        left: var(--button-${props.buttonEnd}-left);
+    transition: var(--outline-transition);
 
-        @keyframes mobile-outline-fade {
-            0% {
-                opacity: 1;
-                top: var(--button-${props.buttonStart}-top);
-                left: var(--button-${props.buttonStart}-left);
-            }
-            45% {
-                opacity: 0;
-                top: var(--button-${props.buttonStart}-top);
-                left: var(--button-${props.buttonStart}-left);
-            }
-            55% {
-                opacity: 0;
-                top: var(--button-${props.buttonEnd}-top);
-                left: var(--button-${props.buttonEnd}-left);
-            }
-            100% {
-                opacity: 1;
-                top: var(--button-${props.buttonEnd}-top);
-                left: var(--button-${props.buttonEnd}-left);
-            }
-          }
-
-        @keyframes desktop-outline-move {
-            0% {
-                top: var(--button-${props.buttonStart}-top);
-                left: var(--button-${props.buttonStart}-left);
-            }
-            100% {
-                top: var(--button-${props.buttonEnd}-top);
-                left: var(--button-${props.buttonEnd}-left);
-            }
-          }
-        `
-        : ""}
-    ${(props) =>
-      props.clicked
-        ? `
-            animation-name: var(--outline-animation-name);
-            animation-duration: var(--outline-animation-duration);
-            animation: var(--outline-animation);
-          
-            -webkit-animation: var(--outline-animation);
-            -webkit-animation-name: var(--outline-animation-name);
-            -webkit-animation-duration: var(--outline-animation-duration);
-            
-            `
-        : ""}
-        
     .button-outline {
       width: var(--button-outline-size);
       height: var(--button-outline-size);
@@ -184,16 +137,6 @@ export const StylesWrapper = styled.div<{
       var(--button-outline-gap) + (5 * var(--button-size)) +
         (5 * var(--button-gap))
     );
-    --outline-animation: desktop-outline-move;
-
-    .outline-wrapper {
-      ${(props) =>
-        props.clicked
-          ? `
-            animation-name: var(--outline-animation);
-                  `
-          : ""}
-    }
   }
 
   @media (min-width: ${gridBreakpoint.lg}) {
