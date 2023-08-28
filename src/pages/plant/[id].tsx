@@ -1,71 +1,48 @@
-import { PlantDataType } from "@/shared/type/data-types";
-import { PlantDetailsLayout } from "@/components/layouts/plant-details";
-import { OverviewCard } from "@/components/overview-card";
-import { ShuffleButton } from "@/components/shuffle-button";
-import { FavoriteButton } from "@/components/favorite-button";
-import { useState } from "react";
-import { CarouselImage } from "@/components/carousel-image";
-import randomId from "@/shared/utils/generateRandomId";
-import { useRouter } from "next/navigation";
 import { getPlantById } from "@/sanity/get-plants-by-id";
-import { getRandomPlantByIndex } from "@/sanity/get-random-plant-by-index";
-import { useSession } from "next-auth/react";
+import { StylesWrapper } from "./index.styles";
+import { CarouselImage } from "@/components/carousel-image";
+import { PlantDataType } from "@/shared/type/data-types";
+import { CategoryTab } from "@/components/category-tab";
+import { useEffect, useState } from "react";
+import { Info } from "./index.interface";
+import { CategoryContent } from "@/components/category-content";
 
 type PlantData = {
   plants: PlantDataType;
   onLikeClick: () => void;
 };
 
-export default function PlantDetails({ plants, onLikeClick }: PlantData) {
-  const [currentId, setCurrentId] = useState<number>(-1);
-  const [currentData, setCurrentData] = useState<PlantDataType>(plants);
-  const [restartImage, setRestartImage] = useState<boolean>(false);
-  const [isLiked, setIsLiked] = useState<boolean>(false);
+export default function PlantDetails({ plants }: PlantData) {
+  const [category, setCategory] = useState<Info>("description");
+  const [textChanged, setTextchanged] = useState<boolean>(false);
 
-  const router = useRouter();
-  const { data: session } = useSession();
-
-  const handleShuffleData = async () => {
-    try {
-      const newId = randomId(currentId, currentData?.total - 1);
-      setCurrentId(newId);
-      setRestartImage(true);
-      const fetchAPI: PlantDataType = await getRandomPlantByIndex(newId);
-      if (fetchAPI) {
-        router.push(`/plant/${fetchAPI._id}`);
-        setCurrentData(fetchAPI);
-      } else {
-        console.log("error");
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (textChanged) {
+        setTextchanged(false);
       }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    }, 500);
 
-  const handleLikeClick = () => {
-    if (!session) {
-      onLikeClick();
-    } else {
-      setIsLiked(!isLiked);
-    }
+    return () => clearInterval(timer);
+  }, [textChanged]);
+
+  const handleCategoryClick = (newCategory: Info) => {
+    setCategory(newCategory);
+    setTextchanged(true);
   };
 
   return (
-    <PlantDetailsLayout>
-      <div className="plant-image">
-        <CarouselImage
-          images={currentData?.images}
-          restartImage={restartImage}
-          setRestartImage={setRestartImage}
-        />
-        <FavoriteButton onLikeClick={handleLikeClick} isLiked={isLiked} />
+    <StylesWrapper>
+      <div className="image-wrapper">
+        <h2 className="plants-name">{plants.name}</h2>
+        <CarouselImage images={plants.images} width={992} height={450} />
       </div>
-      <div className="plant-details">
-        <h3>{currentData?.name.toUpperCase()}</h3>
-        <OverviewCard data={currentData} />
+      <div className="middle-line" />
+      <div className="info-content">
+        <CategoryTab onClick={handleCategoryClick} />
+        <CategoryContent plant={plants} category={category} />
       </div>
-      <ShuffleButton onClick={handleShuffleData} />
-    </PlantDetailsLayout>
+    </StylesWrapper>
   );
 }
 

@@ -1,105 +1,105 @@
-import { PlantDataType } from "@/shared/type/data-types";
-import { useEffect, useMemo, useState } from "react";
-import useDeviceSize from "@/hooks/use-device-size";
 import { getPlants } from "@/sanity/get-plants";
-import randomId from "@/shared/utils/generateRandomId";
 import { StylesWrapper } from "./index.styles";
-import { useSession } from "next-auth/react";
-import { PlantCard } from "@/components/plant-card";
+import { PlantDataType } from "@/shared/type/data-types";
+import { ImageCard } from "@/components/image-card";
+import { useEffect, useMemo, useState } from "react";
+import { HOME_HEADING, HOME_SUBTITLE } from "@/shared/utils/constants";
+import { useRouter } from "next/router";
 
 type PlantData = {
   plants: PlantDataType[];
   onLikeClick: () => void;
 };
 
-export default function Home({ plants, onLikeClick }: PlantData) {
-  const { data: session } = useSession();
-  const [width] = useDeviceSize();
-  const [currentState, setCurrentState] = useState<{
-    plants: PlantDataType[];
-    currentId: number;
-    isLiked: boolean[];
-  }>({
-    plants,
-    currentId: -1,
-    isLiked: [false, false, false], //this is temporary until we have isLiked is in the database
-  });
+type CarouselPlant = {
+  currentId: number;
+  firstPlantImage: {
+    src: string;
+    alt: string;
+  };
+  secondPlantImage: {
+    src: string;
+    alt: string;
+  };
+};
 
-  const cardData = useMemo(() => {
-    let newData = [...currentState.plants];
-    if (width < 576 && width > 0) {
-      newData = [newData[0]];
-      return newData;
-    } else if (width < 992) {
-      newData = [newData[0], newData[1]];
-      return newData;
-    } else {
-      return newData;
-    }
-  }, [currentState.plants, width]);
+export default function Home({
+  plants,
+}: // onLikeClick
+PlantData) {
+  const { push } = useRouter();
+  const defaultState: CarouselPlant = useMemo(() => {
+    return {
+      currentId: 0,
+      firstPlantImage: {
+        src: plants[0]?.images[0]?.src,
+        alt: plants[0]?.images[0]?.alt,
+      },
+      secondPlantImage: {
+        src: plants[1]?.images[0]?.src,
+        alt: plants[2]?.images[0]?.alt,
+      },
+    };
+  }, [plants]);
+
+  const [currentState, setCurrentState] = useState<CarouselPlant>(defaultState);
 
   useEffect(() => {
-    const handleShuffleData = async () => {
-      try {
-        const newId = randomId(currentState.currentId, plants[0].total - 3);
-        const fetchAPI: PlantDataType[] = await getPlants(newId);
-        if (fetchAPI) {
-          setCurrentState({
-            ...currentState,
-            currentId: newId,
-            plants: fetchAPI,
-            isLiked: [false, false, false],
-          });
-        } else {
-          console.log("error");
-        }
-      } catch (error) {
-        console.log(error);
+    const intervalId = setInterval(() => {
+      if (currentState.currentId >= plants.length - 2) {
+        setCurrentState(defaultState);
+      } else {
+        const prevId = currentState.currentId;
+        setCurrentState({
+          currentId: prevId + 2,
+          firstPlantImage: {
+            src: plants[prevId + 2]?.images[0]?.src,
+            alt: plants[prevId + 2]?.images[0]?.alt,
+          },
+          secondPlantImage: {
+            src: plants[prevId + 3]?.images[0]?.src,
+            alt: plants[prevId + 3]?.images[0]?.alt,
+          },
+        });
       }
-    };
+    }, 4980);
 
-    function handleKeyDown(e: any) {
-      if (e.keyCode == 32) {
-        handleShuffleData();
-      }
-    }
-
-    document.addEventListener("keydown", handleKeyDown);
-
-    return function cleanup() {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [currentState, plants]);
-
-  const handleLikeClick = (id: number) => {
-    if (!session) {
-      onLikeClick();
-    } else {
-      console.log("liked!");
-      let temp = [...currentState.isLiked];
-      temp[id] = !temp[id];
-      setCurrentState({ ...currentState, isLiked: temp });
-    }
-  };
+    return () => clearInterval(intervalId);
+  }, [currentState.currentId, defaultState, plants]);
 
   return (
     <>
       <StylesWrapper className="home-layout">
-        {cardData.map((plant, index) => (
-          <PlantCard
-            key={index}
-            plant={plant}
-            onLikeClick={() => handleLikeClick(index)}
-            isLiked={currentState.isLiked[index]}
-          />
-        ))}
+        <ImageCard
+          src={currentState.firstPlantImage.src}
+          alt={currentState.firstPlantImage.alt}
+          width={227}
+          height={600}
+          carousel
+          className="image-component-1"
+        />
+        <ImageCard
+          src={currentState.secondPlantImage.src}
+          alt={currentState.secondPlantImage.alt}
+          width={400}
+          height={600}
+          carousel
+          className="image-component-2"
+        />
+        <div className="text-wrapper">
+          <h1 className="homepage-heading">{HOME_HEADING}</h1>
+          <p className="homepage-subtitle">{HOME_SUBTITLE}</p>
+          <button className="search-button" onClick={() => push("/search")}>
+            Search
+          </button>
+        </div>
       </StylesWrapper>
     </>
   );
 }
 
 export async function getServerSideProps() {
-  const data = await getPlants(0);
+  const data = await getPlants(0, "", 10);
 
   return {
     props: {

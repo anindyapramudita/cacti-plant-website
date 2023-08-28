@@ -2,7 +2,8 @@ import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Merriweather&family=Raleway:wght@100;400;500;700&display=swap');
-
+  @import url('https://fonts.googleapis.com/css2?family=Prata&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Prata&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
   :root {
     /**Achromatic */
     --white: #ffffff;
@@ -12,9 +13,12 @@ export const GlobalStyles = createGlobalStyle`
     --primary: #123132;
     --primary-light: #44595b;
     --primary-dark: #0e1d1d;
+    --new-primary: #5B7663;
     --secondary: #9F5841;
     --secondary-dark: #3C2B25;
     --secondary-light: #a17b6f;
+    --new-secondary: #9F7E69;
+    --new-secondary-light: #e2d8d2;
     --disabled-dark: #AFAEAE;
     --disabled-light: #E5E5E5;
     --error-color: red;
@@ -44,6 +48,8 @@ export const GlobalStyles = createGlobalStyle`
     --breakpoint-xl: 1200px;
     --breakpoint-xxl: 1400px;
     /** Font Family */
+    --display-font-family: Prata, Raleway, Poppins, sans-serif, -apple-system, blinkmacsystemfont, avenir next, avenir, segoe ui, helvetica neue, helvetica,
+    ubuntu, roboto, noto, arial, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol;
     --font-family: Raleway, Poppins, sans-serif, -apple-system, blinkmacsystemfont, avenir next, avenir, segoe ui, helvetica neue, helvetica,
     ubuntu, roboto, noto, arial, sans-serif, apple color emoji, segoe ui emoji, segoe ui symbol;
   }
@@ -54,7 +60,11 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
   }
 
-  h1,h2,h3,h4,h5,h6 {
+  h1 {
+    font-family: 'Prata', serif;
+  }
+
+  h2,h3,h4,h5,h6 {
     font-family: var(--font-family);
   }
 
@@ -64,7 +74,8 @@ export const GlobalStyles = createGlobalStyle`
     --font-size-regular: 1rem;
     --font-size--large: 1.125rem;
     --line-height: 1.5;
-    --header-height: 3rem;
+    --header-height-mobile: 4.5rem;
+    --header-height-desktop: 5.75rem;
     font-size: var(--font-size-regular);
     line-height: var(--line-height);
     font-weight: 400;
