@@ -3,9 +3,9 @@ import { StylesWrapper } from "./index.styles";
 import { CarouselImage } from "@/components/carousel-image";
 import { PlantDataType } from "@/shared/type/data-types";
 import { CategoryTab } from "@/components/category-tab";
-import { useEffect, useMemo, useState } from "react";
-import { Info, Season, seasonList } from "./index.interface";
-import classNames from "classnames";
+import { useEffect, useState } from "react";
+import { Info } from "./index.interface";
+import { CategoryContent } from "@/components/category-content";
 
 type PlantData = {
   plants: PlantDataType;
@@ -15,24 +15,6 @@ type PlantData = {
 export default function PlantDetails({ plants }: PlantData) {
   const [category, setCategory] = useState<Info>("description");
   const [textChanged, setTextchanged] = useState<boolean>(false);
-
-  const renderInfo = useMemo(() => {
-    const activeSeason: string[] = [];
-
-    seasonList.forEach((season: Season) => {
-      if (plants.seasons[season] === true) {
-        activeSeason.push(season);
-      }
-    });
-
-    if (category === "description") {
-      return plants.description;
-    } else if (category === "seasons") {
-      return `Plant can live in these seasons: ${activeSeason.join(", ")}`;
-    } else {
-      return plants[category].info;
-    }
-  }, [plants, category]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -58,12 +40,7 @@ export default function PlantDetails({ plants }: PlantData) {
       <div className="middle-line" />
       <div className="info-content">
         <CategoryTab onClick={handleCategoryClick} />
-        <div
-          className={classNames("info-text", { "text-changed": textChanged })}
-        >
-          <p className="category-header">{category.toUpperCase()}</p>
-          <p>{renderInfo}</p>
-        </div>
+        <CategoryContent plant={plants} category={category} />
       </div>
     </StylesWrapper>
   );
