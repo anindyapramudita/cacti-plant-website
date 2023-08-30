@@ -11,7 +11,7 @@ export const HOME_SUBTITLE =
   "Find your perfect flora companion! Search by color, water, level of care family and much more. You can also learn about cool facts information related to each plant.";
 
 export const HEADER_USER_NAME = "Welcome back,";
-export const LOGIN_HEADER = "Welcome back!";
+export const LOGIN_HEADER = "Welcome to Cacti!";
 export const REGISTER_HEADER = "Welcome to";
 export const CACTI = "Cacti";
 
@@ -40,9 +40,10 @@ export const PASSWORD_REQUIREMENT_ERROR =
   "Password needs to be at least 6 characters";
 
 export const EMAIL_NOT_FOUND = "Email not found";
-export const FORGOT_PASSWORD_HEADING = "Forgot Password?";
+export const FORGOT_PASSWORD_LABEL = "Did you forget your password?";
+export const FORGOT_PASSWORD_HEADING = "Here we go again...";
 export const FORGOT_PASSWORD_SUBTITLE =
-  "Please enter your email and we'll send you a reset link";
+  "We will send an email to your inbox with a reset link 🌵";
 
 export const EMAIL_SENT_HEADING = "Email Sent!";
 export const EMAIL_SENT_SUBTITLE =

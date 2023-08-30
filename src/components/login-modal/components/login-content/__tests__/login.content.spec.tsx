@@ -4,7 +4,7 @@ import { LoginContent } from "../login-content";
 import { ILoginContentProps } from "../login-content.interface";
 import {
   CREDENTIALS_INVALID,
-  FORGOT_PASSWORD_HEADING,
+  FORGOT_PASSWORD_LABEL,
   GOOGLE_SIGN_IN,
   LOGIN_HEADER,
   SIGN_IN,
@@ -97,7 +97,7 @@ describe("Login Content Component", () => {
   });
 
   test("Should not be able to sign in with the wrong credentials and show error message", async () => {
-    const { getByLabelText, getByRole, getByText, container } = render(
+    const { getByLabelText, getByRole, getAllByText, container } = render(
       <LoginContent {...LoginContentMock} />
     );
 
@@ -134,15 +134,11 @@ describe("Login Content Component", () => {
       expect(mockRouterPush).not.toHaveBeenCalled();
     });
 
-    const newErrorMessage = container.querySelector(
-      '[data-testid="error-message"]'
-    );
-    expect(newErrorMessage).toBeInTheDocument();
-    expect(getByText(CREDENTIALS_INVALID)).toBeInTheDocument();
+    expect(getAllByText(CREDENTIALS_INVALID)).toHaveLength(2);
   });
 
   test("Error message should show is email and/or password is undefined or null", async () => {
-    const { getByLabelText, getByRole, getByText, container } = render(
+    const { getByLabelText, getByRole, getAllByText } = render(
       <LoginContent {...LoginContentMock} />
     );
 
@@ -151,10 +147,6 @@ describe("Login Content Component", () => {
     const emailInput = getByLabelText("Email");
     const passwordInput = getByLabelText("Password");
     const signInButton = getByRole("button", { name: SIGN_IN });
-    const errorMessage = container.querySelector(
-      '[data-testid="error-message"]'
-    );
-    expect(errorMessage).not.toBeInTheDocument();
 
     await act(async () => {
       fireEvent.input(emailInput, {
@@ -176,13 +168,13 @@ describe("Login Content Component", () => {
       expect(mockRouterPush).not.toHaveBeenCalled();
     });
 
-    expect(getByText(SOMETHING_WRONG)).toBeInTheDocument();
+    expect(getAllByText(SOMETHING_WRONG)).toHaveLength(2);
   });
 
   test("Should call onForgotClick when forgot button is triggered", async () => {
     const { getByRole } = render(<LoginContent {...LoginContentMock} />);
     const forgotPasswordButton = getByRole("button", {
-      name: FORGOT_PASSWORD_HEADING,
+      name: FORGOT_PASSWORD_LABEL,
     });
     expect(forgotPasswordButton).toBeInTheDocument();
 

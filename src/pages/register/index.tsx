@@ -1,7 +1,6 @@
 import { TransitionImage } from "@/components/image";
 import { Button } from "@/components/button";
 import { Input } from "@/components/input";
-import { RegisterLayout } from "@/components/layouts/register";
 import { getRegisterImage } from "@/sanity/get-register-image";
 import { useForm } from "react-hook-form";
 import { imagePlaceholder } from "@/shared/utils/image-placeholder";
@@ -19,6 +18,9 @@ import {
 } from "@/shared/utils/constants";
 import { createNewUser } from "@/shared/utils/user-sign-up";
 import { NoUserProtectedRoute } from "@/components/protected-route";
+import { IconButton } from "@/components/icon-button";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { StylesWrapper } from "./index.styles";
 
 export default function Register({ image }: ImageType) {
   const [currentState, setCurrentState] = useState<{
@@ -70,17 +72,13 @@ export default function Register({ image }: ImageType) {
 
   return (
     <NoUserProtectedRoute>
-      <RegisterLayout>
+      <StylesWrapper>
         <div className="image-side">
           <TransitionImage
             image={image?.src}
             alt={image?.alt}
             placeholder={imagePlaceholder}
           />
-          <div className="welcome-header">
-            <h3 className="header-text">{REGISTER_HEADER}</h3>
-            <h1 className="logo-text">{CACTI}</h1>
-          </div>
         </div>
         <div className="form-wrapper">
           <h1 className="register-header">
@@ -92,20 +90,36 @@ export default function Register({ image }: ImageType) {
               label={NAME}
               name="name"
               register={register}
+              inputStatus={currentState.errorVisible ? "error" : "default"}
             />
             <Input
               id="register-email"
               label={EMAIL}
               name="email"
               register={register}
+              inputStatus={currentState.errorVisible ? "error" : "default"}
             />
             <Input
               id="register-password"
               label={PASSWORD}
               name="password"
               register={register}
-              isVisible={currentState.isPasswordVisible}
-              onClick={onPasswordClicked}
+              inputStatus={currentState.errorVisible ? "error" : "default"}
+              icon={
+                currentState.isPasswordVisible ? (
+                  <IconButton
+                    type="button"
+                    onClick={onPasswordClicked}
+                    icon={<AiOutlineEyeInvisible size={20} />}
+                  />
+                ) : (
+                  <IconButton
+                    type="button"
+                    onClick={onPasswordClicked}
+                    icon={<AiOutlineEye size={20} />}
+                  />
+                )
+              }
               type={currentState.isPasswordVisible ? "text" : "password"}
             />
             <Input
@@ -113,13 +127,25 @@ export default function Register({ image }: ImageType) {
               label={PASSWORD_CONFIRMATION}
               name="passwordConfirmation"
               register={register}
-              isVisible={currentState.isConfirmationVisible}
-              onClick={onConfirmationClicked}
+              inputStatus={currentState.errorVisible ? "error" : "default"}
+              helperText={(currentState.errorMessage as string) || ""}
+              icon={
+                currentState.isConfirmationVisible ? (
+                  <IconButton
+                    type="button"
+                    onClick={onConfirmationClicked}
+                    icon={<AiOutlineEyeInvisible size={20} />}
+                  />
+                ) : (
+                  <IconButton
+                    type="button"
+                    onClick={onConfirmationClicked}
+                    icon={<AiOutlineEye size={20} />}
+                  />
+                )
+              }
               type={currentState.isConfirmationVisible ? "text" : "password"}
             />
-            {currentState.errorVisible && (
-              <p className="error-message">{currentState.errorMessage}</p>
-            )}
             <Button
               isLoading={currentState.isLoading}
               className={currentState.errorVisible ? "" : "error-hidden"}
@@ -129,7 +155,7 @@ export default function Register({ image }: ImageType) {
             </Button>
           </form>
         </div>
-      </RegisterLayout>
+      </StylesWrapper>
     </NoUserProtectedRoute>
   );
 }

@@ -104,7 +104,7 @@ export const ForgotPasswordContent: FC<IForgotPasswordContentProps> = ({
         <>
           <div className="modal-header" data-testid="email-sent-content">
             <div className="heading-wrapper">
-              <RiMailSendLine size={20} />
+              <RiMailSendLine size={30} className="mail-icon" />
               <h2 className="text-heading">{EMAIL_SENT_HEADING}</h2>
             </div>
             <p className="text-subtitle">{EMAIL_SENT_SUBTITLE}</p>
@@ -116,22 +116,20 @@ export const ForgotPasswordContent: FC<IForgotPasswordContentProps> = ({
             <h2 className="text-heading">{FORGOT_PASSWORD_HEADING}</h2>
             <p className="text-subtitle">{FORGOT_PASSWORD_SUBTITLE}</p>
           </div>
-          <form onSubmit={onSubmit}>
+          <form className="form-wrapper" onSubmit={onSubmit}>
             <Input
               id="forgot-password-email"
               label={EMAIL}
               name={"email"}
               register={register}
               type="text"
+              inputStatus={currentState.errorVisible ? "error" : "default"}
+              helperText={currentState.errorMessage}
             />
-            {currentState.errorVisible && (
-              <p className="error-message" data-testid="error-message">
-                {currentState.errorMessage}
-              </p>
-            )}
             <Button
               fullWidth
               type="submit"
+              color="secondary"
               isLoading={currentState.isLoading}
               className="submit-button"
             >

@@ -5,6 +5,7 @@ import { ImageCard } from "@/components/image-card";
 import { useEffect, useMemo, useState } from "react";
 import { HOME_HEADING, HOME_SUBTITLE } from "@/shared/utils/constants";
 import { useRouter } from "next/router";
+import { Button } from "@/components/button";
 
 type PlantData = {
   plants: PlantDataType[];
@@ -89,9 +90,7 @@ PlantData) {
         <div className="text-wrapper">
           <h1 className="homepage-heading">{HOME_HEADING}</h1>
           <p className="homepage-subtitle">{HOME_SUBTITLE}</p>
-          <button className="search-button" onClick={() => push("/search")}>
-            Search
-          </button>
+          <Button onClick={() => push("/search")}>Search</Button>
         </div>
       </StylesWrapper>
     </>

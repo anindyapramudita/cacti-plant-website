@@ -18,6 +18,7 @@ export const StylesWrapper = styled.div<{}>`
   padding: var(--padding-size);
   min-height: var(--min-height);
   align-items: var(--align-items);
+  width: 100%;
 
   @media (min-width: ${gridBreakpoint.lg}) {
     --gap-per-row: 2;

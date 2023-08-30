@@ -1,4 +1,4 @@
-import { errorMessage } from "@/styles/error-text.styles";
+import { gridBreakpoint } from "@/shared/breakpoints";
 import { ralewayThin } from "@/styles/fonts";
 import styled from "styled-components";
 
@@ -18,10 +18,15 @@ export const StylesWrapper = styled.div<{
   --content-justify-content: center;
   --content-align-items: center;
   --content-transition: left 0.5s;
+  --content-gap: 32px;
 
   --header-text-align: center;
   --header-margin: 1.5rem 0;
   --header-gap: 1rem;
+
+  --heading-font-size: 24px;
+  --heading-font-weight: 400;
+  --heading-line-height: 40px;
 
   --button-margin: 1rem 0 0 0;
 
@@ -46,6 +51,7 @@ export const StylesWrapper = styled.div<{
   justify-content: var(--content-justify-content);
   align-items: var(--content-align-items);
   transition: var(--content-transition);
+  gap: var(--content-gap);
 
   .back-button {
     position: var(--back-button-position);
@@ -62,20 +68,44 @@ export const StylesWrapper = styled.div<{
     flex-direction: var(--content-flex-direction);
     align-items: var(--content-align-items);
     text-align: var(--header-text-align);
-    margin: var(--header-margin);
     gap: var(--header-gap);
+
+    .heading-wrapper {
+      display: var(--content-display);
+      align-items: var(--content-align-items);
+      gap: var(--header-gap);
+
+      .mail-icon {
+        color: var(--new-primary);
+      }
+    }
+
+    .text-heading {
+      font-size: var(--heading-font-size);
+      font-weight: var(--heading-font-weight);
+      line-height: var(--heading-line-height);
+    }
 
     .text-subtitle {
       font-size: var(--font-size--small);
     }
   }
 
-  .submit-button {
-    margin: var(--button-margin);
+  .form-wrapper {
+    display: var(--content-display);
+    flex-direction: var(--content-flex-direction);
+    gap: var(--content-gap);
   }
 
-  .error-message {
-    ${errorMessage}
-    margin: var(--error-margin);
+  @media (min-width: ${gridBreakpoint.md}) {
+    --content-width: 600px;
+    --content-height: 500px;
+
+    .modal-header {
+      .text-heading {
+        --heading-font-size: 40px;
+        --heading-font-weight: 400;
+      }
+    }
   }
 `;

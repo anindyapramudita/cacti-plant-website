@@ -1,8 +1,12 @@
 /* eslint-disable no-undef */
-import { act, fireEvent, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 
 import { Input } from "../input";
-import { passwordInputMock, textInputMock } from "./input.mock";
+import {
+  ErrorTextInputMock,
+  TextInputWithIconMock,
+  textInputMock,
+} from "./input.mock";
 
 describe("Input Component", () => {
   const mockRegister = jest.fn();
@@ -11,10 +15,10 @@ describe("Input Component", () => {
       <Input {...textInputMock} register={mockRegister} />
     );
 
-    const plantCard = container.querySelector(
+    const inputContainer = container.querySelector(
       '[data-testid="input-container"]'
     );
-    expect(plantCard).toBeInTheDocument();
+    expect(inputContainer).toBeInTheDocument();
 
     const inputElement = container.querySelector(
       '[data-testid="input-component"]'
@@ -26,83 +30,33 @@ describe("Input Component", () => {
 
     const label = getByText(textInputMock.label);
     expect(label).toBeInTheDocument();
-
-    const passwordVisibleButton = plantCard?.querySelector(".eye-icon");
-    expect(passwordVisibleButton).not.toBeInTheDocument();
   });
 
-  test("Input should render with the right properties for password", () => {
-    const mockEyeClick = jest.fn();
-    const { container } = render(
-      <Input
-        {...passwordInputMock}
-        register={mockRegister}
-        onClick={mockEyeClick}
-      />
+  test("Input render icon if props has icon", () => {
+    const { getByTestId, container } = render(
+      <Input {...TextInputWithIconMock} />
     );
 
-    const plantCard = container.querySelector(
-      '[data-testid="input-container"]'
-    );
-    expect(plantCard).toBeInTheDocument();
+    const icon = getByTestId("input-icon");
+    expect(icon).toBeInTheDocument();
 
-    const inputElement = container.querySelector(
+    const inputContainer = container.querySelector(
       '[data-testid="input-component"]'
-    ) as HTMLInputElement;
-    expect(inputElement).toBeInTheDocument();
-
-    expect(inputElement.type).toBe("password");
-    expect(inputElement.id).toBe("password");
-
-    const passwordVisibleButton = plantCard?.querySelector(".eye-icon");
-    expect(passwordVisibleButton).toBeInTheDocument();
-
-    const passwordIcon = passwordVisibleButton?.querySelector(
-      '[data-testid="eye-visible"]'
     );
-    expect(passwordIcon).toBeInTheDocument();
+
+    expect(inputContainer).toHaveClass("with-icon");
   });
 
-  test("Input should show the right password icon", () => {
-    const mockEyeClick = jest.fn();
-    const { container } = render(
-      <Input
-        {...passwordInputMock}
-        register={mockRegister}
-        onClick={mockEyeClick}
-        isVisible={true}
-      />
+  test("Input render error message and style if the input status is error", () => {
+    const { container, getByText } = render(<Input {...ErrorTextInputMock} />);
+
+    const inputContainer = container.querySelector(
+      '[data-testid="input-component"]'
     );
 
-    const passwordIcon = container.querySelector(
-      '[data-testid="eye-invisible"]'
-    );
-    expect(passwordIcon).toBeInTheDocument();
-  });
+    expect(inputContainer).toHaveClass("input-error");
 
-  test("Input should trigger handle if  with the right properties for password", () => {
-    const mockEyeClick = jest.fn();
-    const { container } = render(
-      <Input
-        {...passwordInputMock}
-        register={mockRegister}
-        onClick={mockEyeClick}
-      />
-    );
-
-    const plantCard = container.querySelector(
-      '[data-testid="input-container"]'
-    );
-    expect(plantCard).toBeInTheDocument();
-
-    const passwordVisibleButton = plantCard?.querySelector(".eye-icon");
-
-    expect(passwordVisibleButton).toBeInTheDocument();
-    if (passwordVisibleButton) {
-      act(() => {
-        fireEvent.click(passwordVisibleButton);
-      });
-      expect(mockEyeClick).toBeCalledTimes(1);
-    }
+    const errorText = getByText("input error");
+    expect(errorText).toBeInTheDocument();
   });
 });

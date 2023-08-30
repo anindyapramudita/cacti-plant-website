@@ -1,4 +1,4 @@
-import { HTMLInputTypeAttribute, ReactElement } from "react";
+import { HTMLInputTypeAttribute } from "react";
 import { UseFormRegister } from "react-hook-form";
 
 export interface IInputProps {
@@ -6,8 +6,7 @@ export interface IInputProps {
   label: string;
   name: string;
   register: UseFormRegister<any>;
+  isVisible?: boolean;
+  onClick?: () => void;
   type?: HTMLInputTypeAttribute;
-  icon?: ReactElement;
-  helperText?: string;
-  inputStatus?: "default" | "error" | "success";
 }

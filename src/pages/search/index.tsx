@@ -3,12 +3,13 @@ import { getPlants } from "@/sanity/get-plants";
 import { handleUpdateFilter } from "@/hooks/get-filter-query";
 import { Filter } from "@/hooks/use-plant-filter";
 import { useState } from "react";
-import { FilterContext } from "@/components/filter-accordion/utils/season-filter";
 import { PlantDataType } from "@/shared/type/data-types";
 import { SmallCard } from "@/components/small-card";
 import { SmallCardLayout } from "@/components/layouts/small-card";
 import { useSession } from "next-auth/react";
 import { Pagination } from "@/components/pagination";
+import { FilterContext } from "@/components/filter-header/components/filter-accordion/filter-accordion.interface";
+import { StylesWrapper } from "./index.styles";
 
 const defaultFilter = {
   search: "",
@@ -89,7 +90,7 @@ export default function SearchPage({ plants, onLikeClick }: SearchProp) {
   };
 
   return (
-    <>
+    <StylesWrapper>
       <FilterHeader
         onSaveSearch={handleSaveSearch}
         onSaveFilter={handleSaveFilter}
@@ -110,7 +111,7 @@ export default function SearchPage({ plants, onLikeClick }: SearchProp) {
         currentPage={currentState.currentPage}
         onPageClick={handlePageClick}
       />
-    </>
+    </StylesWrapper>
   );
 }
 

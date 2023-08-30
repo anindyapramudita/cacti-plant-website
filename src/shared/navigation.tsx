@@ -5,7 +5,8 @@ import {
   AiOutlineUser,
   AiOutlineUserAdd,
 } from "react-icons/ai";
-import { BiShuffle } from "react-icons/bi";
+import { BiShuffle, BiLogOut } from "react-icons/bi";
+import { BsCollectionPlay } from "react-icons/bs";
 
 export type Navigation = {
   path: string;
@@ -17,43 +18,49 @@ export const navigation: Navigation[] = [
   {
     path: "/contact-us",
     name: "Contact Us",
-    logo: <AiOutlinePhone size={40} />,
+    logo: <AiOutlinePhone size={30} />,
     roles: ["admin", "user", "all"],
   },
   {
     path: "/shuffle",
     name: "Shuffle",
-    logo: <BiShuffle size={40} />,
+    logo: <BiShuffle size={30} />,
     roles: ["admin", "user", "all"],
   },
   {
     path: "/search",
     name: "Search",
-    logo: <AiOutlineSearch size={40} />,
+    logo: <AiOutlineSearch size={30} />,
     roles: ["admin", "user", "all"],
   },
   {
-    path: "/login",
+    path: "#",
     name: "Login",
-    logo: <AiOutlineUser size={40} />,
+    logo: <AiOutlineUser size={30} />,
     roles: ["admin", "all"],
   },
   {
     path: "/register",
     name: "Sign Up",
-    logo: <AiOutlineUserAdd size={40} />,
+    logo: <AiOutlineUserAdd size={30} />,
     roles: ["admin", "all"],
   },
   {
     path: "/collection",
     name: "Collection",
-    logo: <AiOutlineUserAdd size={40} />,
+    logo: <BsCollectionPlay size={30} />,
     roles: ["user"],
   },
   {
     path: "/profile",
     name: "Profile",
-    logo: <AiOutlineUserAdd size={40} />,
+    logo: <AiOutlineUser size={30} />,
+    roles: ["user"],
+  },
+  {
+    path: "#",
+    name: "Log out",
+    logo: <BiLogOut size={30} />,
     roles: ["user"],
   },
 ];

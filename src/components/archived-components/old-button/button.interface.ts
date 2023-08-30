@@ -1,8 +1,8 @@
-import { ButtonHTMLAttributes, ReactElement } from "react";
+import { ButtonHTMLAttributes } from "react";
 
 export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: string;
-  color?: "primary" | "secondary" | "monochrome";
+  color?: "primary" | "secondary";
   variant?: "filled" | "reversed" | "outlined";
   size?: "small" | "medium" | "large";
   isLoading?: boolean;
@@ -10,5 +10,4 @@ export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   fullWidth?: boolean;
   loaderDot?: number;
   loaderSize?: "mini" | "small" | "medium" | "large";
-  icon?: ReactElement;
 }

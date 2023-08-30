@@ -2,7 +2,7 @@
 import { act, fireEvent, render } from "@testing-library/react";
 import { ILoginModalProps } from "../login-modal.interface";
 import { LoginModal } from "../login-modal";
-import { FORGOT_PASSWORD_HEADING } from "@/shared/utils/constants";
+import { FORGOT_PASSWORD_LABEL } from "@/shared/utils/constants";
 
 const LoginModalContentMock: ILoginModalProps = {
   open: true,
@@ -17,7 +17,7 @@ jest.mock("next/router", () => ({
   }),
 }));
 
-describe("Login Content Component", () => {
+describe("Login Modal Component", () => {
   test("Login Content should render with the right prop with LoginContent by default", () => {
     const { getByTestId } = render(<LoginModal {...LoginModalContentMock} />);
 
@@ -39,7 +39,7 @@ describe("Login Content Component", () => {
     const forgotPasswordContent = getByTestId("forgot-password-content");
     const loginContent = getByTestId("login-content");
     const forgotPasswordButton = getByRole("button", {
-      name: FORGOT_PASSWORD_HEADING,
+      name: FORGOT_PASSWORD_LABEL,
     });
     expect(forgotPasswordButton).toBeInTheDocument();
 
@@ -59,7 +59,7 @@ describe("Login Content Component", () => {
     const forgotPasswordContent = getByTestId("forgot-password-content");
     const loginContent = getByTestId("login-content");
     const forgotPasswordButton = getByRole("button", {
-      name: FORGOT_PASSWORD_HEADING,
+      name: FORGOT_PASSWORD_LABEL,
     });
     const backButton = container.querySelector('[data-testid="back-button"]');
     expect(forgotPasswordButton).toBeInTheDocument();

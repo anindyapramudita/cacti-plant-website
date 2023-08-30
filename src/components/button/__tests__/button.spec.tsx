@@ -1,5 +1,7 @@
+/* eslint-disable no-undef */
 import { render, fireEvent, act } from "@testing-library/react";
 import { Button } from "../button";
+import { BsGoogle } from "react-icons/bs";
 
 const text = "Test Button";
 
@@ -32,6 +34,16 @@ describe("Button Component", () => {
     expect(button).toBeInTheDocument();
 
     expect(button).toHaveClass("button-outlined-secondary size-small");
+  });
+
+  test("Button should render icon if props has icon", () => {
+    const { getByTestId } = render(
+      <Button icon={<BsGoogle data-testid="icon-button" />}>{text}</Button>
+    );
+
+    const icon = getByTestId("icon-button");
+
+    expect(icon).toBeInTheDocument();
   });
 
   test("Button should call onClick handler when triggered", () => {
