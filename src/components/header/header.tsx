@@ -4,7 +4,7 @@ import { StylesWrapper } from "./header.styles";
 import { Logo } from "@/assets/logo";
 import { Navigation, navigation } from "@/shared/navigation";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import classNames from "classnames";
 
@@ -31,6 +31,8 @@ export const Header: FC<IHeaderProps> = ({ onLogin }) => {
           if (nav.name === "Login") {
             e.preventDefault();
             onLogin();
+          } else if (nav.name === "Log out") {
+            signOut();
           } else if (pathname === nav.path) {
             e.preventDefault();
           }
@@ -53,6 +55,8 @@ export const Header: FC<IHeaderProps> = ({ onLogin }) => {
           if (nav.name === "Login") {
             e.preventDefault();
             onLogin();
+          } else if (nav.name === "Log out") {
+            signOut();
           } else {
             push(nav.path);
           }
