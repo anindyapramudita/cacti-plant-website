@@ -4,15 +4,18 @@ import styled from "styled-components";
 export const StylesWrapper = styled.button`
   ${ralewayThin}
 
-  --button-padding: 0.6875em 3em;
+  --button-padding: 8px 32px;
   --button-font-size: 1rem;
-  --button-background-color: var(--primary);
+  --button-background-color: var(--new-primary);
   --button-color: var(--white);
-  --button-border-color: var(--primary);
+  --button-border-color: var(--new-primary);
   --button-border: 0.0625rem solid var(--button-border-color);
 
   cursor: pointer;
-  display: "inline-block";
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
   line-height: 1;
   transition: background-color 0.4s ease, border-color 0.4s ease;
   background-color: var(--button-background-color);
@@ -20,30 +23,40 @@ export const StylesWrapper = styled.button`
   padding: var(--button-padding);
   color: var(--button-color);
   font-size: var(--button-font-size);
+  border-radius: 8px;
 
   &:hover {
     color: var(--button-color);
-    --button-background-color: var(--primary-light);
-    --button-border: 0.0625rem solid var(--primary-light);
+    --button-background-color: var(--new-primary-dark);
+    --button-border: 0.0625rem solid var(--new-primary-dark);
   }
 
   &.button-filled-secondary {
-    --button-background-color: var(--secondary);
-    --button-border: 0.0625rem solid var(--secondary);
+    --button-background-color: var(--new-secondary);
+    --button-border: 0.0625rem solid var(--new-secondary);
     &:hover {
-      --button-background-color: var(--secondary-light);
-      --button-border: 0.0625rem solid var(--secondary-light);
+      --button-background-color: var(--new-secondary-dark);
+      --button-border: 0.0625rem solid var(--new-secondary-dark);
+    }
+  }
+
+  &.button-filled-monochrome {
+    --button-background-color: var(--black);
+    --button-border: 0.0625rem solid var(--black);
+    &:hover {
+      --button-background-color: var(--very-dark-grey);
+      --button-border: 0.0625rem solid var(--very-dark-grey);
     }
   }
 
   &.button-outlined-primary,
   &.button-reversed-primary {
     --button-background-color: var(--white);
-    --button-color: var(--primary);
+    --button-color: var(--new-primary);
 
     &:hover {
-      --button-background-color: var(--primary);
-      --button-border: 0.0625rem solid var(--primary);
+      --button-background-color: var(--new-primary);
+      --button-border: 0.0625rem solid var(--new-primary);
       --button-color: var(--white);
     }
   }
@@ -51,17 +64,30 @@ export const StylesWrapper = styled.button`
   &.button-outlined-secondary,
   &.button-reversed-secondary {
     --button-background-color: var(--white);
-    --button-color: var(--secondary);
+    --button-color: var(--new-secondary);
 
     &:hover {
-      --button-background-color: var(--secondary);
-      --button-border: 0.0625rem solid var(--secondary);
+      --button-background-color: var(--new-secondary);
+      --button-border: 0.0625rem solid var(--new-secondary);
+      --button-color: var(--white);
+    }
+  }
+
+  &.button-outlined-monochrome,
+  &.button-reversed-monochrome {
+    --button-background-color: var(--white);
+    --button-border: 0.0625rem solid var(--very-dark-grey);
+    --button-color: var(--black);
+
+    &:hover {
+      --button-background-color: var(--very-dark-grey);
+      --button-border: 0.0625rem solid var(--very-dark-grey);
       --button-color: var(--white);
     }
   }
 
   &.button-outlined-secondary {
-    --button-border: 0.0625rem solid var(--secondary);
+    --button-border: 0.0625rem solid var(--new-secondary);
 
     &:hover {
       --button-color: var(--white);
@@ -110,6 +136,10 @@ export const StylesWrapper = styled.button`
     --button-color: var(--black);
 
     color: transparent;
+
+    .button-icon {
+      visibility: hidden;
+    }
 
     &:hover {
       --button-background-color: var(--disabled-light);

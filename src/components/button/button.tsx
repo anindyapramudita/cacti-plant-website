@@ -14,6 +14,7 @@ export const Button: FC<IButtonProps> = ({
   fullWidth = false,
   loaderDot = 3,
   loaderSize = "small",
+  icon,
   ...props
 }) => {
   if (!children) {
@@ -33,6 +34,7 @@ export const Button: FC<IButtonProps> = ({
         className,
       ].join(" ")}
     >
+      {icon && !isLoading && <div className="button-icon">{icon}</div>}
       {children}
       {isLoading && <Loader size={loaderSize} number={loaderDot} />}
     </StylesWrapper>
