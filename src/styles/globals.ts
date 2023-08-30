@@ -8,16 +8,19 @@ export const GlobalStyles = createGlobalStyle`
     /**Achromatic */
     --white: #ffffff;
     --black: #000000;
+    --very-dark-grey: #3b3b3b;
     --dark-grey: #717171;
     /**Colors */
     --primary: #123132;
     --primary-light: #44595b;
     --primary-dark: #0e1d1d;
     --new-primary: #5B7663;
+    --new-primary-dark: #44595b;
     --secondary: #9F5841;
     --secondary-dark: #3C2B25;
     --secondary-light: #a17b6f;
     --new-secondary: #9F7E69;
+    --new-secondary-dark: #6f5b4a;
     --new-secondary-light: #e2d8d2;
     --disabled-dark: #AFAEAE;
     --disabled-light: #E5E5E5;
