@@ -1,3 +1,4 @@
+import { gridBreakpoint } from "@/shared/breakpoints";
 import { errorMessage } from "@/styles/error-text.styles";
 import { ralewayThin } from "@/styles/fonts";
 import styled from "styled-components";
@@ -16,15 +17,28 @@ export const StylesWrapper = styled.div<{
   --login-justify-content: center;
   --login-align-items: center;
   --login-padding: 3rem;
-  --login-width: 20rem;
-  --login-height: 27rem;
+  --login-width: 600px;
+  --login-height: 500px;
   --login-transition: left 0.5s;
+  --login-gap: 32px;
 
-  --modal-margin: 1.5rem 0 3rem 0;
   --modal-text-align: center;
 
+  --heading-font-size: 24px;
+  --heading-font-weight: 400;
+  --heading-line-height: 40px;
+
+  --form-width: 15rem;
+  --form-display: flex;
+  --form-flex-direction: column;
+  --form-align-items: center;
+  --form-gap: 24px;
+
   --forgot-password-text-align: end;
-  --forgot-password-margin: 0.25rem 0 1rem 0;
+  --forgot-password-margin: 8px 0 0 0;
+  --forgot-password-font-size: 12px;
+  --forgot-password-font-style: italic;
+  --forgot-password-text-decoration: underline;
 
   --button-border: none;
   --button-background-color: transparent;
@@ -35,7 +49,7 @@ export const StylesWrapper = styled.div<{
   --footer-text-align: center;
   --footer-display: flex;
   --footer-flex-direction: column;
-  --footer-gap: 1rem;
+  --footer-gap: 32px;
 
   --divider-cursor: default;
   --divider-display: table;
@@ -45,8 +59,8 @@ export const StylesWrapper = styled.div<{
   --divider-after-content: "";
   --divider-after-display: table-cell;
   --divider-after-position: relative;
-  --divider-after-top: 0.5em;
-  --divider-after-width: 45%;
+  --divider-after-top: 0.6em;
+  --divider-after-width: 50%;
 
   --divider-right: 1.5%;
   --divider-left: 1.5%;
@@ -63,19 +77,38 @@ export const StylesWrapper = styled.div<{
   width: var(--login-width);
   height: var(--login-height);
   transition: var(--login-transition);
+  gap: var(--login-gap);
 
   .modal-header {
-    margin: var(--modal-margin);
     text-align: var(--modal-text-align);
+
+    .heading-text {
+      font-size: var(--heading-font-size);
+      font-weight: var(--heading-font-weight);
+      line-height: var(--heading-line-height);
+    }
   }
 
-  .forgot-password-container {
+  .form-wrapper {
+    width: var(--form-width);
+    display: var(--form-display);
+    flex-direction: var(--form-flex-direction);
+    align-items: var(--form-align-items);
+    gap: var(--form-gap);
+  }
+
+  .password-container {
     text-align: var(--forgot-password-text-align);
-    margin: var(--forgot-password-margin);
-  }
 
-  .error-message {
-    ${errorMessage}
+    .forgot-password {
+      margin: var(--forgot-password-margin);
+      font-size: var(--forgot-password-font-size);
+      font-style: var(--forgot-password-font-style);
+    }
+
+    .forgot-password:hover {
+      text-decoration: var(--forgot-password-text-decoration);
+    }
   }
 
   .google-sign-in,
@@ -87,7 +120,7 @@ export const StylesWrapper = styled.div<{
   }
 
   .footer-container {
-    margin-top: var(--footer-margin-top);
+    width: var(--form-width);
     text-align: var(--footer-text-align);
     display: var(--footer-display);
     flex-direction: var(--footer-flex-direction);
@@ -108,6 +141,7 @@ export const StylesWrapper = styled.div<{
           position: var(--divider-after-position);
           top: var(--divider-after-top);
           width: var(--divider-after-width);
+          border-color: var(--new-secondary);
         }
         &:before {
           right: var(--divider-right);
@@ -115,6 +149,18 @@ export const StylesWrapper = styled.div<{
         &:after {
           left: var(--divider-left);
         }
+      }
+    }
+  }
+
+  @media (min-width: ${gridBreakpoint.md}) {
+    --login-width: 600px;
+    --login-height: 500px;
+
+    .modal-header {
+      .heading-text {
+        --heading-font-size: 40px;
+        --heading-font-weight: 400;
       }
     }
   }
