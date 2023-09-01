@@ -24,7 +24,11 @@ export const CategoryContent: FC<ICategoryContentProps> = ({
 
     if (currentCategory === "description") {
       return (
-        <div className="info-text" key={`${currentCategory}-${index}`}>
+        <div
+          className="info-text"
+          key={`${currentCategory}-${index}`}
+          data-testid="category-content"
+        >
           <p className={classNames("category-header", "info")}>
             {currentCategory.toUpperCase()}
           </p>
@@ -35,7 +39,11 @@ export const CategoryContent: FC<ICategoryContentProps> = ({
       );
     } else if (currentCategory === "seasons") {
       return (
-        <div className="info-text" key={`${currentCategory}-${index}`}>
+        <div
+          className="info-text"
+          key={`${currentCategory}-${index}`}
+          data-testid="category-content"
+        >
           <p className={classNames("category-header", "info")}>
             {currentCategory.toUpperCase()}
           </p>
@@ -46,7 +54,11 @@ export const CategoryContent: FC<ICategoryContentProps> = ({
       );
     } else {
       return (
-        <div className="info-text" key={`${currentCategory}-${index}`}>
+        <div
+          className="info-text"
+          key={`${currentCategory}-${index}`}
+          data-testid="category-content"
+        >
           <p className={classNames("category-header", "info")}>
             {currentCategory.toUpperCase()}
           </p>
@@ -59,8 +71,11 @@ export const CategoryContent: FC<ICategoryContentProps> = ({
   };
 
   return (
-    <StylesWrapper category={category}>
-      <div className="content-wrapper">
+    <StylesWrapper>
+      <div
+        className={classNames("content-wrapper", `content-wrapper-${category}`)}
+        data-testid="content-wrapper"
+      >
         {categoryList.map((cat, index) => {
           return renderInfo(cat, index);
         })}

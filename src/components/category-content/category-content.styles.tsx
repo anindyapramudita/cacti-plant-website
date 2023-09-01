@@ -1,10 +1,7 @@
 import { gridBreakpoint } from "@/shared/breakpoints";
 import styled from "styled-components";
-import { Info } from "../category-tab/category-tab.interface";
 
-export const StylesWrapper = styled.div<{
-  category: Info;
-}>`
+export const StylesWrapper = styled.div`
   --category-button-height: 60px;
   --category-line-height: 20px;
   --category-gap: 24px;
@@ -16,15 +13,9 @@ export const StylesWrapper = styled.div<{
   --wrapper-display: flex;
   --wrapper-gap: 24px;
   --wrapper-position: absolute;
-  --wrapper-left: var(--text-left);
   --wrapper-transition: left 0.5s;
 
-  --description-multiplier: 0;
-  --water-multiplier: -1;
-  --care-multiplier: -2;
-  --seasons-multiplier: -3;
-  --size-multiplier: -4;
-  --sun-multiplier: -5;
+  --multiplier: 0;
 
   --text-display: flex;
   --text-width: 480px;
@@ -36,24 +27,40 @@ export const StylesWrapper = styled.div<{
   --category-font-size: 24px;
   --category-font-weight: 700;
 
-  --text-left: ${(props) =>
-    props.category
-      ? `calc(
-    (var(--${props.category}-multiplier) * var(--info-width)) +
-      (var(--${props.category}-multiplier) * var(--category-gap))
-  )`
-      : "0"};
-
   width: var(--info-width);
   height: var(--info-height);
   position: var(--content-position);
   overflow: var(--content-overflow);
 
+  .content-wrapper-description {
+    --multiplier: 0;
+  }
+  .content-wrapper-water {
+    --multiplier: -1;
+  }
+  .content-wrapper-care {
+    --multiplier: -2;
+  }
+  .content-wrapper-seasons {
+    --multiplier: -3;
+  }
+  .content-wrapper-size {
+    --multiplier: -4;
+  }
+  .content-wrapper-sun {
+    --multiplier: -5;
+  }
+
   .content-wrapper {
+    --text-left: calc(
+      (var(--multiplier) * var(--info-width)) +
+        (var(--multiplier) * var(--category-gap))
+    );
+
     display: var(--wrapper-display);
     gap: var(--wrapper-gap);
     position: var(--wrapper-position);
-    left: var(--wrapper-left);
+    left: var(--text-left);
     transition: var(--wrapper-transition);
 
     .info-text {
