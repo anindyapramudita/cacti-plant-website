@@ -18,9 +18,9 @@ export const ImageCard: FC<IImageCardProps> = ({
     <StyledImage
       {...props}
       className={classNames({ carousel: carousel }, className)}
-      src={src}
+      src={src ? src : NO_IMAGE}
       blurDataURL={imagePlaceholder}
-      alt={alt}
+      alt={alt ? alt : NO_IMAGE_ALT}
       width={width}
       height={height}
       placeholder="blur"
