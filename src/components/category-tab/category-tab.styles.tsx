@@ -2,9 +2,7 @@ import { gridBreakpoint } from "@/shared/breakpoints";
 import styled from "styled-components";
 
 export const StylesWrapper = styled.div<{
-  buttonStart: number;
   buttonEnd: number;
-  clicked?: boolean;
 }>`
   --button-size: 50px;
   --button-gap: 16px;
