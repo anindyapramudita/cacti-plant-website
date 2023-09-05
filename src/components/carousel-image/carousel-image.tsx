@@ -21,30 +21,40 @@ export const CarouselImage: FC<ICarouselImage> = ({
 
   const [currentState, setCurrentState] = useState<PlantImages>(defaultState);
   const [restartImage, setRestartImage] = useState<boolean>(false);
+  const [loadComplete, setLoadComplete] = useState<boolean>(false);
 
+  const handleLoadComplete = () => setLoadComplete(true);
   useEffect(() => {
-    const timer = setInterval(() => {
-      if (currentState.currentId >= images.length - 1) {
-        setCurrentState(defaultState);
-      } else {
-        const prevId = currentState.currentId;
-        setCurrentState({
-          currentId: prevId + 1,
-          currentImage: {
-            src: images[prevId + 1]?.src,
-            alt: images[prevId + 1]?.alt,
-          },
-        });
-      }
-    }, 4980);
+    if (loadComplete) {
+      const timer = setInterval(() => {
+        if (currentState.currentId >= images.length - 1) {
+          setCurrentState(defaultState);
+        } else {
+          const prevId = currentState.currentId;
+          setCurrentState({
+            currentId: prevId + 1,
+            currentImage: {
+              src: images[prevId + 1]?.src,
+              alt: images[prevId + 1]?.alt,
+            },
+          });
+        }
+      }, 4980);
 
-    if (!restartImage) {
-      return () => clearInterval(timer);
-    } else {
-      clearInterval(timer);
-      setRestartImage(false);
+      if (!restartImage) {
+        return () => clearInterval(timer);
+      } else {
+        clearInterval(timer);
+        setRestartImage(false);
+      }
     }
-  }, [currentState.currentId, images, defaultState, restartImage]);
+  }, [
+    currentState.currentId,
+    images,
+    defaultState,
+    restartImage,
+    loadComplete,
+  ]);
 
   return (
     <StylesWrapper>
@@ -55,6 +65,7 @@ export const CarouselImage: FC<ICarouselImage> = ({
         height={height}
         className="carousel-image"
         carousel
+        onLoadingComplete={handleLoadComplete}
       />
       <div className="line-container">
         {images?.length > 1
@@ -69,7 +80,7 @@ export const CarouselImage: FC<ICarouselImage> = ({
                   },
                   { "next-index": index >= currentState.currentId },
                   {
-                    "image-loaded": images[currentState.currentId].src,
+                    "image-loaded": loadComplete,
                   }
                 )}
               />
