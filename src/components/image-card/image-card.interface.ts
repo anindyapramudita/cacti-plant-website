@@ -7,4 +7,5 @@ export interface IImageCardProps extends HTMLAttributes<HTMLImageElement> {
   height: number;
   carousel?: boolean;
   className?: string;
+  onLoadingComplete?: () => void;
 }
