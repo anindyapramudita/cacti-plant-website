@@ -45,14 +45,13 @@ export const SliderImage: FC<ISliderImageProps> = ({
     return images.map((image, index) => {
       if (index <= currentId + 1 || imageArray.includes(index))
         return (
-          <Link href={imageLink || "#"}>
+          <Link key={index} href={imageLink || "#"} className="plant-image">
             <ImageCard
-              className="plant-image"
-              key={index}
               src={image.src}
               alt={image.alt}
               width={width}
               height={height}
+              className="plant-image"
             />
           </Link>
         );
