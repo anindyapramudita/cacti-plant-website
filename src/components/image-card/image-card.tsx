@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { IImageCardProps } from "./index";
 import { NO_IMAGE, NO_IMAGE_ALT } from "./image-card.constants";
 import { imagePlaceholder } from "@/shared/utils/image-placeholder";
@@ -12,12 +12,22 @@ export const ImageCard: FC<IImageCardProps> = ({
   height = 800,
   carousel = false,
   className = "",
+  onLoadingComplete,
   ...props
 }) => {
+  const [loadComplete, setLoadComplete] = useState<boolean>(false);
+
+  const handleOnLoadingComplete = () => {
+    setLoadComplete(true);
+    if (onLoadingComplete) {
+      onLoadingComplete();
+    }
+  };
+
   return (
     <StyledImage
       {...props}
-      className={classNames({ carousel: carousel }, className)}
+      className={classNames({ carousel: carousel && loadComplete }, className)}
       src={src ? src : NO_IMAGE}
       blurDataURL={imagePlaceholder}
       alt={alt ? alt : NO_IMAGE_ALT}
@@ -27,6 +37,7 @@ export const ImageCard: FC<IImageCardProps> = ({
       style={{
         objectFit: "cover",
       }}
+      onLoadingComplete={handleOnLoadingComplete}
     />
   );
 };
