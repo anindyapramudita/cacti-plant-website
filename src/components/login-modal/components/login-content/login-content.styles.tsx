@@ -1,5 +1,4 @@
 import { gridBreakpoint } from "@/shared/breakpoints";
-import { errorMessage } from "@/styles/error-text.styles";
 import { ralewayThin } from "@/styles/fonts";
 import styled from "styled-components";
 
@@ -65,6 +64,8 @@ export const StylesWrapper = styled.div<{
   --divider-right: 1.5%;
   --divider-left: 1.5%;
 
+  --password-container-width: 100%;
+
   position: var(--login-position);
   top: var(--login-top);
   left: var(--login-left);
@@ -99,6 +100,7 @@ export const StylesWrapper = styled.div<{
 
   .password-container {
     text-align: var(--forgot-password-text-align);
+    width: var(--password-container-width);
 
     .forgot-password {
       margin: var(--forgot-password-margin);
