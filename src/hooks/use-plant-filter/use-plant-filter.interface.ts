@@ -1,12 +1,18 @@
 interface FilterType {
-  water: (number | string)[];
-  season: (number | string)[];
-  care: (number | string)[];
+  water: number | null;
+  seasons: string[];
+  care: number | null;
+  sun: number | null;
+  size: number[];
 }
 
 export interface Filter {
   search: string;
   filter: FilterType;
+}
+
+export interface SearchFilter {
+  search: string;
 }
 
 export interface FilterActionSearch {
