@@ -12,6 +12,7 @@ export const Input: FC<IInputProps> = ({
   icon,
   helperText,
   inputStatus = "default",
+  fullWidth = false,
 }) => {
   return (
     <StylesWrapper className="wrapper" data-testid="input-container">
@@ -25,7 +26,8 @@ export const Input: FC<IInputProps> = ({
           className={classNames(
             "input-component",
             { "with-icon": icon },
-            `input-${inputStatus}`
+            `input-${inputStatus}`,
+            { fullwidth: fullWidth }
           )}
         />
         <label className="input-label" htmlFor={id}>
