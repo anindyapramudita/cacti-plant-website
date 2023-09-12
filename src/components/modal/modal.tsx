@@ -1,7 +1,8 @@
 import { FC } from "react";
 import { IModalProps } from "./modal.interface";
-import { ModalWrapper, ModalContent } from "./modal.styles";
-import { AiOutlineCloseCircle } from "react-icons/ai";
+import { ModalWrapper } from "./modal.styles";
+import { AiOutlineClose } from "react-icons/ai";
+import { IconButton } from "../icon-button";
 
 export const Modal: FC<IModalProps> = ({ open = true, children, onClose }) => {
   if (!open) {
@@ -10,12 +11,14 @@ export const Modal: FC<IModalProps> = ({ open = true, children, onClose }) => {
 
   return (
     <ModalWrapper>
-      <ModalContent>
+      <div className="modal-content">
         {children}
-        <button onClick={onClose} className="close-button">
-          <AiOutlineCloseCircle size={20} />
-        </button>
-      </ModalContent>
+        <IconButton
+          icon={<AiOutlineClose size={15} className="close-icon" />}
+          onClick={onClose}
+          className="close-button"
+        />
+      </div>
     </ModalWrapper>
   );
 };
