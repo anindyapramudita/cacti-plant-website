@@ -113,6 +113,7 @@ export const LoginContent: FC<ILoginContentProps> = ({
           type="text"
           inputStatus={currentState.errorVisible ? "error" : "default"}
           helperText={currentState.errorMessage}
+          fullWidth={true}
         />
         <div className="password-container">
           <Input
@@ -136,6 +137,7 @@ export const LoginContent: FC<ILoginContentProps> = ({
                 />
               )
             }
+            fullWidth={true}
             inputStatus={currentState.errorVisible ? "error" : "default"}
             helperText={currentState.errorMessage}
           />

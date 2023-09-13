@@ -7,25 +7,25 @@ export const handleUpdateFilter = (filterContext: Filter) => {
     query.push(`name match "*${filterContext.search}*"`);
   }
 
-  if (filterContext.filter.water.length > 0) {
+  if (filterContext.filter.water) {
+    query.push(`water.level == ${filterContext.filter.water}`);
+  }
+
+  if (filterContext.filter.care) {
+    query.push(`care.level == ${filterContext.filter.care}`);
+  }
+
+  if (filterContext.filter.size.length > 0) {
     let temp: string[] = [];
-    filterContext.filter.water.forEach((waterValue: number | string) => {
-      temp.push(`water.level == ${waterValue}`);
+    filterContext.filter.size.forEach((careValue: number) => {
+      temp.push(`size.level == ${careValue}`);
     });
     query.push(`(${temp.join(" || ")})`);
   }
 
-  if (filterContext.filter.care.length > 0) {
+  if (filterContext.filter.seasons.length > 0) {
     let temp: string[] = [];
-    filterContext.filter.care.forEach((careValue: number | string) => {
-      temp.push(`care.level == ${careValue}`);
-    });
-    query.push(`(${temp.join(" || ")})`);
-  }
-
-  if (filterContext.filter.season.length > 0) {
-    let temp: string[] = [];
-    filterContext.filter.season.forEach((seasonValue: number | string) => {
+    filterContext.filter.seasons.forEach((seasonValue: number | string) => {
       temp.push(`seasons.${seasonValue} == true`);
     });
     query.push(`(${temp.join(" || ")})`);

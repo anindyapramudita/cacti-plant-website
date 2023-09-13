@@ -15,6 +15,7 @@ export const StylesWrapper = styled.div<{}>`
   --image-width: 100vw;
   --image-height: auto;
 
+  --form-max-width: 15rem;
   --form-width: 100%;
   --form-margin: 32px 0 0 0;
   --form-display: flex;
@@ -36,17 +37,18 @@ export const StylesWrapper = styled.div<{}>`
   .image-side {
     width: var(--image-width);
     height: var(--image-height);
-    }
   }
 
   .form-wrapper {
     display: var(--form-display);
     flex-direction: var(--form-flex-direction);
+    align-items: var(--layout-align-items);
     justify-content: var(--form-justify-content);
     gap: var(--form-gap);
     width: var(--form-width);
 
     .register-form {
+      max-width: var(--form-max-width);
       margin: var(--form-margin);
       display: var(--form-display);
       flex-direction: var(--form-flex-direction);

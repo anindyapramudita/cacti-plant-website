@@ -40,6 +40,7 @@ export const StylesWrapper = styled.div`
 
   &.wrapper {
     text-align: start;
+    width: 100%;
   }
 
   .input-container {
@@ -54,6 +55,11 @@ export const StylesWrapper = styled.div`
       padding: var(--input-padding);
       border-color: var(--input-border-color);
     }
+
+    .input-component.fullwidth {
+    }
+    --input-width: 100%;
+    --container-width: 100%;
 
     .input-component.with-icon {
       --input-padding: 0.5rem 1.5rem 0.5rem 0.5rem;
