@@ -22,7 +22,7 @@ export const SliderImage: FC<ISliderImageProps> = ({ images, id }) => {
             <Image
               src={image.src}
               alt={image.alt}
-              sizes="(max-width: 640px) 25vw, (max-width: 768px) 15vw, (max-width: 1440px) 5vw, 10vw"
+              sizes="(max-width: 768px) 100vw, (max-width: 992px) 33vw, 20vw"
               fill={true}
               blurDataURL={imagePlaceholder}
               placeholder="blur"
