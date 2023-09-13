@@ -1,8 +1,9 @@
 import { Button } from "@/components/button";
 import { Input } from "@/components/input";
-import { ForgotPasswordLayout } from "@/components/layouts/forgot-password";
 import { NoUserProtectedRoute } from "@/components/protected-route";
 import {
+  NEW_PASSWORD,
+  NEW_PASSWORD_CONF,
   PASSWORD_NOT_MATCH,
   PASSWORD_REQUIREMENT_ERROR,
   SOMETHING_WRONG,
@@ -16,6 +17,9 @@ import { TransitionImage } from "@/components/image";
 import { getRegisterImage } from "@/sanity/get-register-image";
 import { ImageType } from "@/shared/type/register-type";
 import { imagePlaceholder } from "@/shared/utils/image-placeholder";
+import { IconButton } from "@/components/icon-button";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { StylesWrapper } from "./index.styles";
 
 export const defaultForm = {
   password: "",
@@ -106,7 +110,7 @@ export default function ResetPasswordPage({ image }: ImageType) {
 
   return (
     <NoUserProtectedRoute>
-      <ForgotPasswordLayout>
+      <StylesWrapper>
         <div className="image-side">
           <TransitionImage
             image={image?.src}
@@ -120,23 +124,53 @@ export default function ResetPasswordPage({ image }: ImageType) {
           <form className="register-form" onSubmit={onSubmit}>
             <Input
               id="new-password"
-              label="New Password"
-              onClick={handleTogglePassword}
-              isVisible={currentState.isPasswordVisible}
-              type={currentState.isPasswordVisible ? "text" : "password"}
+              label={NEW_PASSWORD}
               name="password"
               register={register}
+              inputStatus={currentState.errorVisible ? "error" : "default"}
+              icon={
+                currentState.isPasswordVisible ? (
+                  <IconButton
+                    type="button"
+                    onClick={handleTogglePassword}
+                    icon={<AiOutlineEyeInvisible size={20} />}
+                  />
+                ) : (
+                  <IconButton
+                    type="button"
+                    onClick={handleTogglePassword}
+                    icon={<AiOutlineEye size={20} />}
+                  />
+                )
+              }
+              type={currentState.isPasswordVisible ? "text" : "password"}
+              fullWidth={true}
             />
             <Input
               id="new-password-confirmation"
-              label="New Password Confirmation"
-              onClick={handleTogglePasswordConfirmation}
-              isVisible={currentState.isPasswordConfirmationVisible}
+              label={NEW_PASSWORD_CONF}
               name="passwordConfirmation"
+              register={register}
+              inputStatus={currentState.errorVisible ? "error" : "default"}
+              icon={
+                currentState.isPasswordConfirmationVisible ? (
+                  <IconButton
+                    type="button"
+                    onClick={handleTogglePasswordConfirmation}
+                    icon={<AiOutlineEyeInvisible size={20} />}
+                  />
+                ) : (
+                  <IconButton
+                    type="button"
+                    onClick={handleTogglePasswordConfirmation}
+                    icon={<AiOutlineEye size={20} />}
+                  />
+                )
+              }
               type={
                 currentState.isPasswordConfirmationVisible ? "text" : "password"
               }
-              register={register}
+              fullWidth={true}
             />
             {currentState.errorVisible && (
               <p className="error-message">{currentState.errorMessage}</p>
@@ -150,7 +184,7 @@ export default function ResetPasswordPage({ image }: ImageType) {
             </Button>
           </form>
         </div>
-      </ForgotPasswordLayout>
+      </StylesWrapper>
     </NoUserProtectedRoute>
   );
 }
