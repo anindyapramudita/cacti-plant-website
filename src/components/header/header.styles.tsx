@@ -24,8 +24,8 @@ export const StylesWrapper = styled.nav<{}>`
   --desktop-links-display: none;
   --desktop-links-margin: 0;
 
-  --logo-width: 40px;
-  --logo-height: 40px;
+  --logo-width: 30px;
+  --logo-height: 30px;
   --logo-border: none;
   --logo-background: transparent;
   --logo-cursor: pointer;
@@ -129,11 +129,6 @@ export const StylesWrapper = styled.nav<{}>`
     .desktop-logo-wrapper {
       --desktop-links-display: flex;
       --desktop-links-margin: 0 1.5rem;
-    }
-
-    .business-logo {
-      --logo-width: 60px;
-      --logo-height: 60px;
     }
 
     .mobile-logo-wrapper {
