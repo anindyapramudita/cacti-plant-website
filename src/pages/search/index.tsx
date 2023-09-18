@@ -1,7 +1,7 @@
 import { getPlants } from "@/sanity/get-plants";
 import { handleUpdateFilter } from "@/hooks/get-filter-query";
 import { Filter } from "@/hooks/use-plant-filter";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { PlantDataType } from "@/shared/type/data-types";
 import { useSession } from "next-auth/react";
 import { Pagination } from "@/components/pagination";
@@ -15,6 +15,8 @@ import { FilterModal } from "@/components/filter-modal";
 import { FilterContext } from "@/components/filter-modal/filter-modal.interface";
 import { IconButton } from "@/components/icon-button";
 import { SearchFilter } from "@/hooks/use-plant-filter/use-plant-filter.interface";
+import { getLikedPlants } from "@/shared/utils/get-liked-plants";
+import { likePlant } from "@/shared/utils/like-plant";
 
 const defaultSearch = {
   search: "",
@@ -44,12 +46,14 @@ export default function SearchPage({ plants, onLikeClick }: SearchProp) {
     totalPage: number;
     currentPage: number;
     offset: number;
+    likedPlants: string[];
   }>({
     filterQuery: defaultForm,
     data: plants,
     totalPage: Math.ceil(plants[0].total / 10),
     currentPage: 1,
     offset: 10,
+    likedPlants: [],
   });
 
   const [filterModalOpen, setFilterModalOpen] = useState<boolean>(false);
@@ -60,10 +64,33 @@ export default function SearchPage({ plants, onLikeClick }: SearchProp) {
     defaultValues: defaultSearch,
   });
 
+  const handleGetLikedPlants = useCallback(async () => {
+    try {
+      if (session && session.user.email) {
+        const likedPlants = await getLikedPlants(session.user.email);
+        if (likedPlants) {
+          setCurrentState((prevState) => ({
+            ...prevState,
+            likedPlants: likedPlants.likedPlants.likedPlants,
+          }));
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [session]);
+
+  useEffect(() => {
+    handleGetLikedPlants();
+  }, [handleGetLikedPlants]);
+
   const handleSaveSearch = async (search: string) => {
     let temp = { ...currentState.filterQuery };
     temp.search = search;
-    setCurrentState({ ...currentState, filterQuery: temp });
+    setCurrentState((prevState) => ({
+      ...prevState,
+      filterQuery: temp,
+    }));
 
     handleUpdateData(temp);
   };
@@ -71,7 +98,10 @@ export default function SearchPage({ plants, onLikeClick }: SearchProp) {
   const handleSaveFilter = async (filter: FilterContext) => {
     let temp = { ...currentState.filterQuery };
     temp.filter = filter;
-    setCurrentState({ ...currentState, filterQuery: temp });
+    setCurrentState((prevState) => ({
+      ...prevState,
+      filterQuery: temp,
+    }));
 
     handleUpdateData(temp);
   };
@@ -80,23 +110,23 @@ export default function SearchPage({ plants, onLikeClick }: SearchProp) {
     const query = handleUpdateFilter(newQuery);
     const newData = await getPlants(0, query, currentState.offset);
 
-    setCurrentState({
-      ...currentState,
+    setCurrentState((prevState) => ({
+      ...prevState,
       data: newData,
       currentPage: 1,
       totalPage: Math.ceil(newData[0].total / 10),
-    });
+    }));
   };
 
   const handleClearFilter = async () => {
     const newData = await getPlants(0, null, 10);
-    setCurrentState({
-      ...currentState,
+    setCurrentState((prevState) => ({
+      ...prevState,
       filterQuery: defaultForm,
       data: newData,
       currentPage: 1,
       totalPage: Math.ceil(newData[0].total / 10),
-    });
+    }));
   };
 
   const handlePageClick = async (newPage: number) => {
@@ -108,7 +138,11 @@ export default function SearchPage({ plants, onLikeClick }: SearchProp) {
 
     if (newData) {
       setImageLoading(false);
-      setCurrentState({ ...currentState, currentPage: newPage, data: newData });
+      setCurrentState((prevState) => ({
+        ...prevState,
+        currentPage: newPage,
+        data: newData,
+      }));
     }
   };
 
@@ -116,11 +150,23 @@ export default function SearchPage({ plants, onLikeClick }: SearchProp) {
     handleSaveSearch(data.search);
   });
 
-  const handleLikeClick = () => {
-    if (session) {
-      console.log("like!");
-    } else {
-      onLikeClick();
+  const handleLikeClick = async (plantId: string) => {
+    try {
+      if (session && session.user.email) {
+        const email = session.user.email;
+        const response = await likePlant(email, plantId);
+        if (response.success) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        onLikeClick();
+        return false;
+      }
+    } catch (error) {
+      console.log(error);
+      return false;
     }
   };
 
@@ -151,8 +197,9 @@ export default function SearchPage({ plants, onLikeClick }: SearchProp) {
               <SimpleCard
                 plant={plant}
                 key={index}
-                id={plant._id}
                 onLikeClick={handleLikeClick}
+                id={plant._id}
+                isLiked={currentState.likedPlants.includes(plant._id)}
               />
             ))
           )}
