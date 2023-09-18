@@ -27,6 +27,24 @@ export const StylesWrapper = styled.div`
     right: var(--like-button-right);
     filter: var(--like-button-filter);
     transform: var(--like-button-transform);
+
+    .like-icon {
+      display: block;
+      height: 24px;
+      width: 24px;
+      fill: rgba(0, 0, 0, 0.5);
+      stroke: white;
+      stroke-width: 2;
+      overflow: visible;
+      transition: fill 0.2s, stroke 0.2s;
+    }
+  }
+
+  .like-button.is-liked {
+    .like-icon {
+      fill: var(--like-color);
+      stroke: var(--like-color);
+    }
   }
 
   @media (min-width: ${gridBreakpoint.lg}) {
