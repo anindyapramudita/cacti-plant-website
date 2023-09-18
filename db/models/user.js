@@ -30,6 +30,10 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  likedPlants: {
+    type: [String],
+    default: [],
+  },
 });
 
 // ENCRYPTION

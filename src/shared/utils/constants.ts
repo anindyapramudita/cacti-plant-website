@@ -55,3 +55,6 @@ export const CREDENTIALS_INVALID = "email or password is invalid";
 
 export const NEW_PASSWORD = "New Password";
 export const NEW_PASSWORD_CONF = "New Password Confirmation";
+
+export const IMAGE_LIKED_SUCCESS = "Image liked successfully";
+export const IMAGE_UNLIKED_SUCCESS = "Image like removed successfully";
