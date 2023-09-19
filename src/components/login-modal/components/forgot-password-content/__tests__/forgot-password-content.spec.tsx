@@ -50,7 +50,7 @@ describe("Login Content Component", () => {
       <ForgotPasswordContent {...ForgotPasswordContentMock} />
     );
     const mockSendResetPassword =
-      require("@/shared/utils/send-reset-password").sendResetPassword;
+      require("@/db/utils/send-reset-password").sendResetPassword;
 
     const emailInput = getByLabelText("Email");
     expect(emailInput).toBeInTheDocument();

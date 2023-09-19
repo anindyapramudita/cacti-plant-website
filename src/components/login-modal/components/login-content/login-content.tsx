@@ -19,7 +19,7 @@ import {
 import { FcGoogle } from "react-icons/fc";
 import { Button } from "@/components/button";
 import { useForm } from "react-hook-form";
-import { userSignIn } from "@/shared/utils/user-sign-in";
+import { userSignIn } from "@/db/utils/user-sign-in";
 import { useRouter } from "next/router";
 import { Input } from "@/components/input";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";

@@ -19,7 +19,7 @@ import { Input } from "@/components/input";
 import { Button } from "@/components/button";
 import { useForm } from "react-hook-form";
 import { BsArrowLeftShort } from "react-icons/bs";
-import { sendResetPassword } from "@/shared/utils/send-reset-password";
+import { sendResetPassword } from "@/db/utils/send-reset-password";
 import { RiMailSendLine } from "react-icons/ri";
 
 export const ForgotPasswordContent: FC<IForgotPasswordContentProps> = ({
