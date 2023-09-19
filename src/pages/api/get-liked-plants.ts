@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import dbConnect from "../../../db/utils/dbConnect";
-import User from "../../../db/models/user";
+import dbConnect from "@/db/utils/dbConnect";
+import User from "@/db/models/user";
 import { IMAGE_LIKED_SUCCESS, SOMETHING_WRONG } from "@/shared/utils/constants";
 
 type Data = {

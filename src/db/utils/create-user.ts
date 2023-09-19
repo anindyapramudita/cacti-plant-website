@@ -1,4 +1,8 @@
-export const createUser = async (name, email, password) => {
+export const createUser = async (
+  name: string,
+  email: string,
+  password: string
+) => {
   const response = await fetch("/api/auth/signup", {
     method: "POST",
     body: JSON.stringify({ name, email, password }),

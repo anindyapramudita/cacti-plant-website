@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import dbConnect from "../../../db/utils/dbConnect";
-import User from "../../../db/models/user";
+import dbConnect from "@/db/utils/dbConnect";
+import User from "@/db/models/user";
 import { hash } from "bcrypt";
 import {
   PASSWORD_REQUIREMENT_ERROR,

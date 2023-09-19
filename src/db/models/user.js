@@ -26,6 +26,16 @@ const userSchema = new mongoose.Schema({
       values: ["user", "admin"],
     },
   },
+  profilePicture: {
+    data: {
+      type: Buffer,
+      default: null, // Set the default value to null
+    },
+    contentType: {
+      type: String,
+      default: null, // Set the default value to null
+    },
+  },
   createdAt: {
     type: Date,
     default: Date.now,

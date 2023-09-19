@@ -1,8 +1,12 @@
-import { createUser } from "../../../db/utils/create-user";
-import { FORM_ERROR, PASSWORD_NOT_MATCH, SOMETHING_WRONG } from "./constants";
+import { createUser } from "@/db/utils/create-user";
 import { userSignIn } from "./user-sign-in";
+import {
+  FORM_ERROR,
+  PASSWORD_NOT_MATCH,
+  SOMETHING_WRONG,
+} from "@/shared/utils/constants";
 
-type DataType = {
+export type DataType = {
   name: string;
   email: string;
   password: string;

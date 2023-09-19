@@ -1,5 +1,5 @@
-import { findUser } from "../../../db/utils/find-user";
-import dbConnect from "../../../db/utils/dbConnect";
+import { findUser } from "@/db/utils/find-user";
+import dbConnect from "@/db/utils/dbConnect";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getEmailHTML } from "@/shared/utils/get-email-html";
 import { sign } from "jsonwebtoken";
