@@ -48,7 +48,6 @@ export const StylesWrapper = styled.div<{}>`
     width: var(--form-width);
 
     .register-form {
-      max-width: var(--form-max-width);
       margin: var(--form-margin);
       display: var(--form-display);
       flex-direction: var(--form-flex-direction);
