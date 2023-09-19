@@ -40,6 +40,10 @@ export const StylesWrapper = styled.div`
 
   &.wrapper {
     text-align: start;
+    width: var(--input-width);
+  }
+
+  &.wrapper.fullwidth {
     width: 100%;
   }
 

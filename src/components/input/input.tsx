@@ -15,7 +15,10 @@ export const Input: FC<IInputProps> = ({
   fullWidth = false,
 }) => {
   return (
-    <StylesWrapper className="wrapper" data-testid="input-container">
+    <StylesWrapper
+      className={classNames("wrapper", { fullwidth: fullWidth })}
+      data-testid="input-container"
+    >
       <div className="input-container">
         <input
           type={type}
