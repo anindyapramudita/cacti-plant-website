@@ -16,7 +16,7 @@ import {
   REGISTER_HEADER,
   SIGN_UP,
 } from "@/shared/utils/constants";
-import { createNewUser } from "@/shared/utils/user-sign-up";
+import { createNewUser } from "@/db/utils/user-sign-up";
 import { NoUserProtectedRoute } from "@/components/protected-route";
 import { IconButton } from "@/components/icon-button";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
@@ -91,6 +91,7 @@ export default function Register({ image }: ImageType) {
               name="name"
               register={register}
               inputStatus={currentState.errorVisible ? "error" : "default"}
+              required
             />
             <Input
               id="register-email"
@@ -98,6 +99,7 @@ export default function Register({ image }: ImageType) {
               name="email"
               register={register}
               inputStatus={currentState.errorVisible ? "error" : "default"}
+              required
             />
             <Input
               id="register-password"
@@ -121,6 +123,7 @@ export default function Register({ image }: ImageType) {
                 )
               }
               type={currentState.isPasswordVisible ? "text" : "password"}
+              required
             />
             <Input
               id="register-password-confirmation"
@@ -145,6 +148,7 @@ export default function Register({ image }: ImageType) {
                 )
               }
               type={currentState.isConfirmationVisible ? "text" : "password"}
+              required
             />
             <Button
               isLoading={currentState.isLoading}
