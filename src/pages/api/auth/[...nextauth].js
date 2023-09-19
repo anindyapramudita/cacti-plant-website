@@ -1,8 +1,8 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-import User from "../../../../db/models/user";
-import dbConnect from "../../../../db/utils/dbConnect";
+import User from "@/db/models/user";
+import dbConnect from "@/db/utils/dbConnect";
 
 const sessionSecret = process.env.SESSION_SECRET;
 
@@ -61,6 +61,7 @@ export default NextAuth({
           name: user.name,
           email: user.email,
           role: user.role,
+          image: user.profilePicture.data,
         };
       }
       return token;
