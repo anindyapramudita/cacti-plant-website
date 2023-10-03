@@ -1,7 +1,10 @@
-export const getLikedPlants = async (userId: string) => {
-  const response = await fetch("/api/get-liked-plants", {
+export const deleteCollection = async (
+  userId: string,
+  collectionId: string
+) => {
+  const response = await fetch("/api/delete-collection", {
     method: "POST",
-    body: JSON.stringify({ userId }),
+    body: JSON.stringify({ userId, collectionId }),
     headers: {
       "Content-Type": "application/json",
     },

@@ -13,6 +13,7 @@ export const Input: FC<IInputProps> = ({
   helperText,
   inputStatus = "default",
   fullWidth = false,
+  ...props
 }) => {
   return (
     <StylesWrapper
@@ -21,6 +22,7 @@ export const Input: FC<IInputProps> = ({
     >
       <div className="input-container">
         <input
+          {...props}
           type={type}
           id={id}
           placeholder=" "

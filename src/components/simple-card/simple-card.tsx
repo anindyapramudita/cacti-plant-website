@@ -4,12 +4,15 @@ import { StylesWrapper } from "./simple-card.styles";
 import { SliderImage } from "../slider-image";
 import { IconButton } from "../icon-button";
 import classNames from "classnames";
+import { AiOutlinePlus } from "react-icons/ai";
 
 export const SimpleCard: FC<ISimpleCardProps> = ({
   plant,
   id,
   onLikeClick,
   isLiked,
+  onCollectionClick,
+  ...props
 }) => {
   const [liked, setLiked] = useState(isLiked);
 
@@ -25,8 +28,13 @@ export const SimpleCard: FC<ISimpleCardProps> = ({
   };
 
   return (
-    <StylesWrapper>
+    <StylesWrapper {...props}>
       <SliderImage images={plant.images} id={id} />
+      <IconButton
+        icon={<AiOutlinePlus size={15} className="collection-icon" />}
+        onClick={() => onCollectionClick(id)}
+        className="collection-button"
+      />
       <IconButton
         icon={
           <svg

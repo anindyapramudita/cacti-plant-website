@@ -1,5 +1,5 @@
-export const getLikedPlants = async (userId: string) => {
-  const response = await fetch("/api/get-liked-plants", {
+export const getCollections = async (userId: string) => {
+  const response = await fetch("/api/get-collections", {
     method: "POST",
     body: JSON.stringify({ userId }),
     headers: {
