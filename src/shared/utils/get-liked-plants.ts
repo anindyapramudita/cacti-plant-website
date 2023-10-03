@@ -1,7 +1,7 @@
-export const getLikedPlants = async (email: string) => {
+export const getLikedPlants = async (userId: string) => {
   const response = await fetch("/api/get-liked-plants", {
     method: "POST",
-    body: JSON.stringify({ email }),
+    body: JSON.stringify({ userId }),
     headers: {
       "Content-Type": "application/json",
     },
