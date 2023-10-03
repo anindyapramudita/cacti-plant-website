@@ -24,7 +24,6 @@ export default async function handler(
   dbConnect();
 
   const userId = request.body.userId;
-  // const email = request.body.userEmail;
   const title = request.body.title;
   const plantId = request.body.plantId;
 
