@@ -2,7 +2,7 @@ import { getPlants } from "@/sanity/get-plants";
 import { handleUpdateFilter } from "@/hooks/get-filter-query";
 import { Filter } from "@/hooks/use-plant-filter";
 import { useCallback, useEffect, useState } from "react";
-import { PlantDataType } from "@/shared/type/data-types";
+import { Collection, PlantDataType } from "@/shared/type/data-types";
 import { useSession } from "next-auth/react";
 import { Pagination } from "@/components/pagination";
 import { StylesWrapper } from "./index.styles";
@@ -17,6 +17,8 @@ import { IconButton } from "@/components/icon-button";
 import { SearchFilter } from "@/hooks/use-plant-filter/use-plant-filter.interface";
 import { getLikedPlants } from "@/shared/utils/get-liked-plants";
 import { likePlant } from "@/shared/utils/like-plant";
+import { ToastType } from "@/components/toast/toast.interface";
+import { getCollections } from "@/shared/utils/get-collections";
 
 const defaultSearch = {
   search: "",
@@ -36,10 +38,23 @@ const defaultForm = {
 type SearchProp = {
   plants: PlantDataType[];
   onLikeClick: () => void;
+  onCollectionClick: (
+    plantId: string,
+    userId: string,
+    collections: Collection[]
+  ) => void;
+  onUpdateToast: (message: string, type: ToastType) => void;
 };
 
-export default function SearchPage({ plants, onLikeClick }: SearchProp) {
+export default function SearchPage({
+  plants,
+  onLikeClick,
+  onCollectionClick,
+  onUpdateToast,
+}: SearchProp) {
   const [imageLoading, setImageLoading] = useState<boolean>(false);
+  const [collectionModalOpen, setCollectionModalOpen] =
+    useState<boolean>(false);
   const [currentState, setCurrentState] = useState<{
     filterQuery: Filter;
     data: PlantDataType[];
@@ -67,11 +82,11 @@ export default function SearchPage({ plants, onLikeClick }: SearchProp) {
   const handleGetLikedPlants = useCallback(async () => {
     try {
       if (session && session.user.email) {
-        const likedPlants = await getLikedPlants(session.user.email);
+        const likedPlants = await getLikedPlants(session.user._id);
         if (likedPlants) {
           setCurrentState((prevState) => ({
             ...prevState,
-            likedPlants: likedPlants.likedPlants.likedPlants,
+            likedPlants: likedPlants.likedPlantsId,
           }));
         }
       }
@@ -80,9 +95,29 @@ export default function SearchPage({ plants, onLikeClick }: SearchProp) {
     }
   }, [session]);
 
+  const handleGetCollections = useCallback(async () => {
+    try {
+      if (session && session.user._id && collectionModalOpen) {
+        const response = await getCollections(session.user._id);
+        if (response) {
+          setCollectionModalOpen(false);
+          return response.collections;
+        }
+      } else if (session && session.user._id) {
+        const response = await getCollections(session.user._id);
+        if (response) {
+          return response.collections;
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [session, collectionModalOpen]);
+
   useEffect(() => {
     handleGetLikedPlants();
-  }, [handleGetLikedPlants]);
+    handleGetCollections();
+  }, [handleGetLikedPlants, handleGetCollections]);
 
   const handleSaveSearch = async (search: string) => {
     let temp = { ...currentState.filterQuery };
@@ -152,14 +187,33 @@ export default function SearchPage({ plants, onLikeClick }: SearchProp) {
 
   const handleLikeClick = async (plantId: string) => {
     try {
-      if (session && session.user.email) {
-        const email = session.user.email;
-        const response = await likePlant(email, plantId);
+      if (session && session.user._id) {
+        const userId = session.user._id;
+        const response = await likePlant(userId, plantId);
         if (response.success) {
+          onUpdateToast(response.message, "success");
           return true;
         } else {
+          onUpdateToast(response.message, "error");
           return false;
         }
+      } else {
+        onLikeClick();
+        return false;
+      }
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
+
+  const handleCollectionClick = async (plantId: string) => {
+    try {
+      if (session && session.user.email) {
+        setCollectionModalOpen(true);
+        const newCollection = await handleGetCollections();
+        console.log("new collections: ", newCollection);
+        onCollectionClick(plantId, session?.user._id as string, newCollection);
       } else {
         onLikeClick();
         return false;
@@ -193,13 +247,14 @@ export default function SearchPage({ plants, onLikeClick }: SearchProp) {
           {imageLoading ? (
             <div className="image-loading">Loading...</div>
           ) : (
-            currentState.data.map((plant, index) => (
+            currentState.data.map((plant) => (
               <SimpleCard
                 plant={plant}
-                key={index}
+                key={plant._id}
                 onLikeClick={handleLikeClick}
                 id={plant._id}
                 isLiked={currentState.likedPlants.includes(plant._id)}
+                onCollectionClick={handleCollectionClick}
               />
             ))
           )}
