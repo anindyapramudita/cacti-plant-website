@@ -10,6 +10,7 @@ import {
 type Data = {
   success: boolean;
   message: string;
+  likedPlants?: string[];
 };
 
 export default async function handler(
@@ -18,44 +19,49 @@ export default async function handler(
 ) {
   dbConnect();
 
-  const email = request.body.email;
+  const _id = request.body.userId;
   const id = request.body.id;
 
-  const findLiked = await User.findOne({ email, likedPlants: id });
+  const findLiked = await User.findOne({ _id, likedPlants: id });
 
   if (findLiked) {
-    const removevLike = await User.findOneAndUpdate(
-      { email },
+    const removeLike = await User.findOneAndUpdate(
+      { _id },
       { $pull: { likedPlants: id } }
     );
 
-    if (removevLike) {
+    if (removeLike) {
+      const newUserInfo = await User.findOne({ _id });
       response.status(201).json({
         success: true,
         message: IMAGE_UNLIKED_SUCCESS,
+        likedPlants: newUserInfo.likedPlants,
+      });
+    } else {
+      response.status(404).json({
+        success: false,
+        message: SOMETHING_WRONG,
       });
     }
-
-    response.status(404).json({
-      success: false,
-      message: SOMETHING_WRONG,
-    });
   } else {
     const addLiked = await User.findOneAndUpdate(
-      { email },
+      { _id },
       { $push: { likedPlants: id } }
     );
 
     if (addLiked) {
+      const newUserInfo = await User.findOne({ _id });
+
       response.status(201).json({
         success: true,
         message: IMAGE_LIKED_SUCCESS,
+        likedPlants: newUserInfo.likedPlants,
+      });
+    } else {
+      response.status(404).json({
+        success: false,
+        message: SOMETHING_WRONG,
       });
     }
-
-    response.status(404).json({
-      success: false,
-      message: SOMETHING_WRONG,
-    });
   }
 }
