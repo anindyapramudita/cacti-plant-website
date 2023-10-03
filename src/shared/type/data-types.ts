@@ -1,4 +1,4 @@
-export type LevelRange = 1 | 2 | 3
+export type LevelRange = 1 | 2 | 3;
 
 export type LevelInfoType = {
   level: LevelRange;
@@ -29,4 +29,14 @@ export type PlantDataType = {
   size: LevelInfoType;
   colors: string[];
   total: number;
+};
+
+export type Collection = {
+  _id: string;
+  title: string;
+  image: {
+    src: string;
+    alt: string;
+  };
+  saved: number;
 };
