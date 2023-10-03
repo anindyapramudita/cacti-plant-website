@@ -74,8 +74,8 @@ export const GlobalStyles = createGlobalStyle`
     --font-size-regular: 1rem;
     --font-size--large: 1.125rem;
     --line-height: 1.5;
-    --header-height-mobile: 4.5rem;
-    --header-height-desktop: 5.75rem;
+    --header-height-mobile: 3.5rem;
+    --header-height-desktop: 4rem;
     font-size: var(--font-size-regular);
     line-height: var(--line-height);
     font-weight: 400;
