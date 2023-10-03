@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 import validator from "validator";
 import { hash, compare } from "bcrypt";
 
+const plantCollectionsSchema = new mongoose.Schema({
+  title: String,
+  plants: [String],
+});
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -27,14 +32,9 @@ const userSchema = new mongoose.Schema({
     },
   },
   profilePicture: {
-    data: {
-      type: Buffer,
-      default: null, // Set the default value to null
-    },
-    contentType: {
-      type: String,
-      default: null, // Set the default value to null
-    },
+    type: String,
+    default:
+      "https://cdn.sanity.io/images/rb0oc6we/production/1b91a69b31052b745616261ea36c69134615ebe2-150x150.png",
   },
   createdAt: {
     type: Date,
@@ -42,6 +42,10 @@ const userSchema = new mongoose.Schema({
   },
   likedPlants: {
     type: [String],
+    default: [],
+  },
+  plantCollections: {
+    type: [plantCollectionsSchema],
     default: [],
   },
 });
