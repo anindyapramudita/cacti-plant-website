@@ -12,7 +12,7 @@ declare module "next-auth" {
       name: string;
       email: string;
       role: string;
-      image: any;
+      image: string;
     } & DefaultSession["user"];
   }
 }
@@ -26,7 +26,7 @@ declare module "next-auth/client" {
       name: string;
       email: string;
       role: string;
-      image: any;
+      image: string;
     };
   }
 }
