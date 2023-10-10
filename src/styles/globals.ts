@@ -5,6 +5,9 @@ export const GlobalStyles = createGlobalStyle`
     /**Achromatic */
     --white: #ffffff;
     --black: #000000;
+    --very-light-grey: #F7F7F7;
+    --light-grey: #D9D9D9;
+    --grey: #909090;
     --very-dark-grey: #3b3b3b;
     --dark-grey: #717171;
     /**Colors */
@@ -74,8 +77,8 @@ export const GlobalStyles = createGlobalStyle`
     --font-size-regular: 1rem;
     --font-size--large: 1.125rem;
     --line-height: 1.5;
-    --header-height-mobile: 3.5rem;
-    --header-height-desktop: 4rem;
+    --header-height-mobile: 4.5rem;
+    --header-height-desktop: 5.375rem;
     font-size: var(--font-size-regular);
     line-height: var(--line-height);
     font-weight: 400;
