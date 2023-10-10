@@ -19,6 +19,9 @@ import { getLikedPlants } from "@/shared/utils/get-liked-plants";
 import { likePlant } from "@/shared/utils/like-plant";
 import { ToastType } from "@/components/toast/toast.interface";
 import { getCollections } from "@/shared/utils/get-collections";
+import { GetServerSidePropsContext } from "next";
+import { createFilterQueryUrl } from "@/shared/utils/create-filter-query-url";
+import { NO_PLANTS_FOUND } from "@/shared/utils/constants";
 
 const defaultSearch = {
   search: "",
@@ -27,10 +30,10 @@ const defaultSearch = {
 const defaultForm = {
   search: "",
   filter: {
-    water: null,
+    water: "",
     seasons: [],
-    care: null,
-    sun: null,
+    care: "",
+    sun: "",
     size: [],
   },
 };
@@ -65,7 +68,7 @@ export default function SearchPage({
   }>({
     filterQuery: defaultForm,
     data: plants,
-    totalPage: Math.ceil(plants[0].total / 10),
+    totalPage: Math.ceil(plants[0]?.total / 10) || 0,
     currentPage: 1,
     offset: 10,
     likedPlants: [],
@@ -114,6 +117,17 @@ export default function SearchPage({
     }
   }, [session, collectionModalOpen]);
 
+  const handleSaveFilter = async (filter: FilterContext) => {
+    let temp = { ...currentState.filterQuery };
+    temp.filter = filter;
+    setCurrentState((prevState) => ({
+      ...prevState,
+      filterQuery: temp,
+    }));
+
+    handleUpdateData(temp);
+  };
+
   useEffect(() => {
     handleGetLikedPlants();
     handleGetCollections();
@@ -130,17 +144,6 @@ export default function SearchPage({
     handleUpdateData(temp);
   };
 
-  const handleSaveFilter = async (filter: FilterContext) => {
-    let temp = { ...currentState.filterQuery };
-    temp.filter = filter;
-    setCurrentState((prevState) => ({
-      ...prevState,
-      filterQuery: temp,
-    }));
-
-    handleUpdateData(temp);
-  };
-
   const handleUpdateData = async (newQuery: Filter) => {
     const query = handleUpdateFilter(newQuery);
     const newData = await getPlants(0, query, currentState.offset);
@@ -149,8 +152,13 @@ export default function SearchPage({
       ...prevState,
       data: newData,
       currentPage: 1,
-      totalPage: Math.ceil(newData[0].total / 10),
+      totalPage: newData.length > 0 ? Math.ceil(newData[0].total / 10) : 0,
     }));
+
+    const queryParams = createFilterQueryUrl(newQuery);
+    const newUrl = `${window.location.pathname}?${queryParams}`;
+
+    window.history.replaceState(null, "", newUrl);
   };
 
   const handleClearFilter = async () => {
@@ -160,8 +168,11 @@ export default function SearchPage({
       filterQuery: defaultForm,
       data: newData,
       currentPage: 1,
-      totalPage: Math.ceil(newData[0].total / 10),
+      totalPage: newData.length > 0 ? Math.ceil(newData[0].total / 10) : 0,
     }));
+
+    const newUrl = `${window.location.pathname}`;
+    window.history.replaceState(null, "", newUrl);
   };
 
   const handlePageClick = async (newPage: number) => {
@@ -246,7 +257,7 @@ export default function SearchPage({
         <div className="simple-card-layout">
           {imageLoading ? (
             <div className="image-loading">Loading...</div>
-          ) : (
+          ) : currentState.data.length > 0 ? (
             currentState.data.map((plant) => (
               <SimpleCard
                 plant={plant}
@@ -257,6 +268,8 @@ export default function SearchPage({
                 onCollectionClick={handleCollectionClick}
               />
             ))
+          ) : (
+            <p>{NO_PLANTS_FOUND}</p>
           )}
         </div>
       </div>
@@ -275,8 +288,22 @@ export default function SearchPage({
   );
 }
 
-export async function getServerSideProps() {
-  const data = await getPlants(0, null, 10);
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  const { search, water, seasons, care, sun, size } = ctx.query;
+
+  const filter: Filter = {
+    search,
+    filter: {
+      water,
+      seasons,
+      care,
+      sun,
+      size,
+    },
+  };
+
+  const query = handleUpdateFilter(filter);
+  const data = await getPlants(0, query, 10);
 
   return {
     props: {
