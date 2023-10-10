@@ -6,17 +6,17 @@ export interface IFilterModalProps {
 }
 
 export type FilterContext = {
-  water: number | null;
+  water: string | undefined;
   seasons: string[];
-  care: number | null;
-  sun: number | null;
-  size: number[];
+  care: string | undefined;
+  sun: string | undefined;
+  size: string[];
 };
 
 export const defaultForm: FilterContext = {
-  water: null,
+  water: "",
   seasons: [],
-  care: null,
-  sun: null,
+  care: "",
+  sun: "",
   size: [],
 };
