@@ -1,4 +1,3 @@
-import { Header } from "@/components/header";
 import { HomeLayout } from "@/components/layouts/home";
 import { LoginModal } from "@/components/login-modal";
 import { GlobalStyles } from "@/styles/globals";
@@ -11,6 +10,7 @@ import { AddToCollectionModal } from "@/components/add-to-collection-modal";
 import { Collection } from "@/shared/type/data-types";
 import { ToastType } from "@/components/toast/toast.interface";
 import { Toast } from "@/components/toast";
+import { Navbar } from "@/components/navbar";
 
 export default function App({
   Component,
@@ -76,7 +76,7 @@ export default function App({
           <Loading />
         ) : (
           <HomeLayout>
-            <Header onLogin={() => setLoginOpen(!loginOpen)} />
+            <Navbar onLogin={() => setLoginOpen(!loginOpen)} />
             <Component
               {...pageProps}
               onLikeClick={handleOpenLogin}
