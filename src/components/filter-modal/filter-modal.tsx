@@ -154,13 +154,12 @@ export const FilterModal: FC<IFilterModalProps> = ({
               type="button"
               variant="outlined"
               onClick={handleClear}
-              // disabled={currentField.care}
               disabled={
-                currentField.water !== 0 &&
+                !currentField.water &&
                 currentField.seasons.length === 0 &&
-                currentField.care !== 0 &&
+                !currentField.care &&
                 currentField.size.length === 0 &&
-                currentField.sun !== 0
+                !currentField.sun
               }
             >
               Clear

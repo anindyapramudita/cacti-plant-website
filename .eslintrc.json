@@ -14,7 +14,6 @@
     "import/no-unresolved": "off",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": ["error"]
-
   },
   "plugins": ["import", "@typescript-eslint", "prettier"],
   "settings": {
@@ -28,5 +27,8 @@
       }
     }
   },
-  "root": true
+  "root": true,
+  "env": {
+    "node": true
+  }
 }

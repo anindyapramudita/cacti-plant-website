@@ -1,13 +1,13 @@
 interface FilterType {
-  water: number | null;
-  seasons: string[];
-  care: number | null;
-  sun: number | null;
-  size: number[];
+  water: string | string[] | undefined;
+  seasons: string | string[] | undefined;
+  care: string | string[] | undefined;
+  sun: string | string[] | undefined;
+  size: string | string[] | undefined;
 }
 
 export interface Filter {
-  search: string;
+  search: string | string[] | undefined;
   filter: FilterType;
 }
 

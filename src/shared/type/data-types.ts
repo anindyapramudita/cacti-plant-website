@@ -31,6 +31,13 @@ export type PlantDataType = {
   total: number;
 };
 
+export type AutocompletePlant = {
+  _id: string;
+  _createdAt: string;
+  name: string;
+  images: PlantImagesType;
+};
+
 export type Collection = {
   _id: string;
   title: string;

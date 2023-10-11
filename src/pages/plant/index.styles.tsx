@@ -11,6 +11,8 @@ export const StylesWrapper = styled.div`
   --layout-align-items: stretch;
   --layout-justify-content: flex-start;
 
+  --scrollbar-display: none;
+
   --header-font-size: 36px;
 
   --line-display: none;
@@ -49,6 +51,10 @@ export const StylesWrapper = styled.div`
   align-items: var(--layout-align-items);
   justify-content: var(--layout-justify-content);
 
+  ::-webkit-scrollbar {
+    display: var(--scrollbar-display);
+  }
+
   .image-wrapper {
     display: var(--image-wrapper-display);
     flex-direction: var(--image-wrapper-flex-direction);
@@ -77,7 +83,7 @@ export const StylesWrapper = styled.div`
   }
 
   @media (min-width: ${gridBreakpoint.md}) {
-    --layout-height: calc(100vh - var(--header-height-mobile));
+    --layout-height: calc(100vh - var(--header-height-desktop));
     --header-font-size: 42px;
   }
 

@@ -87,3 +87,5 @@ export const COLLECTION = "Collection";
 export const LIKED = "Liked";
 
 export const NOT_LOGGED_IN = "You're not logged in yet";
+
+export const NO_PLANTS_FOUND = "No plants found";
