@@ -7,7 +7,7 @@ export const ButtonGroup: FC<IButtonGroupProps> = ({
   handleButtonClick,
   category,
   buttonClear,
-  setButtonClear,
+  onClear,
 }) => {
   const [buttonSelected, setButtonSelected] = useState<number[]>([]);
   const [valueSelected, setValueSelected] = useState<any>([]);
@@ -16,7 +16,7 @@ export const ButtonGroup: FC<IButtonGroupProps> = ({
     if (buttonClear) {
       setButtonSelected([]);
       setValueSelected([]);
-      setButtonClear(false);
+      onClear(false);
     }
   }, [buttonClear]);
 

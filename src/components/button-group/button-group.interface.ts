@@ -1,4 +1,4 @@
-import { Dispatch, ReactNode, SetStateAction } from "react";
+import { ReactNode } from "react";
 
 export type FilterCategory = "water" | "season" | "care";
 
@@ -15,5 +15,5 @@ export interface IButtonGroupProps {
   ) => void;
   category: FilterCategory;
   buttonClear: boolean;
-  setButtonClear: Dispatch<SetStateAction<boolean>>;
+  onClear: (value: boolean) => void;
 }
