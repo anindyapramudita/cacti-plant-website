@@ -103,4 +103,14 @@ export const StylesWrapper = styled.div`
       --like-button-transform: scale(1.1);
     }
   }
+  @media (min-width: ${gridBreakpoint.xl}) {
+    --image-width: calc(
+      (1184px - (var(--gap-per-row) * var(--gap-per-image))) /
+        var(--image-per-row)
+    );
+
+    .collection-button:hover {
+      --like-button-transform: scale(1.1);
+    }
+  }
 `;
