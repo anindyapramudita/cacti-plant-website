@@ -30,7 +30,7 @@ export const navigation: Navigation[] = [
     roles: ["admin", "user", "all"],
   },
   {
-    path: "/search",
+    path: "/",
     name: "Plants",
     roles: ["admin", "user", "all"],
   },
