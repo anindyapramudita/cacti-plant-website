@@ -89,3 +89,5 @@ export const LIKED = "Liked";
 export const NOT_LOGGED_IN = "You're not logged in yet";
 
 export const NO_PLANTS_FOUND = "No plants found";
+
+export const GOOGLE_SIGN_IN_SUCCESS = "Successfully signed in with Google";

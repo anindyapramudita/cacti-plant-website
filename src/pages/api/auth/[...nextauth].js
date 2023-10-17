@@ -1,13 +1,15 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProviders from "next-auth/providers/google";
 
 import User from "@/db/models/user";
 import dbConnect from "@/db/utils/dbConnect";
+import { findUser } from "@/db/utils/find-user";
+import { googleSignIn } from "@/db/utils/google-sign-in";
 
 const sessionSecret = process.env.SESSION_SECRET;
 
 export default NextAuth({
-  // Enable JSON Web Tokens since we will not store sessions in our DB
   session: {
     jwt: true,
     cookie: {
@@ -17,20 +19,15 @@ export default NextAuth({
     },
   },
   secret: sessionSecret,
-  // Here we add our login providers - this is where you could add Google or Github SSO as well
   providers: [
     CredentialsProvider({
       name: "credentials",
-      // The credentials object is what's used to generate Next Auths default login page - We will not use it however.
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      // Authorize callback is ran upon calling the signin function
       authorize: async (credentials) => {
         dbConnect();
-
-        // Try to find the user and also return the password field
         const user = await User.findOne({ email: credentials.email }).select(
           "+password"
         );
@@ -38,8 +35,6 @@ export default NextAuth({
         if (!user) {
           throw new Error("No user with a matching email was found.");
         }
-
-        // Use the comparePassword method we defined in our user.js Model file to authenticate
         const pwValid = await user.comparePassword(credentials.password);
 
         if (!pwValid) {
@@ -49,24 +44,46 @@ export default NextAuth({
         return user;
       },
     }),
+    GoogleProviders({
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
+    }),
   ],
-  // All of this is just to add user information to be accessible for our app in the token/session
   callbacks: {
-    // We can pass in additional information from the user document MongoDB returns
-    // This could be avatars, role, display name, etc...
+    async signIn({ user, account }) {
+      if (account.provider === "google") {
+        const { name, email, image } = user;
+        console.log(image);
+        try {
+          const userExists = await findUser(email);
+
+          if (!userExists) {
+            const res = await googleSignIn(name, email, image);
+
+            if (res.success) {
+              return res.user;
+            }
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      return user;
+    },
     async jwt({ token, user }) {
       if (user) {
+        const currentUser = await findUser(user.email);
         token.user = {
-          _id: user._id,
+          _id: currentUser?._id,
           name: user.name,
           email: user.email,
-          role: user.role,
-          image: user.profilePicture,
+          role: currentUser?.role,
+          image: currentUser?.profilePicture,
         };
       }
       return token;
     },
-    // If we want to access our extra user info from sessions we have to pass it the token here to get them in sync:
     session: async ({ session, token }) => {
       if (token) {
         session.user = token.user;
@@ -75,7 +92,7 @@ export default NextAuth({
     },
   },
   pages: {
-    // Here you can define your own custom pages for login, recover password, etc.
-    signIn: "/login", // we are going to use a custom login page (we'll create this in just a second)
+    signIn: "/login",
   },
+  debug: false,
 });

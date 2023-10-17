@@ -193,10 +193,8 @@ export const StylesWrapper = styled.div<{
     .slider-component {
       --page-padding: 64px;
       --image-width: calc(
-        (
-            100vw - (2 * var(--page-padding)) -
-              (var(--gap-per-row) * var(--gap-per-image))
-          ) / var(--image-per-row)
+        (1184px - (var(--gap-per-row) * var(--gap-per-image))) /
+          var(--image-per-row)
       );
     }
   }
