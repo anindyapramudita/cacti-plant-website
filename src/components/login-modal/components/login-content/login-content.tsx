@@ -24,6 +24,7 @@ import { useRouter } from "next/router";
 import { Input } from "@/components/input";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { IconButton } from "@/components/icon-button";
+import { signIn } from "next-auth/react";
 
 export const LoginContent: FC<ILoginContentProps> = ({
   onClose,
@@ -169,6 +170,7 @@ export const LoginContent: FC<ILoginContentProps> = ({
           variant="outlined"
           color="primary"
           fullWidth
+          onClick={() => signIn("google")}
         >
           {GOOGLE_SIGN_IN}
         </Button>
