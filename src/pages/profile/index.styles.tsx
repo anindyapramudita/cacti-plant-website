@@ -167,7 +167,7 @@ export const StylesWrapper = styled.div<{ currentTab: "Collection" | "Liked" }>`
 
   @media (min-width: ${gridBreakpoint.lg}) {
     --header-height: var(--header-height-desktop);
-    --card-layout-grid-template-columns: repeat(5, 1fr);
+    --card-layout-grid-template-columns: repeat(4, 1fr);
   }
   @media (min-width: ${gridBreakpoint.xl}) {
     --header-height: var(--header-height-desktop);
