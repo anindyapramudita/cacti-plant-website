@@ -13,29 +13,24 @@ export const handleUpdateFilter = (filterContext: Filter) => {
 
   if (filterContext.filter.water) {
     if (typeof filterContext.filter.water === "string") {
-      query.push(`water.level == ${filterContext.filter.water}`);
-    } else if (filterContext.filter.water.length > 0) {
-      query.push(`water.level == ${filterContext.filter.water}`);
+      if (filterContext.filter.water !== "3")
+        query.push(
+          `water.level == ${parseInt(filterContext.filter.water) + 1}`
+        );
     }
   }
 
   if (filterContext.filter.care) {
     if (typeof filterContext.filter.care === "string") {
-      query.push(`care.level == ${filterContext.filter.care}`);
-    } else if (filterContext.filter.care.length > 0) {
-      query.push(`care.level == ${filterContext.filter.care[0]}`);
+      if (filterContext.filter.care !== "3")
+        query.push(`care.level == ${parseInt(filterContext.filter.care) + 1}`);
     }
   }
 
   if (filterContext.filter.size) {
     if (typeof filterContext.filter.size === "string") {
-      query.push(`size.level == ${filterContext.filter.size}`);
-    } else if (filterContext.filter.size.length > 0) {
-      let temp: string[] = [];
-      filterContext.filter.size.forEach((size: number | string) => {
-        temp.push(`size.level == ${size}`);
-      });
-      query.push(`(${temp.join(" || ")})`);
+      if (filterContext.filter.size !== "3")
+        query.push(`size.level == ${parseInt(filterContext.filter.size) + 1}`);
     }
   }
 
@@ -46,6 +41,18 @@ export const handleUpdateFilter = (filterContext: Filter) => {
       let temp: string[] = [];
       filterContext.filter.seasons.forEach((seasonValue: number | string) => {
         temp.push(`seasons.${seasonValue} == true`);
+      });
+      query.push(`(${temp.join(" || ")})`);
+    }
+  }
+
+  if (filterContext.filter.colors) {
+    if (typeof filterContext.filter.colors === "string") {
+      query.push(`colors == ${filterContext.filter.colors}`);
+    } else if (filterContext.filter.colors.length > 0) {
+      let temp: string[] = [];
+      filterContext.filter.colors.forEach((colorValue: number | string) => {
+        temp.push(`color == ${colorValue}`);
       });
       query.push(`(${temp.join(" || ")})`);
     }
