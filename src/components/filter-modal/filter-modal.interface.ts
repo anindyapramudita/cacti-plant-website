@@ -1,16 +1,20 @@
+import { FilterType } from "@/hooks/use-plant-filter/use-plant-filter.interface";
+
 export interface IFilterModalProps {
   open: boolean;
   onClose: () => void;
   onSaveFilter: (filter: FilterContext) => void;
   onClearFilter: () => void;
+  defaultFilter?: FilterType;
 }
 
 export type FilterContext = {
   water: string | undefined;
-  seasons: string[];
+  seasons: string | string[] | undefined;
   care: string | undefined;
   sun: string | undefined;
-  size: string[];
+  size: string | undefined;
+  colors: string | string[] | undefined;
 };
 
 export const defaultForm: FilterContext = {
@@ -18,5 +22,6 @@ export const defaultForm: FilterContext = {
   seasons: [],
   care: "",
   sun: "",
-  size: [],
+  size: "",
+  colors: [],
 };
