@@ -2,13 +2,14 @@ import { FC } from "react";
 
 type ILogoProps = {
   className?: string;
+  size?: number;
 };
 
-export const WaterIcon: FC<ILogoProps> = ({ className }) => {
+export const WaterIcon: FC<ILogoProps> = ({ className, size = 40 }) => {
   return (
     <svg
-      width="40"
-      height="42"
+      width={size}
+      height={size}
       viewBox="0 0 40 42"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
