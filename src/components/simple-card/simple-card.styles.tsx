@@ -33,6 +33,7 @@ export const StylesWrapper = styled.div`
   position: var(--card-position);
   text-align: var(--card-text-align);
   height: max-content;
+  width: max-content;
 
   .plant-name {
     font-weight: var(--plant-name-font-weight);
