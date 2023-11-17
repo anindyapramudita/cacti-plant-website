@@ -14,7 +14,10 @@ import { Button } from "@/components/button";
 import { FilterModal } from "@/components/filter-modal";
 import { FilterContext } from "@/components/filter-modal/filter-modal.interface";
 import { IconButton } from "@/components/icon-button";
-import { SearchFilter } from "@/hooks/use-plant-filter/use-plant-filter.interface";
+import {
+  FilterType,
+  SearchFilter,
+} from "@/hooks/use-plant-filter/use-plant-filter.interface";
 import { getLikedPlants } from "@/shared/utils/get-liked-plants";
 import { likePlant } from "@/shared/utils/like-plant";
 import { ToastType } from "@/components/toast/toast.interface";
@@ -22,6 +25,7 @@ import { getCollections } from "@/shared/utils/get-collections";
 import { GetServerSidePropsContext } from "next";
 import { createFilterQueryUrl } from "@/shared/utils/create-filter-query-url";
 import { NO_PLANTS_FOUND } from "@/shared/utils/constants";
+import { PlantFilter } from "@/components/plant-filter";
 
 const defaultSearch = {
   search: "",
@@ -34,12 +38,14 @@ const defaultForm = {
     seasons: [],
     care: "",
     sun: "",
-    size: [],
+    size: "",
+    colors: [],
   },
 };
 
 type SearchProp = {
   plants: PlantDataType[];
+  filter: Filter;
   onLikeClick: () => void;
   onCollectionClick: (
     plantId: string,
@@ -51,6 +57,7 @@ type SearchProp = {
 
 export default function SearchPage({
   plants,
+  filter,
   onLikeClick,
   onCollectionClick,
   onUpdateToast,
@@ -75,6 +82,9 @@ export default function SearchPage({
   });
 
   const [filterModalOpen, setFilterModalOpen] = useState<boolean>(false);
+  const [previousFilter, setPreviousFilter] = useState<FilterType>(
+    filter.filter
+  );
 
   const { data: session } = useSession();
 
@@ -154,6 +164,7 @@ export default function SearchPage({
       currentPage: 1,
       totalPage: newData.length > 0 ? Math.ceil(newData[0].total / 10) : 0,
     }));
+    setPreviousFilter(newQuery.filter);
 
     const queryParams = createFilterQueryUrl(newQuery);
     const newUrl = `${window.location.pathname}?${queryParams}`;
@@ -223,7 +234,6 @@ export default function SearchPage({
       if (session && session.user.email) {
         setCollectionModalOpen(true);
         const newCollection = await handleGetCollections();
-        console.log("new collections: ", newCollection);
         onCollectionClick(plantId, session?.user._id as string, newCollection);
       } else {
         onLikeClick();
@@ -238,23 +248,36 @@ export default function SearchPage({
   return (
     <StylesWrapper>
       <div className="page-content">
-        <h2 className="filter-heading">Find your perfect companion plan 🌱</h2>
-        <div className="filter-header">
-          <form className="filter-input-container" onSubmit={onSubmit}>
-            <Input
-              id="filter-search-input"
-              label="search"
-              name="search"
-              register={register}
-              icon={<IconButton icon={<AiOutlineSearch />} type="submit" />}
-              fullWidth={true}
-            />
-          </form>
-          <Button type="button" onClick={() => setFilterModalOpen(true)}>
-            Filter
-          </Button>
+        <div className="filter-heading-wrapper">
+          <h2 className="filter-heading">
+            Find your perfect companion plan 🌱
+          </h2>
+        </div>
+        <div className="filter-header-wrapper">
+          <div className="filter-header">
+            <form className="filter-input-container" onSubmit={onSubmit}>
+              <Input
+                id="filter-search-input"
+                label="search"
+                name="search"
+                register={register}
+                icon={<IconButton icon={<AiOutlineSearch />} type="submit" />}
+                fullWidth={true}
+              />
+            </form>
+            <Button type="button" onClick={() => setFilterModalOpen(true)}>
+              Filter
+            </Button>
+          </div>
         </div>
         <div className="content-wrapper">
+          <div className="plant-filter-wrapper">
+            <PlantFilter
+              onSaveFilter={handleSaveFilter}
+              onClearFilter={handleClearFilter}
+              defaultFilter={previousFilter}
+            />
+          </div>
           <div className="simple-card-layout">
             {imageLoading ? (
               <div className="image-loading">Loading...</div>
@@ -270,20 +293,25 @@ export default function SearchPage({
                 />
               ))
             ) : (
-              <p>{NO_PLANTS_FOUND}</p>
+              <div className="no-plants-wrapper">
+                <p className="no-plants-found">{NO_PLANTS_FOUND}</p>
+              </div>
             )}
           </div>
         </div>
-        <Pagination
-          totalPage={currentState.totalPage}
-          currentPage={currentState.currentPage}
-          onPageClick={handlePageClick}
-        />
+        <div className="pagination-wrapper">
+          <Pagination
+            totalPage={currentState.totalPage}
+            currentPage={currentState.currentPage}
+            onPageClick={handlePageClick}
+          />
+        </div>
         <FilterModal
           open={filterModalOpen}
           onClose={() => setFilterModalOpen(!filterModalOpen)}
           onSaveFilter={handleSaveFilter}
           onClearFilter={handleClearFilter}
+          defaultFilter={previousFilter}
         />
       </div>
     </StylesWrapper>
@@ -291,16 +319,25 @@ export default function SearchPage({
 }
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
-  const { search, water, seasons, care, sun, size } = ctx.query;
+  const { search, water, seasons, care, sun, size, colors } = ctx.query;
+
+  const waterValue = water && water?.length > 0 ? water[0] : (water as string);
+  const careValue = care && care?.length > 0 ? care[0] : (care as string);
+  const sunValue = sun && sun?.length > 0 ? sun[0] : (sun as string);
+  const sizeValue = size && size?.length > 0 ? size[0] : (size as string);
+  const searchValue = search && search;
+  const seasonsValue = seasons && seasons;
+  const colorsValue = colors && colors;
 
   const filter: Filter = {
-    search,
+    search: searchValue || "",
     filter: {
-      water,
-      seasons,
-      care,
-      sun,
-      size,
+      water: waterValue || "3",
+      care: careValue || "3",
+      sun: sunValue || "3",
+      size: sizeValue || "3",
+      seasons: seasonsValue || "",
+      colors: colorsValue || "",
     },
   };
 
@@ -310,6 +347,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   return {
     props: {
       plants: data,
+      filter,
     },
   };
 }

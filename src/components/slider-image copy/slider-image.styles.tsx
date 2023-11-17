@@ -58,16 +58,16 @@ export const StylesWrapper = styled.div<{
   --dot-width: 8px;
   --dot-background-color: var(--disabled-dark);
   --dot-border-radius: 50%;
-  border-radius: 8px;
-  overflow: hidden;
 
   .slider-component {
     overflow: var(--slider-overflow);
     position: var(--slider-position);
-    min-height: var(--slider-min-height);
     min-width: var(--slider-min-width);
+    min-height: var(--slider-min-height);
     width: var(--image-width);
     height: var(--image-width);
+    border-radius: (--slider-border-radius);
+    box-shadow: (--slider-box-shadow);
 
     .slider-image-wrapper {
       width: var(--image-width);
@@ -155,8 +155,8 @@ export const StylesWrapper = styled.div<{
 
   @media (min-width: ${gridBreakpoint.lg}) {
     .slider-component {
-      --image-per-row: 4;
-      --gap-per-row: 3;
+      --image-per-row: 5;
+      --gap-per-row: 4;
       --page-padding: 54px;
       --image-width: calc(
         (

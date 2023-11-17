@@ -9,7 +9,7 @@ export const StylesWrapper = styled.div`
   --page-scrollbar-width: none;
   --page-display: flex;
   --page-flex-direction: column;
-  --page-gap: 42px;
+  --page-gap: 26px;
 
   --scrollbar-display: none;
 
@@ -27,10 +27,10 @@ export const StylesWrapper = styled.div`
 
   display: flex;
   justify-content: center;
-  padding: var(--page-padding);
   height: calc(100vh - var(--header-height));
 
   .page-content {
+    padding: var(--page-padding);
     overflow-y: var(--page-overflow-y);
     -ms-overflow-style: var(--page-ms-overflow-style);
     scrollbar-width: var(--page-scrollbar-width);
@@ -63,6 +63,12 @@ export const StylesWrapper = styled.div`
       grid-gap: var(--card-layout-grid-gap);
       grid-template-columns: var(--card-layout-grid-template-columns);
     }
+
+    .content-wrapper {
+      .plant-filter-wrapper {
+        display: none;
+      }
+    }
   }
 
   @media (min-width: ${gridBreakpoint.md}) {
@@ -74,9 +80,30 @@ export const StylesWrapper = styled.div`
         --filter-font-size: 36px;
       }
 
+      .filter-header > button {
+        display: none;
+      }
+
       .content-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-gap: 32px;
+
+        .plant-filter-wrapper {
+          display: block;
+        }
+
         .simple-card-layout {
-          --card-layout-grid-template-columns: repeat(3, 1fr);
+          --card-layout-grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      .pagination-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+
+        > div {
+          grid-column-start: 2;
         }
       }
     }
@@ -88,12 +115,42 @@ export const StylesWrapper = styled.div`
     --card-content-height: calc(
       (100vw - (2 * 54px) - (4 * 32px)) / 5 * 2 + 32px + (2 * 25px)
     );
+
     .page-content {
-      .content-wrapper {
-        .simple-card-layout {
-          --card-layout-grid-template-columns: repeat(5, 1fr);
-          height: var(--card-content-height);
+      .filter-heading-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-gap: 32px;
+
+        .filter-heading {
+          grid-column-start: 2;
+          grid-column-end: 5;
         }
+      }
+
+      .filter-header-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-gap: 32px;
+
+        .filter-header {
+          grid-column-start: 2;
+          grid-column-end: 5;
+        }
+      }
+      .content-wrapper {
+        grid-template-columns: 1fr 3fr;
+        .simple-card-layout {
+          --card-layout-grid-template-columns: repeat(3, 1fr);
+          .no-plants-wrapper {
+            grid-column-start: 1;
+            grid-column-end: 3;
+          }
+        }
+      }
+
+      .pagination-wrapper {
+        grid-template-columns: 1fr 3fr;
       }
     }
   }
@@ -104,11 +161,11 @@ export const StylesWrapper = styled.div`
     --card-content-height: calc(
       (1184px - (4 * 32px)) / 5 * 2 + 32px + (2 * 32px)
     );
+
     .page-content {
       .content-wrapper {
         .simple-card-layout {
-          --card-layout-grid-template-columns: repeat(5, 1fr);
-          height: var(--card-content-height);
+          --card-layout-grid-template-columns: repeat(3, 1fr);
         }
       }
     }

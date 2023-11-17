@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const StylesWrapper = styled.button`
   ${ralewayThin}
 
-  --button-padding: 8px 32px;
+  --button-padding: 8px 24px;
   --button-font-size: 1rem;
   --button-background-color: var(--new-primary);
   --button-color: var(--white);

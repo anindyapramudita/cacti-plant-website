@@ -2,13 +2,14 @@ import { FC } from "react";
 
 type ILogoProps = {
   className?: string;
+  size?: number;
 };
 
-export const CareIcon: FC<ILogoProps> = ({ className }) => {
+export const CareIcon: FC<ILogoProps> = ({ className, size = 30 }) => {
   return (
     <svg
-      width="30"
-      height="30"
+      width={size}
+      height={size}
       viewBox="0 0 30 30"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

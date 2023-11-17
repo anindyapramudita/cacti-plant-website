@@ -1,9 +1,10 @@
-interface FilterType {
-  water: string | string[] | undefined;
+export interface FilterType {
+  water: string | undefined;
+  care: string | undefined;
+  sun: string | undefined;
+  size: string | undefined;
   seasons: string | string[] | undefined;
-  care: string | string[] | undefined;
-  sun: string | string[] | undefined;
-  size: string | string[] | undefined;
+  colors: string | string[] | undefined;
 }
 
 export interface Filter {
