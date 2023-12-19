@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { Loader } from "../loader";
 import { IButtonProps } from "./button.interface";
 import { StylesWrapper } from "./button.styles";
+import { Loader } from "@/components/loader";
 
 export const Button: FC<IButtonProps> = ({
   children,
