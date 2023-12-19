@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 type ILogoProps = {
-  className: string;
+  className?: string;
 };
 
 export const Logo: FC<ILogoProps> = ({ className }) => {
