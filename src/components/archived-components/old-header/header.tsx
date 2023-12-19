@@ -3,7 +3,6 @@ import config from "@/shared/config";
 import { navigation } from "@/shared/navigation";
 import Link from "next/link";
 import { FC, useMemo, useState } from "react";
-import { Button } from "../button";
 import { IHeaderProps } from "./header.interface";
 import {
   StylesWrapper,
@@ -23,6 +22,7 @@ import {
   SIGN_OUT,
   SIGN_UP,
 } from "@/shared/utils/constants";
+import { Button } from "@/components/button";
 
 export const Header: FC<IHeaderProps> = ({ onLogin }) => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
